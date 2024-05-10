@@ -1,0 +1,45 @@
+{
+    "exp": {
+      "name": "mapper_qzp_bbh"
+    },
+    "data_loader": {
+      "name": "MappedDataLoader",
+      "args": {},
+      "data_path": "/home/nino/GW/data/bbh_qzp_data.hdf5",
+      "scale_data": false,
+      "data_output_type": "hp",
+      "split_size": 0.2
+    },
+    "model":{
+      "name": "MappedAutoEncoderGenerator",
+      "args": {},
+      "latent_dim": 10,
+      "reg_weight": 0.05,
+      "mapper_dropout": 0.001,
+      "optimizer_kwargs":{
+        "learning_rate": 0.0001
+      }
+    },
+    "trainer":{
+      "name": "GWMappedAutoEncoderModelTrainer",
+      "args": {},
+      "num_epochs": 10000,
+      "mapper_epochs": 10000,
+      "generator_epochs": 10000,
+      "batch_size": 1024,
+      "batch_size_test": 1024,
+      "verbose_training": 2
+    },
+    "callbacks":{
+      "checkpoint_monitor": "val_loss",
+      "checkpoint_mode": "min",
+      "checkpoint_save_best_only": true,
+      "checkpoint_save_weights_only": true,
+      "checkpoint_verbose": true,
+      "tensorboard_write_graph": true,
+      "early_stopping_patience": 50,
+      "lr_reduce_factor": 0.5,
+      "lr_reduce_patience": 15,
+      "min_lr": 5e-6
+    }
+  }

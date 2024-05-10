@@ -1,0 +1,2844 @@
+
+Loading data...Data loaded!
+Loading model...
+
+Computing nearest neighbors for parametric UMAP
+
+
+Sat Apr 27 10:58:38 2024 Building RP forest with 19 trees
+Sat Apr 27 10:58:44 2024 NN descent for 16 iterations
+	 1  /  16
+	 2  /  16
+	Stopping threshold met -- exiting after 2 iterations
+Model loaded!
+Initialising training...
+
+
+Parametric UMAP training
+
+
+Epoch 1/5
+10564/10564 - 103s - loss: 0.1231 - lr: 0.0010 - 103s/epoch - 10ms/step
+Epoch 2/5
+10564/10564 - 107s - loss: 0.1227 - lr: 0.0010 - 107s/epoch - 10ms/step
+Epoch 3/5
+10564/10564 - 107s - loss: 0.1227 - lr: 0.0010 - 107s/epoch - 10ms/step
+Epoch 4/5
+10564/10564 - 107s - loss: 0.1227 - lr: 0.0010 - 107s/epoch - 10ms/step
+Epoch 5/5
+10564/10564 - 107s - loss: 0.1227 - lr: 0.0010 - 107s/epoch - 10ms/step
+
+
+Regularized autoencoder training
+
+
+Epoch 1/10000
+
+Epoch 1: loss improved from inf to 0.08254, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 103s - loss: 0.0825 - encoding_loss: 2.3120 - reconstruction_loss: 0.0600 - val_loss: 0.0730 - val_encoding_loss: 2.1305 - val_reconstruction_loss: 0.0522 - lr: 1.0000e-04 - 103s/epoch - 64ms/step
+Epoch 2/10000
+
+Epoch 2: loss improved from 0.08254 to 0.07074, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 99s - loss: 0.0707 - encoding_loss: 2.1679 - reconstruction_loss: 0.0496 - val_loss: 0.0680 - val_encoding_loss: 2.1844 - val_reconstruction_loss: 0.0466 - lr: 1.0000e-04 - 99s/epoch - 62ms/step
+Epoch 3/10000
+
+Epoch 3: loss improved from 0.07074 to 0.06565, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0657 - encoding_loss: 2.2220 - reconstruction_loss: 0.0439 - val_loss: 0.0617 - val_encoding_loss: 2.1986 - val_reconstruction_loss: 0.0401 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 4/10000
+
+Epoch 4: loss improved from 0.06565 to 0.05545, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0555 - encoding_loss: 2.1785 - reconstruction_loss: 0.0340 - val_loss: 0.0480 - val_encoding_loss: 2.1717 - val_reconstruction_loss: 0.0266 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 5/10000
+
+Epoch 5: loss improved from 0.05545 to 0.04610, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0461 - encoding_loss: 2.1697 - reconstruction_loss: 0.0246 - val_loss: 0.0447 - val_encoding_loss: 2.1800 - val_reconstruction_loss: 0.0231 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 6/10000
+
+Epoch 6: loss improved from 0.04610 to 0.04241, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0424 - encoding_loss: 2.1702 - reconstruction_loss: 0.0209 - val_loss: 0.0416 - val_encoding_loss: 2.1711 - val_reconstruction_loss: 0.0201 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 7/10000
+
+Epoch 7: loss improved from 0.04241 to 0.03926, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0393 - encoding_loss: 2.1547 - reconstruction_loss: 0.0179 - val_loss: 0.0363 - val_encoding_loss: 2.1529 - val_reconstruction_loss: 0.0150 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 8/10000
+
+Epoch 8: loss improved from 0.03926 to 0.03628, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0363 - encoding_loss: 2.1418 - reconstruction_loss: 0.0150 - val_loss: 0.0349 - val_encoding_loss: 2.1399 - val_reconstruction_loss: 0.0136 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 9/10000
+
+Epoch 9: loss improved from 0.03628 to 0.03398, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0340 - encoding_loss: 2.1323 - reconstruction_loss: 0.0128 - val_loss: 0.0339 - val_encoding_loss: 2.1370 - val_reconstruction_loss: 0.0126 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 10/10000
+
+Epoch 10: loss improved from 0.03398 to 0.03273, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0327 - encoding_loss: 2.1312 - reconstruction_loss: 0.0115 - val_loss: 0.0321 - val_encoding_loss: 2.1402 - val_reconstruction_loss: 0.0108 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 11/10000
+
+Epoch 11: loss improved from 0.03273 to 0.03161, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0316 - encoding_loss: 2.1294 - reconstruction_loss: 0.0104 - val_loss: 0.0312 - val_encoding_loss: 2.1346 - val_reconstruction_loss: 0.0100 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 12/10000
+
+Epoch 12: loss improved from 0.03161 to 0.03089, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0309 - encoding_loss: 2.1278 - reconstruction_loss: 0.0097 - val_loss: 0.0310 - val_encoding_loss: 2.1351 - val_reconstruction_loss: 0.0097 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 13/10000
+
+Epoch 13: loss improved from 0.03089 to 0.03021, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0302 - encoding_loss: 2.1241 - reconstruction_loss: 0.0091 - val_loss: 0.0291 - val_encoding_loss: 2.1412 - val_reconstruction_loss: 0.0077 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 14/10000
+
+Epoch 14: loss improved from 0.03021 to 0.02957, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0296 - encoding_loss: 2.1218 - reconstruction_loss: 0.0084 - val_loss: 0.0326 - val_encoding_loss: 2.1362 - val_reconstruction_loss: 0.0114 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 15/10000
+
+Epoch 15: loss improved from 0.02957 to 0.02908, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0291 - encoding_loss: 2.1189 - reconstruction_loss: 0.0080 - val_loss: 0.0282 - val_encoding_loss: 2.1298 - val_reconstruction_loss: 0.0069 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 16/10000
+
+Epoch 16: loss improved from 0.02908 to 0.02860, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0286 - encoding_loss: 2.1159 - reconstruction_loss: 0.0075 - val_loss: 0.0274 - val_encoding_loss: 2.1224 - val_reconstruction_loss: 0.0062 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 17/10000
+
+Epoch 17: loss improved from 0.02860 to 0.02824, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0282 - encoding_loss: 2.1132 - reconstruction_loss: 0.0072 - val_loss: 0.0272 - val_encoding_loss: 2.1216 - val_reconstruction_loss: 0.0061 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 18/10000
+
+Epoch 18: loss improved from 0.02824 to 0.02789, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0279 - encoding_loss: 2.1117 - reconstruction_loss: 0.0068 - val_loss: 0.0274 - val_encoding_loss: 2.1250 - val_reconstruction_loss: 0.0062 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 19/10000
+
+Epoch 19: loss improved from 0.02789 to 0.02749, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0275 - encoding_loss: 2.1021 - reconstruction_loss: 0.0065 - val_loss: 0.0275 - val_encoding_loss: 2.1109 - val_reconstruction_loss: 0.0065 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 20/10000
+
+Epoch 20: loss improved from 0.02749 to 0.02704, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0270 - encoding_loss: 2.0900 - reconstruction_loss: 0.0062 - val_loss: 0.0262 - val_encoding_loss: 2.0988 - val_reconstruction_loss: 0.0053 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 21/10000
+
+Epoch 21: loss improved from 0.02704 to 0.02659, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0266 - encoding_loss: 2.0831 - reconstruction_loss: 0.0058 - val_loss: 0.0270 - val_encoding_loss: 2.0923 - val_reconstruction_loss: 0.0062 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 22/10000
+
+Epoch 22: loss improved from 0.02659 to 0.02651, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0265 - encoding_loss: 2.0809 - reconstruction_loss: 0.0058 - val_loss: 0.0266 - val_encoding_loss: 2.0977 - val_reconstruction_loss: 0.0056 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 23/10000
+
+Epoch 23: loss improved from 0.02651 to 0.02604, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0260 - encoding_loss: 2.0785 - reconstruction_loss: 0.0053 - val_loss: 0.0261 - val_encoding_loss: 2.0920 - val_reconstruction_loss: 0.0053 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 24/10000
+
+Epoch 24: loss improved from 0.02604 to 0.02582, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0258 - encoding_loss: 2.0765 - reconstruction_loss: 0.0051 - val_loss: 0.0264 - val_encoding_loss: 2.0925 - val_reconstruction_loss: 0.0056 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 25/10000
+
+Epoch 25: loss improved from 0.02582 to 0.02562, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0256 - encoding_loss: 2.0757 - reconstruction_loss: 0.0049 - val_loss: 0.0256 - val_encoding_loss: 2.0909 - val_reconstruction_loss: 0.0048 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 26/10000
+
+Epoch 26: loss improved from 0.02562 to 0.02542, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0254 - encoding_loss: 2.0745 - reconstruction_loss: 0.0047 - val_loss: 0.0252 - val_encoding_loss: 2.0861 - val_reconstruction_loss: 0.0044 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 27/10000
+
+Epoch 27: loss improved from 0.02542 to 0.02522, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0252 - encoding_loss: 2.0734 - reconstruction_loss: 0.0045 - val_loss: 0.0246 - val_encoding_loss: 2.0855 - val_reconstruction_loss: 0.0038 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 28/10000
+
+Epoch 28: loss improved from 0.02522 to 0.02515, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0252 - encoding_loss: 2.0724 - reconstruction_loss: 0.0045 - val_loss: 0.0247 - val_encoding_loss: 2.0894 - val_reconstruction_loss: 0.0038 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 29/10000
+
+Epoch 29: loss improved from 0.02515 to 0.02495, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0250 - encoding_loss: 2.0716 - reconstruction_loss: 0.0043 - val_loss: 0.0246 - val_encoding_loss: 2.0812 - val_reconstruction_loss: 0.0039 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 30/10000
+
+Epoch 30: loss improved from 0.02495 to 0.02484, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0248 - encoding_loss: 2.0710 - reconstruction_loss: 0.0042 - val_loss: 0.0244 - val_encoding_loss: 2.0787 - val_reconstruction_loss: 0.0037 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 31/10000
+
+Epoch 31: loss improved from 0.02484 to 0.02467, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0247 - encoding_loss: 2.0694 - reconstruction_loss: 0.0040 - val_loss: 0.0255 - val_encoding_loss: 2.0882 - val_reconstruction_loss: 0.0047 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 32/10000
+
+Epoch 32: loss did not improve from 0.02467
+1600/1600 - 100s - loss: 0.0247 - encoding_loss: 2.0698 - reconstruction_loss: 0.0040 - val_loss: 0.0249 - val_encoding_loss: 2.0776 - val_reconstruction_loss: 0.0042 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 33/10000
+
+Epoch 33: loss improved from 0.02467 to 0.02455, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0245 - encoding_loss: 2.0683 - reconstruction_loss: 0.0039 - val_loss: 0.0240 - val_encoding_loss: 2.0784 - val_reconstruction_loss: 0.0033 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 34/10000
+
+Epoch 34: loss improved from 0.02455 to 0.02444, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0244 - encoding_loss: 2.0673 - reconstruction_loss: 0.0038 - val_loss: 0.0246 - val_encoding_loss: 2.0777 - val_reconstruction_loss: 0.0038 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 35/10000
+
+Epoch 35: loss improved from 0.02444 to 0.02430, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0243 - encoding_loss: 2.0663 - reconstruction_loss: 0.0037 - val_loss: 0.0239 - val_encoding_loss: 2.0788 - val_reconstruction_loss: 0.0032 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 36/10000
+
+Epoch 36: loss improved from 0.02430 to 0.02414, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0241 - encoding_loss: 2.0656 - reconstruction_loss: 0.0035 - val_loss: 0.0243 - val_encoding_loss: 2.0779 - val_reconstruction_loss: 0.0035 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 37/10000
+
+Epoch 37: loss did not improve from 0.02414
+1600/1600 - 100s - loss: 0.0243 - encoding_loss: 2.0650 - reconstruction_loss: 0.0036 - val_loss: 0.0243 - val_encoding_loss: 2.0775 - val_reconstruction_loss: 0.0035 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 38/10000
+
+Epoch 38: loss did not improve from 0.02414
+1600/1600 - 100s - loss: 0.0241 - encoding_loss: 2.0657 - reconstruction_loss: 0.0035 - val_loss: 0.0244 - val_encoding_loss: 2.0755 - val_reconstruction_loss: 0.0036 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 39/10000
+
+Epoch 39: loss did not improve from 0.02414
+1600/1600 - 100s - loss: 0.0242 - encoding_loss: 2.0650 - reconstruction_loss: 0.0036 - val_loss: 0.0240 - val_encoding_loss: 2.0808 - val_reconstruction_loss: 0.0033 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 40/10000
+
+Epoch 40: loss improved from 0.02414 to 0.02398, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0240 - encoding_loss: 2.0637 - reconstruction_loss: 0.0034 - val_loss: 0.0241 - val_encoding_loss: 2.0733 - val_reconstruction_loss: 0.0034 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 41/10000
+
+Epoch 41: loss improved from 0.02398 to 0.02393, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0239 - encoding_loss: 2.0627 - reconstruction_loss: 0.0033 - val_loss: 0.0237 - val_encoding_loss: 2.0761 - val_reconstruction_loss: 0.0029 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 42/10000
+
+Epoch 42: loss improved from 0.02393 to 0.02390, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0239 - encoding_loss: 2.0624 - reconstruction_loss: 0.0033 - val_loss: 0.0232 - val_encoding_loss: 2.0701 - val_reconstruction_loss: 0.0025 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 43/10000
+
+Epoch 43: loss did not improve from 0.02390
+1600/1600 - 101s - loss: 0.0239 - encoding_loss: 2.0620 - reconstruction_loss: 0.0033 - val_loss: 0.0243 - val_encoding_loss: 2.0727 - val_reconstruction_loss: 0.0036 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 44/10000
+
+Epoch 44: loss improved from 0.02390 to 0.02381, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0238 - encoding_loss: 2.0612 - reconstruction_loss: 0.0032 - val_loss: 0.0236 - val_encoding_loss: 2.0782 - val_reconstruction_loss: 0.0029 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 45/10000
+
+Epoch 45: loss did not improve from 0.02381
+1600/1600 - 100s - loss: 0.0238 - encoding_loss: 2.0610 - reconstruction_loss: 0.0032 - val_loss: 0.0241 - val_encoding_loss: 2.0757 - val_reconstruction_loss: 0.0034 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 46/10000
+
+Epoch 46: loss did not improve from 0.02381
+1600/1600 - 100s - loss: 0.0238 - encoding_loss: 2.0602 - reconstruction_loss: 0.0033 - val_loss: 0.0244 - val_encoding_loss: 2.0717 - val_reconstruction_loss: 0.0037 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 47/10000
+
+Epoch 47: loss did not improve from 0.02381
+1600/1600 - 100s - loss: 0.0238 - encoding_loss: 2.0606 - reconstruction_loss: 0.0033 - val_loss: 0.0235 - val_encoding_loss: 2.0712 - val_reconstruction_loss: 0.0028 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 48/10000
+
+Epoch 48: loss improved from 0.02381 to 0.02358, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0236 - encoding_loss: 2.0605 - reconstruction_loss: 0.0030 - val_loss: 0.0239 - val_encoding_loss: 2.0699 - val_reconstruction_loss: 0.0033 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 49/10000
+
+Epoch 49: loss did not improve from 0.02358
+1600/1600 - 101s - loss: 0.0237 - encoding_loss: 2.0598 - reconstruction_loss: 0.0031 - val_loss: 0.0235 - val_encoding_loss: 2.0706 - val_reconstruction_loss: 0.0029 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 50/10000
+
+Epoch 50: loss did not improve from 0.02358
+1600/1600 - 101s - loss: 0.0236 - encoding_loss: 2.0603 - reconstruction_loss: 0.0031 - val_loss: 0.0236 - val_encoding_loss: 2.0729 - val_reconstruction_loss: 0.0029 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 51/10000
+
+Epoch 51: loss improved from 0.02358 to 0.02350, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0235 - encoding_loss: 2.0590 - reconstruction_loss: 0.0029 - val_loss: 0.0238 - val_encoding_loss: 2.0739 - val_reconstruction_loss: 0.0031 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 52/10000
+
+Epoch 52: loss did not improve from 0.02350
+1600/1600 - 101s - loss: 0.0235 - encoding_loss: 2.0596 - reconstruction_loss: 0.0030 - val_loss: 0.0234 - val_encoding_loss: 2.0699 - val_reconstruction_loss: 0.0027 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 53/10000
+
+Epoch 53: loss improved from 0.02350 to 0.02346, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0235 - encoding_loss: 2.0583 - reconstruction_loss: 0.0029 - val_loss: 0.0233 - val_encoding_loss: 2.0695 - val_reconstruction_loss: 0.0027 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 54/10000
+
+Epoch 54: loss did not improve from 0.02346
+1600/1600 - 100s - loss: 0.0236 - encoding_loss: 2.0581 - reconstruction_loss: 0.0030 - val_loss: 0.0238 - val_encoding_loss: 2.0696 - val_reconstruction_loss: 0.0031 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 55/10000
+
+Epoch 55: loss improved from 0.02346 to 0.02334, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0233 - encoding_loss: 2.0575 - reconstruction_loss: 0.0028 - val_loss: 0.0235 - val_encoding_loss: 2.0741 - val_reconstruction_loss: 0.0028 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 56/10000
+
+Epoch 56: loss improved from 0.02334 to 0.02330, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0233 - encoding_loss: 2.0570 - reconstruction_loss: 0.0028 - val_loss: 0.0235 - val_encoding_loss: 2.0695 - val_reconstruction_loss: 0.0028 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 57/10000
+
+Epoch 57: loss improved from 0.02330 to 0.02321, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0232 - encoding_loss: 2.0562 - reconstruction_loss: 0.0027 - val_loss: 0.0228 - val_encoding_loss: 2.0721 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 58/10000
+
+Epoch 58: loss did not improve from 0.02321
+1600/1600 - 100s - loss: 0.0233 - encoding_loss: 2.0566 - reconstruction_loss: 0.0027 - val_loss: 0.0232 - val_encoding_loss: 2.0694 - val_reconstruction_loss: 0.0025 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 59/10000
+
+Epoch 59: loss improved from 0.02321 to 0.02311, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0231 - encoding_loss: 2.0549 - reconstruction_loss: 0.0026 - val_loss: 0.0234 - val_encoding_loss: 2.0698 - val_reconstruction_loss: 0.0027 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 60/10000
+
+Epoch 60: loss did not improve from 0.02311
+1600/1600 - 100s - loss: 0.0231 - encoding_loss: 2.0554 - reconstruction_loss: 0.0026 - val_loss: 0.0234 - val_encoding_loss: 2.0729 - val_reconstruction_loss: 0.0027 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 61/10000
+
+Epoch 61: loss did not improve from 0.02311
+1600/1600 - 100s - loss: 0.0232 - encoding_loss: 2.0559 - reconstruction_loss: 0.0027 - val_loss: 0.0230 - val_encoding_loss: 2.0766 - val_reconstruction_loss: 0.0022 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 62/10000
+
+Epoch 62: loss did not improve from 0.02311
+1600/1600 - 100s - loss: 0.0232 - encoding_loss: 2.0548 - reconstruction_loss: 0.0027 - val_loss: 0.0232 - val_encoding_loss: 2.0666 - val_reconstruction_loss: 0.0026 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 63/10000
+
+Epoch 63: loss did not improve from 0.02311
+1600/1600 - 101s - loss: 0.0232 - encoding_loss: 2.0552 - reconstruction_loss: 0.0027 - val_loss: 0.0227 - val_encoding_loss: 2.0666 - val_reconstruction_loss: 0.0020 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 64/10000
+
+Epoch 64: loss did not improve from 0.02311
+1600/1600 - 100s - loss: 0.0231 - encoding_loss: 2.0543 - reconstruction_loss: 0.0026 - val_loss: 0.0227 - val_encoding_loss: 2.0647 - val_reconstruction_loss: 0.0020 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 65/10000
+
+Epoch 65: loss improved from 0.02311 to 0.02311, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0231 - encoding_loss: 2.0541 - reconstruction_loss: 0.0026 - val_loss: 0.0233 - val_encoding_loss: 2.0703 - val_reconstruction_loss: 0.0027 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 66/10000
+
+Epoch 66: loss improved from 0.02311 to 0.02297, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0230 - encoding_loss: 2.0529 - reconstruction_loss: 0.0025 - val_loss: 0.0226 - val_encoding_loss: 2.0642 - val_reconstruction_loss: 0.0020 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 67/10000
+
+Epoch 67: loss did not improve from 0.02297
+1600/1600 - 100s - loss: 0.0231 - encoding_loss: 2.0538 - reconstruction_loss: 0.0026 - val_loss: 0.0232 - val_encoding_loss: 2.0670 - val_reconstruction_loss: 0.0025 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 68/10000
+
+Epoch 68: loss improved from 0.02297 to 0.02293, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0229 - encoding_loss: 2.0531 - reconstruction_loss: 0.0024 - val_loss: 0.0234 - val_encoding_loss: 2.0640 - val_reconstruction_loss: 0.0027 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 69/10000
+
+Epoch 69: loss did not improve from 0.02293
+1600/1600 - 100s - loss: 0.0230 - encoding_loss: 2.0527 - reconstruction_loss: 0.0025 - val_loss: 0.0227 - val_encoding_loss: 2.0669 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 70/10000
+
+Epoch 70: loss did not improve from 0.02293
+1600/1600 - 100s - loss: 0.0230 - encoding_loss: 2.0526 - reconstruction_loss: 0.0025 - val_loss: 0.0227 - val_encoding_loss: 2.0662 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 71/10000
+
+Epoch 71: loss did not improve from 0.02293
+1600/1600 - 100s - loss: 0.0230 - encoding_loss: 2.0520 - reconstruction_loss: 0.0025 - val_loss: 0.0235 - val_encoding_loss: 2.0661 - val_reconstruction_loss: 0.0029 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 72/10000
+
+Epoch 72: loss did not improve from 0.02293
+1600/1600 - 100s - loss: 0.0232 - encoding_loss: 2.0531 - reconstruction_loss: 0.0027 - val_loss: 0.0231 - val_encoding_loss: 2.0672 - val_reconstruction_loss: 0.0025 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 73/10000
+
+Epoch 73: loss did not improve from 0.02293
+1600/1600 - 100s - loss: 0.0229 - encoding_loss: 2.0519 - reconstruction_loss: 0.0024 - val_loss: 0.0228 - val_encoding_loss: 2.0649 - val_reconstruction_loss: 0.0022 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 74/10000
+
+Epoch 74: loss did not improve from 0.02293
+1600/1600 - 101s - loss: 0.0229 - encoding_loss: 2.0524 - reconstruction_loss: 0.0025 - val_loss: 0.0236 - val_encoding_loss: 2.0628 - val_reconstruction_loss: 0.0030 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 75/10000
+
+Epoch 75: loss did not improve from 0.02293
+1600/1600 - 100s - loss: 0.0230 - encoding_loss: 2.0515 - reconstruction_loss: 0.0025 - val_loss: 0.0231 - val_encoding_loss: 2.0725 - val_reconstruction_loss: 0.0024 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 76/10000
+
+Epoch 76: loss improved from 0.02293 to 0.02284, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0228 - encoding_loss: 2.0519 - reconstruction_loss: 0.0023 - val_loss: 0.0228 - val_encoding_loss: 2.0650 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 77/10000
+
+Epoch 77: loss improved from 0.02284 to 0.02276, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0228 - encoding_loss: 2.0503 - reconstruction_loss: 0.0023 - val_loss: 0.0226 - val_encoding_loss: 2.0623 - val_reconstruction_loss: 0.0020 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 78/10000
+
+Epoch 78: loss did not improve from 0.02276
+1600/1600 - 101s - loss: 0.0229 - encoding_loss: 2.0510 - reconstruction_loss: 0.0025 - val_loss: 0.0237 - val_encoding_loss: 2.0638 - val_reconstruction_loss: 0.0031 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 79/10000
+
+Epoch 79: loss did not improve from 0.02276
+1600/1600 - 100s - loss: 0.0229 - encoding_loss: 2.0515 - reconstruction_loss: 0.0024 - val_loss: 0.0235 - val_encoding_loss: 2.0673 - val_reconstruction_loss: 0.0028 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 80/10000
+
+Epoch 80: loss improved from 0.02276 to 0.02275, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0227 - encoding_loss: 2.0510 - reconstruction_loss: 0.0023 - val_loss: 0.0225 - val_encoding_loss: 2.0633 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 81/10000
+
+Epoch 81: loss did not improve from 0.02275
+1600/1600 - 100s - loss: 0.0228 - encoding_loss: 2.0503 - reconstruction_loss: 0.0024 - val_loss: 0.0242 - val_encoding_loss: 2.0664 - val_reconstruction_loss: 0.0036 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 82/10000
+
+Epoch 82: loss did not improve from 0.02275
+1600/1600 - 100s - loss: 0.0228 - encoding_loss: 2.0507 - reconstruction_loss: 0.0023 - val_loss: 0.0232 - val_encoding_loss: 2.0643 - val_reconstruction_loss: 0.0026 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 83/10000
+
+Epoch 83: loss improved from 0.02275 to 0.02267, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0227 - encoding_loss: 2.0501 - reconstruction_loss: 0.0022 - val_loss: 0.0228 - val_encoding_loss: 2.0623 - val_reconstruction_loss: 0.0022 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 84/10000
+
+Epoch 84: loss improved from 0.02267 to 0.02265, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0226 - encoding_loss: 2.0497 - reconstruction_loss: 0.0022 - val_loss: 0.0226 - val_encoding_loss: 2.0621 - val_reconstruction_loss: 0.0020 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 85/10000
+
+Epoch 85: loss did not improve from 0.02265
+1600/1600 - 100s - loss: 0.0227 - encoding_loss: 2.0492 - reconstruction_loss: 0.0022 - val_loss: 0.0226 - val_encoding_loss: 2.0661 - val_reconstruction_loss: 0.0020 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 86/10000
+
+Epoch 86: loss did not improve from 0.02265
+1600/1600 - 100s - loss: 0.0227 - encoding_loss: 2.0490 - reconstruction_loss: 0.0022 - val_loss: 0.0231 - val_encoding_loss: 2.0633 - val_reconstruction_loss: 0.0025 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 87/10000
+
+Epoch 87: loss did not improve from 0.02265
+1600/1600 - 100s - loss: 0.0227 - encoding_loss: 2.0493 - reconstruction_loss: 0.0022 - val_loss: 0.0227 - val_encoding_loss: 2.0621 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 88/10000
+
+Epoch 88: loss did not improve from 0.02265
+1600/1600 - 100s - loss: 0.0227 - encoding_loss: 2.0493 - reconstruction_loss: 0.0022 - val_loss: 0.0232 - val_encoding_loss: 2.0660 - val_reconstruction_loss: 0.0026 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 89/10000
+
+Epoch 89: loss improved from 0.02265 to 0.02263, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0490 - reconstruction_loss: 0.0022 - val_loss: 0.0228 - val_encoding_loss: 2.0715 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 90/10000
+
+Epoch 90: loss did not improve from 0.02263
+1600/1600 - 100s - loss: 0.0228 - encoding_loss: 2.0497 - reconstruction_loss: 0.0023 - val_loss: 0.0227 - val_encoding_loss: 2.0670 - val_reconstruction_loss: 0.0020 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 91/10000
+
+Epoch 91: loss did not improve from 0.02263
+1600/1600 - 100s - loss: 0.0228 - encoding_loss: 2.0492 - reconstruction_loss: 0.0023 - val_loss: 0.0231 - val_encoding_loss: 2.0629 - val_reconstruction_loss: 0.0025 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 92/10000
+
+Epoch 92: loss improved from 0.02263 to 0.02257, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0482 - reconstruction_loss: 0.0021 - val_loss: 0.0227 - val_encoding_loss: 2.0633 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 93/10000
+
+Epoch 93: loss did not improve from 0.02257
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0485 - reconstruction_loss: 0.0022 - val_loss: 0.0229 - val_encoding_loss: 2.0666 - val_reconstruction_loss: 0.0023 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 94/10000
+
+Epoch 94: loss did not improve from 0.02257
+1600/1600 - 100s - loss: 0.0227 - encoding_loss: 2.0487 - reconstruction_loss: 0.0023 - val_loss: 0.0226 - val_encoding_loss: 2.0646 - val_reconstruction_loss: 0.0020 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 95/10000
+
+Epoch 95: loss did not improve from 0.02257
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0481 - reconstruction_loss: 0.0021 - val_loss: 0.0227 - val_encoding_loss: 2.0667 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 96/10000
+
+Epoch 96: loss did not improve from 0.02257
+1600/1600 - 100s - loss: 0.0227 - encoding_loss: 2.0486 - reconstruction_loss: 0.0022 - val_loss: 0.0227 - val_encoding_loss: 2.0658 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 97/10000
+
+Epoch 97: loss did not improve from 0.02257
+1600/1600 - 100s - loss: 0.0227 - encoding_loss: 2.0486 - reconstruction_loss: 0.0022 - val_loss: 0.0235 - val_encoding_loss: 2.0632 - val_reconstruction_loss: 0.0029 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 98/10000
+
+Epoch 98: loss did not improve from 0.02257
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0480 - reconstruction_loss: 0.0022 - val_loss: 0.0228 - val_encoding_loss: 2.0652 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 99/10000
+
+Epoch 99: loss did not improve from 0.02257
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0486 - reconstruction_loss: 0.0022 - val_loss: 0.0237 - val_encoding_loss: 2.0678 - val_reconstruction_loss: 0.0030 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 100/10000
+
+Epoch 100: loss did not improve from 0.02257
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0482 - reconstruction_loss: 0.0021 - val_loss: 0.0231 - val_encoding_loss: 2.0697 - val_reconstruction_loss: 0.0024 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 101/10000
+
+Epoch 101: loss improved from 0.02257 to 0.02256, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0485 - reconstruction_loss: 0.0021 - val_loss: 0.0233 - val_encoding_loss: 2.0621 - val_reconstruction_loss: 0.0027 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 102/10000
+
+Epoch 102: loss did not improve from 0.02256
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0479 - reconstruction_loss: 0.0021 - val_loss: 0.0236 - val_encoding_loss: 2.0640 - val_reconstruction_loss: 0.0030 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 103/10000
+
+Epoch 103: loss did not improve from 0.02256
+1600/1600 - 101s - loss: 0.0227 - encoding_loss: 2.0487 - reconstruction_loss: 0.0022 - val_loss: 0.0232 - val_encoding_loss: 2.0662 - val_reconstruction_loss: 0.0026 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 104/10000
+
+Epoch 104: loss did not improve from 0.02256
+1600/1600 - 100s - loss: 0.0226 - encoding_loss: 2.0480 - reconstruction_loss: 0.0021 - val_loss: 0.0228 - val_encoding_loss: 2.0628 - val_reconstruction_loss: 0.0022 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 105/10000
+
+Epoch 105: loss improved from 0.02256 to 0.02254, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0225 - encoding_loss: 2.0472 - reconstruction_loss: 0.0021 - val_loss: 0.0226 - val_encoding_loss: 2.0647 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 106/10000
+
+Epoch 106: loss improved from 0.02254 to 0.02253, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0225 - encoding_loss: 2.0472 - reconstruction_loss: 0.0021 - val_loss: 0.0225 - val_encoding_loss: 2.0613 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 107/10000
+
+Epoch 107: loss improved from 0.02253 to 0.02247, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0225 - encoding_loss: 2.0461 - reconstruction_loss: 0.0020 - val_loss: 0.0229 - val_encoding_loss: 2.0627 - val_reconstruction_loss: 0.0023 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 108/10000
+
+Epoch 108: loss did not improve from 0.02247
+1600/1600 - 100s - loss: 0.0225 - encoding_loss: 2.0464 - reconstruction_loss: 0.0020 - val_loss: 0.0230 - val_encoding_loss: 2.0615 - val_reconstruction_loss: 0.0024 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 109/10000
+
+Epoch 109: loss improved from 0.02247 to 0.02240, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0224 - encoding_loss: 2.0460 - reconstruction_loss: 0.0020 - val_loss: 0.0230 - val_encoding_loss: 2.0620 - val_reconstruction_loss: 0.0024 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 110/10000
+
+Epoch 110: loss did not improve from 0.02240
+1600/1600 - 100s - loss: 0.0225 - encoding_loss: 2.0463 - reconstruction_loss: 0.0020 - val_loss: 0.0228 - val_encoding_loss: 2.0630 - val_reconstruction_loss: 0.0022 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 111/10000
+
+Epoch 111: loss improved from 0.02240 to 0.02239, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0224 - encoding_loss: 2.0460 - reconstruction_loss: 0.0019 - val_loss: 0.0225 - val_encoding_loss: 2.0637 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 112/10000
+
+Epoch 112: loss improved from 0.02239 to 0.02238, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0224 - encoding_loss: 2.0462 - reconstruction_loss: 0.0019 - val_loss: 0.0223 - val_encoding_loss: 2.0649 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 113/10000
+
+Epoch 113: loss improved from 0.02238 to 0.02234, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0223 - encoding_loss: 2.0456 - reconstruction_loss: 0.0019 - val_loss: 0.0225 - val_encoding_loss: 2.0619 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 114/10000
+
+Epoch 114: loss did not improve from 0.02234
+1600/1600 - 101s - loss: 0.0224 - encoding_loss: 2.0454 - reconstruction_loss: 0.0020 - val_loss: 0.0226 - val_encoding_loss: 2.0643 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 115/10000
+
+Epoch 115: loss did not improve from 0.02234
+1600/1600 - 101s - loss: 0.0224 - encoding_loss: 2.0457 - reconstruction_loss: 0.0019 - val_loss: 0.0231 - val_encoding_loss: 2.0592 - val_reconstruction_loss: 0.0026 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 116/10000
+
+Epoch 116: loss improved from 0.02234 to 0.02230, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0223 - encoding_loss: 2.0450 - reconstruction_loss: 0.0019 - val_loss: 0.0232 - val_encoding_loss: 2.0602 - val_reconstruction_loss: 0.0026 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 117/10000
+
+Epoch 117: loss improved from 0.02230 to 0.02230, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0223 - encoding_loss: 2.0445 - reconstruction_loss: 0.0019 - val_loss: 0.0225 - val_encoding_loss: 2.0612 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 118/10000
+
+Epoch 118: loss did not improve from 0.02230
+1600/1600 - 101s - loss: 0.0223 - encoding_loss: 2.0444 - reconstruction_loss: 0.0019 - val_loss: 0.0235 - val_encoding_loss: 2.0659 - val_reconstruction_loss: 0.0028 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 119/10000
+
+Epoch 119: loss did not improve from 0.02230
+1600/1600 - 101s - loss: 0.0223 - encoding_loss: 2.0447 - reconstruction_loss: 0.0019 - val_loss: 0.0224 - val_encoding_loss: 2.0605 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 120/10000
+
+Epoch 120: loss did not improve from 0.02230
+1600/1600 - 100s - loss: 0.0223 - encoding_loss: 2.0448 - reconstruction_loss: 0.0019 - val_loss: 0.0224 - val_encoding_loss: 2.0659 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 121/10000
+
+Epoch 121: loss did not improve from 0.02230
+1600/1600 - 100s - loss: 0.0223 - encoding_loss: 2.0447 - reconstruction_loss: 0.0019 - val_loss: 0.0225 - val_encoding_loss: 2.0624 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 122/10000
+
+Epoch 122: loss did not improve from 0.02230
+1600/1600 - 100s - loss: 0.0223 - encoding_loss: 2.0450 - reconstruction_loss: 0.0019 - val_loss: 0.0225 - val_encoding_loss: 2.0603 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 123/10000
+
+Epoch 123: loss improved from 0.02230 to 0.02224, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0222 - encoding_loss: 2.0439 - reconstruction_loss: 0.0018 - val_loss: 0.0226 - val_encoding_loss: 2.0586 - val_reconstruction_loss: 0.0020 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 124/10000
+
+Epoch 124: loss did not improve from 0.02224
+1600/1600 - 100s - loss: 0.0223 - encoding_loss: 2.0443 - reconstruction_loss: 0.0019 - val_loss: 0.0228 - val_encoding_loss: 2.0634 - val_reconstruction_loss: 0.0022 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 125/10000
+
+Epoch 125: loss did not improve from 0.02224
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0439 - reconstruction_loss: 0.0018 - val_loss: 0.0224 - val_encoding_loss: 2.0597 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 126/10000
+
+Epoch 126: loss improved from 0.02224 to 0.02222, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0438 - reconstruction_loss: 0.0018 - val_loss: 0.0225 - val_encoding_loss: 2.0616 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 127/10000
+
+Epoch 127: loss improved from 0.02222 to 0.02222, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0433 - reconstruction_loss: 0.0018 - val_loss: 0.0224 - val_encoding_loss: 2.0628 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 128/10000
+
+Epoch 128: loss did not improve from 0.02222
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0429 - reconstruction_loss: 0.0018 - val_loss: 0.0221 - val_encoding_loss: 2.0662 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 129/10000
+
+Epoch 129: loss improved from 0.02222 to 0.02218, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0427 - reconstruction_loss: 0.0018 - val_loss: 0.0224 - val_encoding_loss: 2.0595 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 130/10000
+
+Epoch 130: loss did not improve from 0.02218
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0429 - reconstruction_loss: 0.0018 - val_loss: 0.0225 - val_encoding_loss: 2.0613 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 131/10000
+
+Epoch 131: loss did not improve from 0.02218
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0431 - reconstruction_loss: 0.0018 - val_loss: 0.0228 - val_encoding_loss: 2.0625 - val_reconstruction_loss: 0.0022 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 132/10000
+
+Epoch 132: loss did not improve from 0.02218
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0435 - reconstruction_loss: 0.0018 - val_loss: 0.0222 - val_encoding_loss: 2.0602 - val_reconstruction_loss: 0.0016 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 133/10000
+
+Epoch 133: loss improved from 0.02218 to 0.02217, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0425 - reconstruction_loss: 0.0018 - val_loss: 0.0221 - val_encoding_loss: 2.0604 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 134/10000
+
+Epoch 134: loss did not improve from 0.02217
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0427 - reconstruction_loss: 0.0018 - val_loss: 0.0225 - val_encoding_loss: 2.0600 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 135/10000
+
+Epoch 135: loss improved from 0.02217 to 0.02214, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0423 - reconstruction_loss: 0.0017 - val_loss: 0.0221 - val_encoding_loss: 2.0600 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 136/10000
+
+Epoch 136: loss did not improve from 0.02214
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0424 - reconstruction_loss: 0.0018 - val_loss: 0.0223 - val_encoding_loss: 2.0627 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 137/10000
+
+Epoch 137: loss did not improve from 0.02214
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0423 - reconstruction_loss: 0.0017 - val_loss: 0.0223 - val_encoding_loss: 2.0592 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 138/10000
+
+Epoch 138: loss improved from 0.02214 to 0.02213, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0423 - reconstruction_loss: 0.0017 - val_loss: 0.0222 - val_encoding_loss: 2.0588 - val_reconstruction_loss: 0.0016 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 139/10000
+
+Epoch 139: loss did not improve from 0.02213
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0421 - reconstruction_loss: 0.0017 - val_loss: 0.0223 - val_encoding_loss: 2.0621 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 140/10000
+
+Epoch 140: loss did not improve from 0.02213
+1600/1600 - 100s - loss: 0.0222 - encoding_loss: 2.0427 - reconstruction_loss: 0.0018 - val_loss: 0.0224 - val_encoding_loss: 2.0640 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 141/10000
+
+Epoch 141: loss did not improve from 0.02213
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0427 - reconstruction_loss: 0.0017 - val_loss: 0.0223 - val_encoding_loss: 2.0635 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 142/10000
+
+Epoch 142: loss improved from 0.02213 to 0.02209, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 99s - loss: 0.0221 - encoding_loss: 2.0417 - reconstruction_loss: 0.0017 - val_loss: 0.0224 - val_encoding_loss: 2.0634 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 99s/epoch - 62ms/step
+Epoch 143/10000
+
+Epoch 143: loss did not improve from 0.02209
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0419 - reconstruction_loss: 0.0017 - val_loss: 0.0227 - val_encoding_loss: 2.0604 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 144/10000
+
+Epoch 144: loss did not improve from 0.02209
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0418 - reconstruction_loss: 0.0017 - val_loss: 0.0220 - val_encoding_loss: 2.0630 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 145/10000
+
+Epoch 145: loss did not improve from 0.02209
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0421 - reconstruction_loss: 0.0017 - val_loss: 0.0221 - val_encoding_loss: 2.0617 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 146/10000
+
+Epoch 146: loss did not improve from 0.02209
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0410 - reconstruction_loss: 0.0017 - val_loss: 0.0224 - val_encoding_loss: 2.0635 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 147/10000
+
+Epoch 147: loss improved from 0.02209 to 0.02207, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0417 - reconstruction_loss: 0.0017 - val_loss: 0.0224 - val_encoding_loss: 2.0607 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 148/10000
+
+Epoch 148: loss did not improve from 0.02207
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0414 - reconstruction_loss: 0.0017 - val_loss: 0.0220 - val_encoding_loss: 2.0614 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 149/10000
+
+Epoch 149: loss did not improve from 0.02207
+1600/1600 - 99s - loss: 0.0221 - encoding_loss: 2.0414 - reconstruction_loss: 0.0017 - val_loss: 0.0222 - val_encoding_loss: 2.0620 - val_reconstruction_loss: 0.0016 - lr: 1.0000e-04 - 99s/epoch - 62ms/step
+Epoch 150/10000
+
+Epoch 150: loss improved from 0.02207 to 0.02202, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0409 - reconstruction_loss: 0.0016 - val_loss: 0.0222 - val_encoding_loss: 2.0610 - val_reconstruction_loss: 0.0016 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 151/10000
+
+Epoch 151: loss did not improve from 0.02202
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0408 - reconstruction_loss: 0.0017 - val_loss: 0.0220 - val_encoding_loss: 2.0607 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 152/10000
+
+Epoch 152: loss did not improve from 0.02202
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0409 - reconstruction_loss: 0.0016 - val_loss: 0.0230 - val_encoding_loss: 2.0638 - val_reconstruction_loss: 0.0024 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 153/10000
+
+Epoch 153: loss did not improve from 0.02202
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0411 - reconstruction_loss: 0.0016 - val_loss: 0.0220 - val_encoding_loss: 2.0613 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 154/10000
+
+Epoch 154: loss did not improve from 0.02202
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0405 - reconstruction_loss: 0.0016 - val_loss: 0.0222 - val_encoding_loss: 2.0605 - val_reconstruction_loss: 0.0016 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 155/10000
+
+Epoch 155: loss did not improve from 0.02202
+1600/1600 - 101s - loss: 0.0220 - encoding_loss: 2.0410 - reconstruction_loss: 0.0016 - val_loss: 0.0220 - val_encoding_loss: 2.0593 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 156/10000
+
+Epoch 156: loss did not improve from 0.02202
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0407 - reconstruction_loss: 0.0017 - val_loss: 0.0222 - val_encoding_loss: 2.0605 - val_reconstruction_loss: 0.0016 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 157/10000
+
+Epoch 157: loss improved from 0.02202 to 0.02198, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0402 - reconstruction_loss: 0.0016 - val_loss: 0.0223 - val_encoding_loss: 2.0599 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 158/10000
+
+Epoch 158: loss did not improve from 0.02198
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0401 - reconstruction_loss: 0.0016 - val_loss: 0.0222 - val_encoding_loss: 2.0655 - val_reconstruction_loss: 0.0016 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 159/10000
+
+Epoch 159: loss did not improve from 0.02198
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0405 - reconstruction_loss: 0.0017 - val_loss: 0.0224 - val_encoding_loss: 2.0610 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 160/10000
+
+Epoch 160: loss did not improve from 0.02198
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0406 - reconstruction_loss: 0.0016 - val_loss: 0.0220 - val_encoding_loss: 2.0655 - val_reconstruction_loss: 0.0013 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 161/10000
+
+Epoch 161: loss did not improve from 0.02198
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0404 - reconstruction_loss: 0.0016 - val_loss: 0.0227 - val_encoding_loss: 2.0639 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 162/10000
+
+Epoch 162: loss did not improve from 0.02198
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0397 - reconstruction_loss: 0.0016 - val_loss: 0.0220 - val_encoding_loss: 2.0615 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 163/10000
+
+Epoch 163: loss did not improve from 0.02198
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0401 - reconstruction_loss: 0.0016 - val_loss: 0.0229 - val_encoding_loss: 2.0616 - val_reconstruction_loss: 0.0023 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 164/10000
+
+Epoch 164: loss did not improve from 0.02198
+1600/1600 - 98s - loss: 0.0220 - encoding_loss: 2.0402 - reconstruction_loss: 0.0016 - val_loss: 0.0221 - val_encoding_loss: 2.0603 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 98s/epoch - 61ms/step
+Epoch 165/10000
+
+Epoch 165: loss did not improve from 0.02198
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0401 - reconstruction_loss: 0.0016 - val_loss: 0.0221 - val_encoding_loss: 2.0603 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 166/10000
+
+Epoch 166: loss improved from 0.02198 to 0.02194, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0393 - reconstruction_loss: 0.0016 - val_loss: 0.0221 - val_encoding_loss: 2.0603 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 167/10000
+
+Epoch 167: loss did not improve from 0.02194
+1600/1600 - 100s - loss: 0.0221 - encoding_loss: 2.0404 - reconstruction_loss: 0.0017 - val_loss: 0.0224 - val_encoding_loss: 2.0608 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 168/10000
+
+Epoch 168: loss did not improve from 0.02194
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0395 - reconstruction_loss: 0.0016 - val_loss: 0.0223 - val_encoding_loss: 2.0593 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 169/10000
+
+Epoch 169: loss did not improve from 0.02194
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0397 - reconstruction_loss: 0.0016 - val_loss: 0.0225 - val_encoding_loss: 2.0612 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 170/10000
+
+Epoch 170: loss did not improve from 0.02194
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0396 - reconstruction_loss: 0.0016 - val_loss: 0.0221 - val_encoding_loss: 2.0595 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 171/10000
+
+Epoch 171: loss did not improve from 0.02194
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0394 - reconstruction_loss: 0.0016 - val_loss: 0.0225 - val_encoding_loss: 2.0612 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 172/10000
+
+Epoch 172: loss did not improve from 0.02194
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0397 - reconstruction_loss: 0.0016 - val_loss: 0.0221 - val_encoding_loss: 2.0620 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 173/10000
+
+Epoch 173: loss did not improve from 0.02194
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0393 - reconstruction_loss: 0.0016 - val_loss: 0.0222 - val_encoding_loss: 2.0642 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 174/10000
+
+Epoch 174: loss improved from 0.02194 to 0.02192, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0219 - encoding_loss: 2.0392 - reconstruction_loss: 0.0015 - val_loss: 0.0220 - val_encoding_loss: 2.0599 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 175/10000
+
+Epoch 175: loss did not improve from 0.02192
+1600/1600 - 101s - loss: 0.0219 - encoding_loss: 2.0389 - reconstruction_loss: 0.0016 - val_loss: 0.0226 - val_encoding_loss: 2.0661 - val_reconstruction_loss: 0.0019 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 176/10000
+
+Epoch 176: loss did not improve from 0.02192
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0388 - reconstruction_loss: 0.0015 - val_loss: 0.0221 - val_encoding_loss: 2.0608 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 177/10000
+
+Epoch 177: loss did not improve from 0.02192
+1600/1600 - 101s - loss: 0.0219 - encoding_loss: 2.0387 - reconstruction_loss: 0.0016 - val_loss: 0.0224 - val_encoding_loss: 2.0587 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 101s/epoch - 63ms/step
+Epoch 178/10000
+
+Epoch 178: loss did not improve from 0.02192
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0389 - reconstruction_loss: 0.0016 - val_loss: 0.0219 - val_encoding_loss: 2.0637 - val_reconstruction_loss: 0.0013 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 179/10000
+
+Epoch 179: loss did not improve from 0.02192
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0391 - reconstruction_loss: 0.0016 - val_loss: 0.0223 - val_encoding_loss: 2.0615 - val_reconstruction_loss: 0.0017 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 180/10000
+
+Epoch 180: loss did not improve from 0.02192
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0389 - reconstruction_loss: 0.0016 - val_loss: 0.0221 - val_encoding_loss: 2.0611 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 181/10000
+
+Epoch 181: loss improved from 0.02192 to 0.02192, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0387 - reconstruction_loss: 0.0015 - val_loss: 0.0220 - val_encoding_loss: 2.0624 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 182/10000
+
+Epoch 182: loss did not improve from 0.02192
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0389 - reconstruction_loss: 0.0016 - val_loss: 0.0231 - val_encoding_loss: 2.0840 - val_reconstruction_loss: 0.0023 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 183/10000
+
+Epoch 183: loss did not improve from 0.02192
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0391 - reconstruction_loss: 0.0015 - val_loss: 0.0219 - val_encoding_loss: 2.0624 - val_reconstruction_loss: 0.0013 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 184/10000
+
+Epoch 184: loss improved from 0.02192 to 0.02191, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 99s - loss: 0.0219 - encoding_loss: 2.0387 - reconstruction_loss: 0.0015 - val_loss: 0.0220 - val_encoding_loss: 2.0617 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 99s/epoch - 62ms/step
+Epoch 185/10000
+
+Epoch 185: loss improved from 0.02191 to 0.02189, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0383 - reconstruction_loss: 0.0015 - val_loss: 0.0224 - val_encoding_loss: 2.0636 - val_reconstruction_loss: 0.0018 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 186/10000
+
+Epoch 186: loss did not improve from 0.02189
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0388 - reconstruction_loss: 0.0015 - val_loss: 0.0221 - val_encoding_loss: 2.0593 - val_reconstruction_loss: 0.0016 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 187/10000
+
+Epoch 187: loss improved from 0.02189 to 0.02187, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0381 - reconstruction_loss: 0.0015 - val_loss: 0.0227 - val_encoding_loss: 2.0636 - val_reconstruction_loss: 0.0021 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 188/10000
+
+Epoch 188: loss did not improve from 0.02187
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0386 - reconstruction_loss: 0.0015 - val_loss: 0.0222 - val_encoding_loss: 2.0636 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 63ms/step
+Epoch 189/10000
+
+Epoch 189: loss did not improve from 0.02187
+1600/1600 - 99s - loss: 0.0219 - encoding_loss: 2.0384 - reconstruction_loss: 0.0015 - val_loss: 0.0220 - val_encoding_loss: 2.0609 - val_reconstruction_loss: 0.0014 - lr: 1.0000e-04 - 99s/epoch - 62ms/step
+Epoch 190/10000
+
+Epoch 190: loss improved from 0.02187 to 0.02186, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0219 - encoding_loss: 2.0379 - reconstruction_loss: 0.0015 - val_loss: 0.0218 - val_encoding_loss: 2.0610 - val_reconstruction_loss: 0.0012 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 191/10000
+
+Epoch 191: loss did not improve from 0.02186
+1600/1600 - 100s - loss: 0.0220 - encoding_loss: 2.0386 - reconstruction_loss: 0.0016 - val_loss: 0.0221 - val_encoding_loss: 2.0632 - val_reconstruction_loss: 0.0015 - lr: 1.0000e-04 - 100s/epoch - 62ms/step
+Epoch 192/10000
+
+Epoch 192: loss improved from 0.02186 to 0.02124, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0347 - reconstruction_loss: 9.0573e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0606 - val_reconstruction_loss: 9.1535e-04 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 193/10000
+
+Epoch 193: loss improved from 0.02124 to 0.02124, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0336 - reconstruction_loss: 9.0896e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0603 - val_reconstruction_loss: 9.0105e-04 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 194/10000
+
+Epoch 194: loss improved from 0.02124 to 0.02122, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0329 - reconstruction_loss: 9.0343e-04 - val_loss: 0.0214 - val_encoding_loss: 2.0596 - val_reconstruction_loss: 8.5160e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 195/10000
+
+Epoch 195: loss did not improve from 0.02122
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0325 - reconstruction_loss: 9.1110e-04 - val_loss: 0.0216 - val_encoding_loss: 2.0576 - val_reconstruction_loss: 9.8849e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 196/10000
+
+Epoch 196: loss improved from 0.02122 to 0.02121, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0321 - reconstruction_loss: 8.9785e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0591 - val_reconstruction_loss: 9.5551e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 197/10000
+
+Epoch 197: loss did not improve from 0.02121
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0317 - reconstruction_loss: 9.1388e-04 - val_loss: 0.0214 - val_encoding_loss: 2.0594 - val_reconstruction_loss: 8.3562e-04 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 198/10000
+
+Epoch 198: loss improved from 0.02121 to 0.02120, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0315 - reconstruction_loss: 8.9263e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0585 - val_reconstruction_loss: 8.9050e-04 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 199/10000
+
+Epoch 199: loss did not improve from 0.02120
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0312 - reconstruction_loss: 8.9891e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0584 - val_reconstruction_loss: 9.6393e-04 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 200/10000
+
+Epoch 200: loss did not improve from 0.02120
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0310 - reconstruction_loss: 9.0145e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0578 - val_reconstruction_loss: 9.4267e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 201/10000
+
+Epoch 201: loss did not improve from 0.02120
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0307 - reconstruction_loss: 9.0886e-04 - val_loss: 0.0214 - val_encoding_loss: 2.0568 - val_reconstruction_loss: 7.8998e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 202/10000
+
+Epoch 202: loss improved from 0.02120 to 0.02119, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0307 - reconstruction_loss: 8.9236e-04 - val_loss: 0.0214 - val_encoding_loss: 2.0584 - val_reconstruction_loss: 8.6546e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 203/10000
+
+Epoch 203: loss improved from 0.02119 to 0.02118, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0303 - reconstruction_loss: 8.8925e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0561 - val_reconstruction_loss: 9.1779e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 204/10000
+
+Epoch 204: loss did not improve from 0.02118
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0307 - reconstruction_loss: 9.0708e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0590 - val_reconstruction_loss: 9.0598e-04 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 205/10000
+
+Epoch 205: loss improved from 0.02118 to 0.02118, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0300 - reconstruction_loss: 8.9047e-04 - val_loss: 0.0214 - val_encoding_loss: 2.0582 - val_reconstruction_loss: 8.6429e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 206/10000
+
+Epoch 206: loss did not improve from 0.02118
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0301 - reconstruction_loss: 8.9709e-04 - val_loss: 0.0214 - val_encoding_loss: 2.0579 - val_reconstruction_loss: 8.5271e-04 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 207/10000
+
+Epoch 207: loss did not improve from 0.02118
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0301 - reconstruction_loss: 9.0962e-04 - val_loss: 0.0216 - val_encoding_loss: 2.0581 - val_reconstruction_loss: 0.0011 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 208/10000
+
+Epoch 208: loss improved from 0.02118 to 0.02118, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0298 - reconstruction_loss: 8.8919e-04 - val_loss: 0.0216 - val_encoding_loss: 2.0583 - val_reconstruction_loss: 0.0011 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 209/10000
+
+Epoch 209: loss did not improve from 0.02118
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0297 - reconstruction_loss: 9.0273e-04 - val_loss: 0.0217 - val_encoding_loss: 2.0616 - val_reconstruction_loss: 0.0011 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 210/10000
+
+Epoch 210: loss did not improve from 0.02118
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0296 - reconstruction_loss: 8.9662e-04 - val_loss: 0.0216 - val_encoding_loss: 2.0598 - val_reconstruction_loss: 0.0010 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 211/10000
+
+Epoch 211: loss improved from 0.02118 to 0.02117, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0294 - reconstruction_loss: 8.8114e-04 - val_loss: 0.0214 - val_encoding_loss: 2.0576 - val_reconstruction_loss: 8.1083e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 212/10000
+
+Epoch 212: loss improved from 0.02117 to 0.02117, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0291 - reconstruction_loss: 8.8291e-04 - val_loss: 0.0214 - val_encoding_loss: 2.0592 - val_reconstruction_loss: 8.4968e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 213/10000
+
+Epoch 213: loss did not improve from 0.02117
+1600/1600 - 99s - loss: 0.0212 - encoding_loss: 2.0290 - reconstruction_loss: 9.0210e-04 - val_loss: 0.0213 - val_encoding_loss: 2.0576 - val_reconstruction_loss: 7.6513e-04 - lr: 5.0000e-05 - 99s/epoch - 62ms/step
+Epoch 214/10000
+
+Epoch 214: loss did not improve from 0.02117
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0291 - reconstruction_loss: 8.8548e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0576 - val_reconstruction_loss: 9.5922e-04 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 215/10000
+
+Epoch 215: loss did not improve from 0.02117
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0291 - reconstruction_loss: 8.9980e-04 - val_loss: 0.0217 - val_encoding_loss: 2.0577 - val_reconstruction_loss: 0.0012 - lr: 5.0000e-05 - 100s/epoch - 62ms/step
+Epoch 216/10000
+
+Epoch 216: loss did not improve from 0.02117
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0291 - reconstruction_loss: 8.8819e-04 - val_loss: 0.0215 - val_encoding_loss: 2.0570 - val_reconstruction_loss: 9.5102e-04 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 217/10000
+
+Epoch 217: loss improved from 0.02117 to 0.02116, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0212 - encoding_loss: 2.0289 - reconstruction_loss: 8.8408e-04 - val_loss: 0.0216 - val_encoding_loss: 2.0613 - val_reconstruction_loss: 0.0010 - lr: 5.0000e-05 - 100s/epoch - 63ms/step
+Epoch 218/10000
+
+Epoch 218: loss improved from 0.02116 to 0.02085, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0209 - encoding_loss: 2.0268 - reconstruction_loss: 5.8960e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0581 - val_reconstruction_loss: 6.5771e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 219/10000
+
+Epoch 219: loss improved from 0.02085 to 0.02084, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0263 - reconstruction_loss: 5.8564e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0576 - val_reconstruction_loss: 6.7739e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 220/10000
+
+Epoch 220: loss improved from 0.02084 to 0.02084, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0257 - reconstruction_loss: 5.8476e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0575 - val_reconstruction_loss: 6.1416e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 221/10000
+
+Epoch 221: loss improved from 0.02084 to 0.02083, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0257 - reconstruction_loss: 5.8247e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0580 - val_reconstruction_loss: 6.0714e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 222/10000
+
+Epoch 222: loss did not improve from 0.02083
+1600/1600 - 99s - loss: 0.0208 - encoding_loss: 2.0254 - reconstruction_loss: 5.8998e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0577 - val_reconstruction_loss: 5.9993e-04 - lr: 2.5000e-05 - 99s/epoch - 62ms/step
+Epoch 223/10000
+
+Epoch 223: loss did not improve from 0.02083
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0252 - reconstruction_loss: 5.8936e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0579 - val_reconstruction_loss: 5.9895e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 224/10000
+
+Epoch 224: loss improved from 0.02083 to 0.02082, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0250 - reconstruction_loss: 5.7810e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0585 - val_reconstruction_loss: 6.0683e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 225/10000
+
+Epoch 225: loss improved from 0.02082 to 0.02082, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0246 - reconstruction_loss: 5.8036e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0561 - val_reconstruction_loss: 6.4006e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 226/10000
+
+Epoch 226: loss improved from 0.02082 to 0.02082, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0247 - reconstruction_loss: 5.7834e-04 - val_loss: 0.0211 - val_encoding_loss: 2.0575 - val_reconstruction_loss: 5.2923e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 227/10000
+
+Epoch 227: loss improved from 0.02082 to 0.02082, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0245 - reconstruction_loss: 5.7557e-04 - val_loss: 0.0211 - val_encoding_loss: 2.0590 - val_reconstruction_loss: 5.4079e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 228/10000
+
+Epoch 228: loss improved from 0.02082 to 0.02081, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0241 - reconstruction_loss: 5.7288e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0599 - val_reconstruction_loss: 6.3813e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 229/10000
+
+Epoch 229: loss did not improve from 0.02081
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0240 - reconstruction_loss: 5.7749e-04 - val_loss: 0.0211 - val_encoding_loss: 2.0598 - val_reconstruction_loss: 5.2685e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 230/10000
+
+Epoch 230: loss improved from 0.02081 to 0.02081, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 99s - loss: 0.0208 - encoding_loss: 2.0241 - reconstruction_loss: 5.7140e-04 - val_loss: 0.0211 - val_encoding_loss: 2.0577 - val_reconstruction_loss: 5.7080e-04 - lr: 2.5000e-05 - 99s/epoch - 62ms/step
+Epoch 231/10000
+
+Epoch 231: loss did not improve from 0.02081
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0238 - reconstruction_loss: 5.7551e-04 - val_loss: 0.0211 - val_encoding_loss: 2.0592 - val_reconstruction_loss: 5.5161e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 232/10000
+
+Epoch 232: loss did not improve from 0.02081
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0237 - reconstruction_loss: 5.7814e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0597 - val_reconstruction_loss: 5.7449e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 233/10000
+
+Epoch 233: loss improved from 0.02081 to 0.02081, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0236 - reconstruction_loss: 5.7516e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0576 - val_reconstruction_loss: 6.0946e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 234/10000
+
+Epoch 234: loss improved from 0.02081 to 0.02080, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0235 - reconstruction_loss: 5.7361e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0582 - val_reconstruction_loss: 5.8224e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 235/10000
+
+Epoch 235: loss did not improve from 0.02080
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0235 - reconstruction_loss: 5.7587e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0592 - val_reconstruction_loss: 5.7425e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 236/10000
+
+Epoch 236: loss improved from 0.02080 to 0.02079, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0231 - reconstruction_loss: 5.6637e-04 - val_loss: 0.0213 - val_encoding_loss: 2.0588 - val_reconstruction_loss: 6.7870e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 237/10000
+
+Epoch 237: loss did not improve from 0.02079
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0231 - reconstruction_loss: 5.7400e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0582 - val_reconstruction_loss: 6.5753e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 238/10000
+
+Epoch 238: loss did not improve from 0.02079
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0232 - reconstruction_loss: 5.6865e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0589 - val_reconstruction_loss: 5.8121e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 239/10000
+
+Epoch 239: loss improved from 0.02079 to 0.02079, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0229 - reconstruction_loss: 5.6826e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0583 - val_reconstruction_loss: 6.3361e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 240/10000
+
+Epoch 240: loss did not improve from 0.02079
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0227 - reconstruction_loss: 5.6989e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0581 - val_reconstruction_loss: 5.8502e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 241/10000
+
+Epoch 241: loss improved from 0.02079 to 0.02078, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0226 - reconstruction_loss: 5.6197e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0585 - val_reconstruction_loss: 6.0623e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 242/10000
+
+Epoch 242: loss did not improve from 0.02078
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0225 - reconstruction_loss: 5.7418e-04 - val_loss: 0.0213 - val_encoding_loss: 2.0579 - val_reconstruction_loss: 6.7904e-04 - lr: 2.5000e-05 - 100s/epoch - 63ms/step
+Epoch 243/10000
+
+Epoch 243: loss did not improve from 0.02078
+1600/1600 - 100s - loss: 0.0208 - encoding_loss: 2.0224 - reconstruction_loss: 5.6596e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0588 - val_reconstruction_loss: 6.3265e-04 - lr: 2.5000e-05 - 100s/epoch - 62ms/step
+Epoch 244/10000
+
+Epoch 244: loss improved from 0.02078 to 0.02063, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0209 - reconstruction_loss: 4.2609e-04 - val_loss: 0.0211 - val_encoding_loss: 2.0589 - val_reconstruction_loss: 4.7019e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 245/10000
+
+Epoch 245: loss improved from 0.02063 to 0.02062, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0206 - encoding_loss: 2.0206 - reconstruction_loss: 4.2253e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0593 - val_reconstruction_loss: 4.2437e-04 - lr: 1.2500e-05 - 101s/epoch - 63ms/step
+Epoch 246/10000
+
+Epoch 246: loss improved from 0.02062 to 0.02062, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0206 - encoding_loss: 2.0204 - reconstruction_loss: 4.2328e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0587 - val_reconstruction_loss: 4.2302e-04 - lr: 1.2500e-05 - 101s/epoch - 63ms/step
+Epoch 247/10000
+
+Epoch 247: loss did not improve from 0.02062
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0203 - reconstruction_loss: 4.2532e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0586 - val_reconstruction_loss: 4.3579e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 248/10000
+
+Epoch 248: loss improved from 0.02062 to 0.02062, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0201 - reconstruction_loss: 4.2180e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0584 - val_reconstruction_loss: 4.2322e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 249/10000
+
+Epoch 249: loss improved from 0.02062 to 0.02062, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0200 - reconstruction_loss: 4.2271e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0588 - val_reconstruction_loss: 4.5066e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 250/10000
+
+Epoch 250: loss improved from 0.02062 to 0.02061, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0200 - reconstruction_loss: 4.1915e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0585 - val_reconstruction_loss: 4.1860e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 251/10000
+
+Epoch 251: loss improved from 0.02061 to 0.02061, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0197 - reconstruction_loss: 4.2073e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0590 - val_reconstruction_loss: 4.3630e-04 - lr: 1.2500e-05 - 100s/epoch - 62ms/step
+Epoch 252/10000
+
+Epoch 252: loss did not improve from 0.02061
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0197 - reconstruction_loss: 4.2140e-04 - val_loss: 0.0211 - val_encoding_loss: 2.0608 - val_reconstruction_loss: 4.5801e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 253/10000
+
+Epoch 253: loss improved from 0.02061 to 0.02061, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0206 - encoding_loss: 2.0196 - reconstruction_loss: 4.1878e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0598 - val_reconstruction_loss: 4.4354e-04 - lr: 1.2500e-05 - 101s/epoch - 63ms/step
+Epoch 254/10000
+
+Epoch 254: loss improved from 0.02061 to 0.02060, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0192 - reconstruction_loss: 4.1492e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0600 - val_reconstruction_loss: 4.4498e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 255/10000
+
+Epoch 255: loss improved from 0.02060 to 0.02060, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0192 - reconstruction_loss: 4.1481e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0601 - val_reconstruction_loss: 4.4070e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 256/10000
+
+Epoch 256: loss improved from 0.02060 to 0.02060, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0191 - reconstruction_loss: 4.1474e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0601 - val_reconstruction_loss: 4.3754e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 257/10000
+
+Epoch 257: loss improved from 0.02060 to 0.02060, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0190 - reconstruction_loss: 4.1303e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0593 - val_reconstruction_loss: 4.3133e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 258/10000
+
+Epoch 258: loss improved from 0.02060 to 0.02060, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 99s - loss: 0.0206 - encoding_loss: 2.0189 - reconstruction_loss: 4.1428e-04 - val_loss: 0.0211 - val_encoding_loss: 2.0593 - val_reconstruction_loss: 4.7879e-04 - lr: 1.2500e-05 - 99s/epoch - 62ms/step
+Epoch 259/10000
+
+Epoch 259: loss improved from 0.02060 to 0.02060, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0186 - reconstruction_loss: 4.1433e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0607 - val_reconstruction_loss: 4.1982e-04 - lr: 1.2500e-05 - 100s/epoch - 62ms/step
+Epoch 260/10000
+
+Epoch 260: loss did not improve from 0.02060
+1600/1600 - 99s - loss: 0.0206 - encoding_loss: 2.0186 - reconstruction_loss: 4.1513e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0590 - val_reconstruction_loss: 4.2093e-04 - lr: 1.2500e-05 - 99s/epoch - 62ms/step
+Epoch 261/10000
+
+Epoch 261: loss did not improve from 0.02060
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0185 - reconstruction_loss: 4.1531e-04 - val_loss: 0.0212 - val_encoding_loss: 2.0592 - val_reconstruction_loss: 5.6928e-04 - lr: 1.2500e-05 - 100s/epoch - 62ms/step
+Epoch 262/10000
+
+Epoch 262: loss improved from 0.02060 to 0.02059, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0184 - reconstruction_loss: 4.1307e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0604 - val_reconstruction_loss: 4.2492e-04 - lr: 1.2500e-05 - 100s/epoch - 62ms/step
+Epoch 263/10000
+
+Epoch 263: loss improved from 0.02059 to 0.02059, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0183 - reconstruction_loss: 4.0909e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0608 - val_reconstruction_loss: 4.2406e-04 - lr: 1.2500e-05 - 100s/epoch - 62ms/step
+Epoch 264/10000
+
+Epoch 264: loss improved from 0.02059 to 0.02059, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0182 - reconstruction_loss: 4.0973e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0601 - val_reconstruction_loss: 4.0198e-04 - lr: 1.2500e-05 - 100s/epoch - 62ms/step
+Epoch 265/10000
+
+Epoch 265: loss improved from 0.02059 to 0.02059, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0181 - reconstruction_loss: 4.1072e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0600 - val_reconstruction_loss: 4.2884e-04 - lr: 1.2500e-05 - 100s/epoch - 62ms/step
+Epoch 266/10000
+
+Epoch 266: loss improved from 0.02059 to 0.02059, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0181 - reconstruction_loss: 4.0999e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0608 - val_reconstruction_loss: 4.0192e-04 - lr: 1.2500e-05 - 100s/epoch - 62ms/step
+Epoch 267/10000
+
+Epoch 267: loss improved from 0.02059 to 0.02059, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0179 - reconstruction_loss: 4.0999e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0605 - val_reconstruction_loss: 4.3221e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 268/10000
+
+Epoch 268: loss improved from 0.02059 to 0.02058, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0177 - reconstruction_loss: 4.0825e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0612 - val_reconstruction_loss: 4.1529e-04 - lr: 1.2500e-05 - 100s/epoch - 63ms/step
+Epoch 269/10000
+
+Epoch 269: loss did not improve from 0.02058
+1600/1600 - 100s - loss: 0.0206 - encoding_loss: 2.0178 - reconstruction_loss: 4.1015e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0606 - val_reconstruction_loss: 4.2416e-04 - lr: 1.2500e-05 - 100s/epoch - 62ms/step
+Epoch 270/10000
+
+Epoch 270: loss improved from 0.02058 to 0.02050, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0164 - reconstruction_loss: 3.4313e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0605 - val_reconstruction_loss: 3.7834e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 271/10000
+
+Epoch 271: loss improved from 0.02050 to 0.02050, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0162 - reconstruction_loss: 3.4457e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0618 - val_reconstruction_loss: 3.7021e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 272/10000
+
+Epoch 272: loss improved from 0.02050 to 0.02050, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0162 - reconstruction_loss: 3.4448e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0613 - val_reconstruction_loss: 3.9274e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 273/10000
+
+Epoch 273: loss improved from 0.02050 to 0.02050, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0161 - reconstruction_loss: 3.4357e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0607 - val_reconstruction_loss: 3.7186e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 274/10000
+
+Epoch 274: loss improved from 0.02050 to 0.02050, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0159 - reconstruction_loss: 3.4218e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0612 - val_reconstruction_loss: 3.6358e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 275/10000
+
+Epoch 275: loss improved from 0.02050 to 0.02050, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0158 - reconstruction_loss: 3.4240e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0610 - val_reconstruction_loss: 3.7974e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 276/10000
+
+Epoch 276: loss improved from 0.02050 to 0.02050, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0157 - reconstruction_loss: 3.4260e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0613 - val_reconstruction_loss: 3.5808e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 277/10000
+
+Epoch 277: loss improved from 0.02050 to 0.02049, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0156 - reconstruction_loss: 3.4048e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0611 - val_reconstruction_loss: 3.7661e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 278/10000
+
+Epoch 278: loss did not improve from 0.02049
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0155 - reconstruction_loss: 3.4235e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0614 - val_reconstruction_loss: 3.6370e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 279/10000
+
+Epoch 279: loss improved from 0.02049 to 0.02049, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0155 - reconstruction_loss: 3.4112e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0612 - val_reconstruction_loss: 3.7265e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 280/10000
+
+Epoch 280: loss improved from 0.02049 to 0.02049, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0154 - reconstruction_loss: 3.3901e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0611 - val_reconstruction_loss: 3.8511e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 281/10000
+
+Epoch 281: loss improved from 0.02049 to 0.02049, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0154 - reconstruction_loss: 3.3869e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0616 - val_reconstruction_loss: 3.5517e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 282/10000
+
+Epoch 282: loss improved from 0.02049 to 0.02049, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0152 - reconstruction_loss: 3.3867e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0613 - val_reconstruction_loss: 3.6134e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 283/10000
+
+Epoch 283: loss did not improve from 0.02049
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0151 - reconstruction_loss: 3.3976e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0616 - val_reconstruction_loss: 3.7335e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 284/10000
+
+Epoch 284: loss improved from 0.02049 to 0.02049, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0151 - reconstruction_loss: 3.3837e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0621 - val_reconstruction_loss: 3.6608e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 285/10000
+
+Epoch 285: loss improved from 0.02049 to 0.02048, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0149 - reconstruction_loss: 3.3693e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0621 - val_reconstruction_loss: 3.5688e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 286/10000
+
+Epoch 286: loss improved from 0.02048 to 0.02048, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0148 - reconstruction_loss: 3.3695e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0624 - val_reconstruction_loss: 3.6117e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 287/10000
+
+Epoch 287: loss improved from 0.02048 to 0.02048, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0147 - reconstruction_loss: 3.3779e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0622 - val_reconstruction_loss: 3.6105e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 288/10000
+
+Epoch 288: loss improved from 0.02048 to 0.02048, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0147 - reconstruction_loss: 3.3642e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0617 - val_reconstruction_loss: 3.6939e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 289/10000
+
+Epoch 289: loss improved from 0.02048 to 0.02048, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0145 - reconstruction_loss: 3.3588e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0624 - val_reconstruction_loss: 3.6698e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 290/10000
+
+Epoch 290: loss did not improve from 0.02048
+1600/1600 - 99s - loss: 0.0205 - encoding_loss: 2.0145 - reconstruction_loss: 3.3722e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0630 - val_reconstruction_loss: 3.8041e-04 - lr: 6.2500e-06 - 99s/epoch - 62ms/step
+Epoch 291/10000
+
+Epoch 291: loss improved from 0.02048 to 0.02048, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 99s - loss: 0.0205 - encoding_loss: 2.0144 - reconstruction_loss: 3.3460e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0627 - val_reconstruction_loss: 3.5725e-04 - lr: 6.2500e-06 - 99s/epoch - 62ms/step
+Epoch 292/10000
+
+Epoch 292: loss improved from 0.02048 to 0.02047, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0142 - reconstruction_loss: 3.3495e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0617 - val_reconstruction_loss: 4.0613e-04 - lr: 6.2500e-06 - 100s/epoch - 62ms/step
+Epoch 293/10000
+
+Epoch 293: loss improved from 0.02047 to 0.02047, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0141 - reconstruction_loss: 3.3607e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0623 - val_reconstruction_loss: 3.5067e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 294/10000
+
+Epoch 294: loss improved from 0.02047 to 0.02047, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0142 - reconstruction_loss: 3.3294e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0629 - val_reconstruction_loss: 3.6737e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 295/10000
+
+Epoch 295: loss improved from 0.02047 to 0.02047, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0205 - encoding_loss: 2.0140 - reconstruction_loss: 3.3341e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0624 - val_reconstruction_loss: 3.8045e-04 - lr: 6.2500e-06 - 100s/epoch - 63ms/step
+Epoch 296/10000
+
+Epoch 296: loss improved from 0.02047 to 0.02043, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0131 - reconstruction_loss: 3.0550e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0622 - val_reconstruction_loss: 3.4707e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 297/10000
+
+Epoch 297: loss improved from 0.02043 to 0.02043, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0131 - reconstruction_loss: 3.0551e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0627 - val_reconstruction_loss: 3.4193e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 298/10000
+
+Epoch 298: loss improved from 0.02043 to 0.02043, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0130 - reconstruction_loss: 3.0573e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0629 - val_reconstruction_loss: 3.3438e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 299/10000
+
+Epoch 299: loss improved from 0.02043 to 0.02043, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0129 - reconstruction_loss: 3.0460e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0626 - val_reconstruction_loss: 3.3613e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 300/10000
+
+Epoch 300: loss did not improve from 0.02043
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0129 - reconstruction_loss: 3.0464e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0626 - val_reconstruction_loss: 3.3642e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 301/10000
+
+Epoch 301: loss improved from 0.02043 to 0.02043, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0128 - reconstruction_loss: 3.0405e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0637 - val_reconstruction_loss: 3.3390e-04 - lr: 3.1250e-06 - 100s/epoch - 63ms/step
+Epoch 302/10000
+
+Epoch 302: loss did not improve from 0.02043
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0128 - reconstruction_loss: 3.0430e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0631 - val_reconstruction_loss: 3.3102e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 303/10000
+
+Epoch 303: loss improved from 0.02043 to 0.02043, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0127 - reconstruction_loss: 3.0361e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0632 - val_reconstruction_loss: 3.5743e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 304/10000
+
+Epoch 304: loss improved from 0.02043 to 0.02043, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0126 - reconstruction_loss: 3.0429e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0637 - val_reconstruction_loss: 3.4495e-04 - lr: 3.1250e-06 - 100s/epoch - 63ms/step
+Epoch 305/10000
+
+Epoch 305: loss improved from 0.02043 to 0.02043, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0126 - reconstruction_loss: 3.0333e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0632 - val_reconstruction_loss: 3.3181e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 306/10000
+
+Epoch 306: loss improved from 0.02043 to 0.02042, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0124 - reconstruction_loss: 3.0257e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0638 - val_reconstruction_loss: 3.3624e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 307/10000
+
+Epoch 307: loss did not improve from 0.02042
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0125 - reconstruction_loss: 3.0282e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0633 - val_reconstruction_loss: 3.3289e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 308/10000
+
+Epoch 308: loss improved from 0.02042 to 0.02042, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0124 - reconstruction_loss: 3.0258e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0633 - val_reconstruction_loss: 3.3920e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 309/10000
+
+Epoch 309: loss improved from 0.02042 to 0.02042, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0123 - reconstruction_loss: 3.0219e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0634 - val_reconstruction_loss: 3.3675e-04 - lr: 3.1250e-06 - 100s/epoch - 63ms/step
+Epoch 310/10000
+
+Epoch 310: loss did not improve from 0.02042
+1600/1600 - 99s - loss: 0.0204 - encoding_loss: 2.0123 - reconstruction_loss: 3.0224e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0640 - val_reconstruction_loss: 3.4329e-04 - lr: 3.1250e-06 - 99s/epoch - 62ms/step
+Epoch 311/10000
+
+Epoch 311: loss improved from 0.02042 to 0.02042, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0121 - reconstruction_loss: 3.0172e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0633 - val_reconstruction_loss: 3.3248e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 312/10000
+
+Epoch 312: loss improved from 0.02042 to 0.02042, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0121 - reconstruction_loss: 3.0160e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0642 - val_reconstruction_loss: 3.3683e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 313/10000
+
+Epoch 313: loss did not improve from 0.02042
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0121 - reconstruction_loss: 3.0153e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0634 - val_reconstruction_loss: 3.3119e-04 - lr: 3.1250e-06 - 100s/epoch - 63ms/step
+Epoch 314/10000
+
+Epoch 314: loss improved from 0.02042 to 0.02042, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0120 - reconstruction_loss: 3.0074e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0634 - val_reconstruction_loss: 3.3727e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 315/10000
+
+Epoch 315: loss improved from 0.02042 to 0.02042, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0119 - reconstruction_loss: 3.0091e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0640 - val_reconstruction_loss: 3.4169e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 316/10000
+
+Epoch 316: loss improved from 0.02042 to 0.02042, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0119 - reconstruction_loss: 3.0068e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0638 - val_reconstruction_loss: 3.4035e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 317/10000
+
+Epoch 317: loss improved from 0.02042 to 0.02041, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0117 - reconstruction_loss: 3.0074e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0634 - val_reconstruction_loss: 3.3098e-04 - lr: 3.1250e-06 - 100s/epoch - 62ms/step
+Epoch 318/10000
+
+Epoch 318: loss did not improve from 0.02041
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0118 - reconstruction_loss: 2.9988e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0638 - val_reconstruction_loss: 3.4863e-04 - lr: 3.1250e-06 - 100s/epoch - 63ms/step
+Epoch 319/10000
+
+Epoch 319: loss improved from 0.02041 to 0.02041, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0116 - reconstruction_loss: 2.9984e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0645 - val_reconstruction_loss: 3.2875e-04 - lr: 3.1250e-06 - 100s/epoch - 63ms/step
+Epoch 320/10000
+
+Epoch 320: loss improved from 0.02041 to 0.02041, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0116 - reconstruction_loss: 2.9943e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0640 - val_reconstruction_loss: 3.3597e-04 - lr: 3.1250e-06 - 100s/epoch - 63ms/step
+Epoch 321/10000
+
+Epoch 321: loss improved from 0.02041 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0204 - encoding_loss: 2.0111 - reconstruction_loss: 2.8689e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0640 - val_reconstruction_loss: 3.2935e-04 - lr: 1.5625e-06 - 101s/epoch - 63ms/step
+Epoch 322/10000
+
+Epoch 322: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0204 - encoding_loss: 2.0109 - reconstruction_loss: 2.8693e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0642 - val_reconstruction_loss: 3.2390e-04 - lr: 1.5625e-06 - 101s/epoch - 63ms/step
+Epoch 323/10000
+
+Epoch 323: loss did not improve from 0.02039
+1600/1600 - 101s - loss: 0.0204 - encoding_loss: 2.0109 - reconstruction_loss: 2.8715e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0639 - val_reconstruction_loss: 3.2719e-04 - lr: 1.5625e-06 - 101s/epoch - 63ms/step
+Epoch 324/10000
+
+Epoch 324: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0204 - encoding_loss: 2.0109 - reconstruction_loss: 2.8694e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0641 - val_reconstruction_loss: 3.1979e-04 - lr: 1.5625e-06 - 101s/epoch - 63ms/step
+Epoch 325/10000
+
+Epoch 325: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0204 - encoding_loss: 2.0109 - reconstruction_loss: 2.8656e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0643 - val_reconstruction_loss: 3.2120e-04 - lr: 1.5625e-06 - 101s/epoch - 63ms/step
+Epoch 326/10000
+
+Epoch 326: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0108 - reconstruction_loss: 2.8675e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0641 - val_reconstruction_loss: 3.2134e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 327/10000
+
+Epoch 327: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0108 - reconstruction_loss: 2.8653e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0642 - val_reconstruction_loss: 3.2012e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 328/10000
+
+Epoch 328: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0204 - encoding_loss: 2.0108 - reconstruction_loss: 2.8605e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0645 - val_reconstruction_loss: 3.3130e-04 - lr: 1.5625e-06 - 101s/epoch - 63ms/step
+Epoch 329/10000
+
+Epoch 329: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0107 - reconstruction_loss: 2.8585e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0645 - val_reconstruction_loss: 3.2117e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 330/10000
+
+Epoch 330: loss did not improve from 0.02039
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0107 - reconstruction_loss: 2.8586e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0645 - val_reconstruction_loss: 3.2017e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 331/10000
+
+Epoch 331: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0106 - reconstruction_loss: 2.8539e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0648 - val_reconstruction_loss: 3.2269e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 332/10000
+
+Epoch 332: loss did not improve from 0.02039
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0106 - reconstruction_loss: 2.8584e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0647 - val_reconstruction_loss: 3.2218e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 333/10000
+
+Epoch 333: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 101s - loss: 0.0204 - encoding_loss: 2.0106 - reconstruction_loss: 2.8503e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0644 - val_reconstruction_loss: 3.1956e-04 - lr: 1.5625e-06 - 101s/epoch - 63ms/step
+Epoch 334/10000
+
+Epoch 334: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0105 - reconstruction_loss: 2.8526e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0645 - val_reconstruction_loss: 3.1914e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 335/10000
+
+Epoch 335: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0104 - reconstruction_loss: 2.8524e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0647 - val_reconstruction_loss: 3.2360e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 336/10000
+
+Epoch 336: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0104 - reconstruction_loss: 2.8490e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0646 - val_reconstruction_loss: 3.1877e-04 - lr: 1.5625e-06 - 100s/epoch - 62ms/step
+Epoch 337/10000
+
+Epoch 337: loss did not improve from 0.02039
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0104 - reconstruction_loss: 2.8467e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0645 - val_reconstruction_loss: 3.2235e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 338/10000
+
+Epoch 338: loss improved from 0.02039 to 0.02039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0104 - reconstruction_loss: 2.8476e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0644 - val_reconstruction_loss: 3.1870e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 339/10000
+
+Epoch 339: loss improved from 0.02039 to 0.02038, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0103 - reconstruction_loss: 2.8442e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0643 - val_reconstruction_loss: 3.2093e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 340/10000
+
+Epoch 340: loss improved from 0.02038 to 0.02038, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0103 - reconstruction_loss: 2.8400e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0647 - val_reconstruction_loss: 3.1807e-04 - lr: 1.5625e-06 - 100s/epoch - 63ms/step
+Epoch 341/10000
+
+Epoch 341: loss improved from 0.02038 to 0.02038, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0102 - reconstruction_loss: 2.8422e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0645 - val_reconstruction_loss: 3.2004e-04 - lr: 1.5625e-06 - 100s/epoch - 62ms/step
+Epoch 342/10000
+
+Epoch 342: loss did not improve from 0.02038
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0102 - reconstruction_loss: 2.8421e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0646 - val_reconstruction_loss: 3.2926e-04 - lr: 1.5625e-06 - 100s/epoch - 62ms/step
+Epoch 343/10000
+
+Epoch 343: loss improved from 0.02038 to 0.02038, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0101 - reconstruction_loss: 2.8382e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0647 - val_reconstruction_loss: 3.2176e-04 - lr: 1.5625e-06 - 100s/epoch - 62ms/step
+Epoch 344/10000
+
+Epoch 344: loss improved from 0.02038 to 0.02038, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0101 - reconstruction_loss: 2.8370e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0647 - val_reconstruction_loss: 3.2253e-04 - lr: 1.5625e-06 - 100s/epoch - 62ms/step
+Epoch 345/10000
+
+Epoch 345: loss did not improve from 0.02038
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0101 - reconstruction_loss: 2.8388e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0651 - val_reconstruction_loss: 3.2320e-04 - lr: 1.5625e-06 - 100s/epoch - 62ms/step
+Epoch 346/10000
+
+Epoch 346: loss did not improve from 0.02038
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0101 - reconstruction_loss: 2.8387e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0648 - val_reconstruction_loss: 3.2090e-04 - lr: 1.5625e-06 - 100s/epoch - 62ms/step
+Epoch 347/10000
+
+Epoch 347: loss improved from 0.02038 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0097 - reconstruction_loss: 2.7758e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0647 - val_reconstruction_loss: 3.1478e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 348/10000
+
+Epoch 348: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0097 - reconstruction_loss: 2.7766e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0648 - val_reconstruction_loss: 3.1639e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 349/10000
+
+Epoch 349: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0097 - reconstruction_loss: 2.7757e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0648 - val_reconstruction_loss: 3.1662e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 350/10000
+
+Epoch 350: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0096 - reconstruction_loss: 2.7751e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0649 - val_reconstruction_loss: 3.1642e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 351/10000
+
+Epoch 351: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0096 - reconstruction_loss: 2.7739e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0650 - val_reconstruction_loss: 3.1437e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 352/10000
+
+Epoch 352: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0095 - reconstruction_loss: 2.7734e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0653 - val_reconstruction_loss: 3.1524e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 353/10000
+
+Epoch 353: loss did not improve from 0.02037
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0096 - reconstruction_loss: 2.7716e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0650 - val_reconstruction_loss: 3.1619e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 354/10000
+
+Epoch 354: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0095 - reconstruction_loss: 2.7732e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0649 - val_reconstruction_loss: 3.1411e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 355/10000
+
+Epoch 355: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0095 - reconstruction_loss: 2.7708e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0652 - val_reconstruction_loss: 3.1442e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 356/10000
+
+Epoch 356: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0095 - reconstruction_loss: 2.7681e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0651 - val_reconstruction_loss: 3.1457e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 357/10000
+
+Epoch 357: loss did not improve from 0.02037
+1600/1600 - 99s - loss: 0.0204 - encoding_loss: 2.0095 - reconstruction_loss: 2.7680e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0652 - val_reconstruction_loss: 3.1429e-04 - lr: 7.8125e-07 - 99s/epoch - 62ms/step
+Epoch 358/10000
+
+Epoch 358: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0094 - reconstruction_loss: 2.7698e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0654 - val_reconstruction_loss: 3.1487e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 359/10000
+
+Epoch 359: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0094 - reconstruction_loss: 2.7695e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0651 - val_reconstruction_loss: 3.1420e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 360/10000
+
+Epoch 360: loss did not improve from 0.02037
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0094 - reconstruction_loss: 2.7664e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0651 - val_reconstruction_loss: 3.1373e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 361/10000
+
+Epoch 361: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0093 - reconstruction_loss: 2.7674e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0653 - val_reconstruction_loss: 3.1443e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 362/10000
+
+Epoch 362: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0093 - reconstruction_loss: 2.7666e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0652 - val_reconstruction_loss: 3.1606e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 363/10000
+
+Epoch 363: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0093 - reconstruction_loss: 2.7647e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0653 - val_reconstruction_loss: 3.1374e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 364/10000
+
+Epoch 364: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 99s - loss: 0.0204 - encoding_loss: 2.0093 - reconstruction_loss: 2.7647e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0652 - val_reconstruction_loss: 3.1440e-04 - lr: 7.8125e-07 - 99s/epoch - 62ms/step
+Epoch 365/10000
+
+Epoch 365: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0093 - reconstruction_loss: 2.7613e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0652 - val_reconstruction_loss: 3.1340e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 366/10000
+
+Epoch 366: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0093 - reconstruction_loss: 2.7611e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0651 - val_reconstruction_loss: 3.1299e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 367/10000
+
+Epoch 367: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0092 - reconstruction_loss: 2.7631e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0654 - val_reconstruction_loss: 3.1461e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 368/10000
+
+Epoch 368: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0092 - reconstruction_loss: 2.7604e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0655 - val_reconstruction_loss: 3.1469e-04 - lr: 7.8125e-07 - 100s/epoch - 62ms/step
+Epoch 369/10000
+
+Epoch 369: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0092 - reconstruction_loss: 2.7624e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0652 - val_reconstruction_loss: 3.1364e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 370/10000
+
+Epoch 370: loss improved from 0.02037 to 0.02037, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0092 - reconstruction_loss: 2.7595e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0654 - val_reconstruction_loss: 3.1512e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 371/10000
+
+Epoch 371: loss improved from 0.02037 to 0.02036, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0091 - reconstruction_loss: 2.7591e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0654 - val_reconstruction_loss: 3.1479e-04 - lr: 7.8125e-07 - 100s/epoch - 63ms/step
+Epoch 372/10000
+
+Epoch 372: loss improved from 0.02036 to 0.02036, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 99s - loss: 0.0204 - encoding_loss: 2.0090 - reconstruction_loss: 2.7305e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0654 - val_reconstruction_loss: 3.1185e-04 - lr: 3.9062e-07 - 99s/epoch - 62ms/step
+Epoch 373/10000
+
+Epoch 373: loss improved from 0.02036 to 0.02036, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0089 - reconstruction_loss: 2.7301e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0653 - val_reconstruction_loss: 3.1191e-04 - lr: 3.9062e-07 - 100s/epoch - 62ms/step
+Epoch 374/10000
+
+Epoch 374: loss improved from 0.02036 to 0.02036, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0089 - reconstruction_loss: 2.7297e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0654 - val_reconstruction_loss: 3.1186e-04 - lr: 3.9062e-07 - 100s/epoch - 62ms/step
+Epoch 375/10000
+
+Epoch 375: loss did not improve from 0.02036
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0089 - reconstruction_loss: 2.7295e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0654 - val_reconstruction_loss: 3.1137e-04 - lr: 3.9062e-07 - 100s/epoch - 62ms/step
+Epoch 376/10000
+
+Epoch 376: loss improved from 0.02036 to 0.02036, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0089 - reconstruction_loss: 2.7284e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0655 - val_reconstruction_loss: 3.1246e-04 - lr: 3.9062e-07 - 100s/epoch - 63ms/step
+Epoch 377/10000
+
+Epoch 377: loss did not improve from 0.02036
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0089 - reconstruction_loss: 2.7287e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0654 - val_reconstruction_loss: 3.1293e-04 - lr: 3.9062e-07 - 100s/epoch - 62ms/step
+Epoch 378/10000
+
+Epoch 378: loss improved from 0.02036 to 0.02036, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0089 - reconstruction_loss: 2.7277e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0653 - val_reconstruction_loss: 3.1163e-04 - lr: 3.9062e-07 - 100s/epoch - 62ms/step
+Epoch 379/10000
+
+Epoch 379: loss improved from 0.02036 to 0.02036, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_autoencoder.hdf5
+1600/1600 - 100s - loss: 0.0204 - encoding_loss: 2.0089 - reconstruction_loss: 2.7278e-04 - val_loss: 0.0210 - val_encoding_loss: 2.0654 - val_reconstruction_loss: 3.1186e-04 - lr: 3.9062e-07 - 100s/epoch - 62ms/step
+
+
+Mapper training
+
+
+Epoch 1/10000
+
+Epoch 1: loss improved from inf to 1.10369, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 1.1037 - val_loss: 0.5725 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 2/10000
+
+Epoch 2: loss improved from 1.10369 to 0.51331, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.5133 - val_loss: 0.3664 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 3/10000
+
+Epoch 3: loss improved from 0.51331 to 0.43039, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.4304 - val_loss: 0.3537 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 4/10000
+
+Epoch 4: loss improved from 0.43039 to 0.40346, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.4035 - val_loss: 0.3520 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 5/10000
+
+Epoch 5: loss improved from 0.40346 to 0.38331, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3833 - val_loss: 0.3808 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 6/10000
+
+Epoch 6: loss did not improve from 0.38331
+1600/1600 - 12s - loss: 0.3836 - val_loss: 0.3695 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 7/10000
+
+Epoch 7: loss improved from 0.38331 to 0.37267, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3727 - val_loss: 0.3416 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 8/10000
+
+Epoch 8: loss improved from 0.37267 to 0.36541, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3654 - val_loss: 0.3856 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 9/10000
+
+Epoch 9: loss improved from 0.36541 to 0.35914, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3591 - val_loss: 0.3408 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 10/10000
+
+Epoch 10: loss improved from 0.35914 to 0.35566, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3557 - val_loss: 0.3295 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 11/10000
+
+Epoch 11: loss improved from 0.35566 to 0.34338, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3434 - val_loss: 0.3632 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 12/10000
+
+Epoch 12: loss did not improve from 0.34338
+1600/1600 - 13s - loss: 0.3443 - val_loss: 0.3450 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 13/10000
+
+Epoch 13: loss improved from 0.34338 to 0.34102, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3410 - val_loss: 0.3229 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 14/10000
+
+Epoch 14: loss improved from 0.34102 to 0.33998, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3400 - val_loss: 0.3916 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 15/10000
+
+Epoch 15: loss improved from 0.33998 to 0.33194, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3319 - val_loss: 0.3196 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 16/10000
+
+Epoch 16: loss improved from 0.33194 to 0.33018, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3302 - val_loss: 0.3153 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 17/10000
+
+Epoch 17: loss did not improve from 0.33018
+1600/1600 - 13s - loss: 0.3926 - val_loss: 0.3315 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 18/10000
+
+Epoch 18: loss did not improve from 0.33018
+1600/1600 - 13s - loss: 0.3314 - val_loss: 0.3326 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 19/10000
+
+Epoch 19: loss improved from 0.33018 to 0.32572, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3257 - val_loss: 0.3161 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 20/10000
+
+Epoch 20: loss did not improve from 0.32572
+1600/1600 - 11s - loss: 0.3629 - val_loss: 0.3288 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 21/10000
+
+Epoch 21: loss improved from 0.32572 to 0.32485, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3248 - val_loss: 0.3202 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 22/10000
+
+Epoch 22: loss did not improve from 0.32485
+1600/1600 - 13s - loss: 0.3296 - val_loss: 0.3533 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 23/10000
+
+Epoch 23: loss improved from 0.32485 to 0.32270, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3227 - val_loss: 0.3498 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 24/10000
+
+Epoch 24: loss improved from 0.32270 to 0.32189, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3219 - val_loss: 0.3182 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 25/10000
+
+Epoch 25: loss improved from 0.32189 to 0.31909, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3191 - val_loss: 0.3254 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 26/10000
+
+Epoch 26: loss did not improve from 0.31909
+1600/1600 - 12s - loss: 0.3212 - val_loss: 0.3460 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 27/10000
+
+Epoch 27: loss improved from 0.31909 to 0.31778, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3178 - val_loss: 0.3205 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 28/10000
+
+Epoch 28: loss improved from 0.31778 to 0.31773, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3177 - val_loss: 0.3123 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 29/10000
+
+Epoch 29: loss did not improve from 0.31773
+1600/1600 - 13s - loss: 0.3900 - val_loss: 0.3184 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 30/10000
+
+Epoch 30: loss did not improve from 0.31773
+1600/1600 - 12s - loss: 0.3224 - val_loss: 0.3266 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 31/10000
+
+Epoch 31: loss improved from 0.31773 to 0.31722, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3172 - val_loss: 0.3129 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 32/10000
+
+Epoch 32: loss improved from 0.31722 to 0.31551, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3155 - val_loss: 0.3258 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 33/10000
+
+Epoch 33: loss did not improve from 0.31551
+1600/1600 - 13s - loss: 0.3156 - val_loss: 0.3164 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 34/10000
+
+Epoch 34: loss did not improve from 0.31551
+1600/1600 - 13s - loss: 0.3614 - val_loss: 0.3197 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 35/10000
+
+Epoch 35: loss did not improve from 0.31551
+1600/1600 - 13s - loss: 0.3160 - val_loss: 0.3166 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 36/10000
+
+Epoch 36: loss improved from 0.31551 to 0.31433, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3143 - val_loss: 0.3140 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 37/10000
+
+Epoch 37: loss improved from 0.31433 to 0.31351, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3135 - val_loss: 0.3162 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 38/10000
+
+Epoch 38: loss did not improve from 0.31351
+1600/1600 - 13s - loss: 0.3175 - val_loss: 0.3104 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 39/10000
+
+Epoch 39: loss improved from 0.31351 to 0.31317, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3132 - val_loss: 0.3147 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 40/10000
+
+Epoch 40: loss improved from 0.31317 to 0.31306, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3131 - val_loss: 0.3174 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 41/10000
+
+Epoch 41: loss did not improve from 0.31306
+1600/1600 - 11s - loss: 0.3218 - val_loss: 0.3305 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 42/10000
+
+Epoch 42: loss improved from 0.31306 to 0.31149, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3115 - val_loss: 0.3096 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 43/10000
+
+Epoch 43: loss did not improve from 0.31149
+1600/1600 - 13s - loss: 0.3123 - val_loss: 0.3128 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 44/10000
+
+Epoch 44: loss did not improve from 0.31149
+1600/1600 - 13s - loss: 0.3706 - val_loss: 0.3104 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 45/10000
+
+Epoch 45: loss did not improve from 0.31149
+1600/1600 - 13s - loss: 0.3129 - val_loss: 0.3182 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 46/10000
+
+Epoch 46: loss did not improve from 0.31149
+1600/1600 - 12s - loss: 0.3226 - val_loss: 0.3275 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 47/10000
+
+Epoch 47: loss did not improve from 0.31149
+1600/1600 - 12s - loss: 0.3120 - val_loss: 0.3120 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 48/10000
+
+Epoch 48: loss did not improve from 0.31149
+1600/1600 - 13s - loss: 0.3219 - val_loss: 0.3197 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 49/10000
+
+Epoch 49: loss improved from 0.31149 to 0.31081, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3108 - val_loss: 0.3149 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 50/10000
+
+Epoch 50: loss did not improve from 0.31081
+1600/1600 - 12s - loss: 0.3124 - val_loss: 0.3213 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 51/10000
+
+Epoch 51: loss did not improve from 0.31081
+1600/1600 - 12s - loss: 0.3119 - val_loss: 0.3112 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 52/10000
+
+Epoch 52: loss did not improve from 0.31081
+1600/1600 - 11s - loss: 0.3184 - val_loss: 0.3160 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 53/10000
+
+Epoch 53: loss improved from 0.31081 to 0.31025, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3103 - val_loss: 0.3082 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 54/10000
+
+Epoch 54: loss did not improve from 0.31025
+1600/1600 - 12s - loss: 0.3111 - val_loss: 0.3108 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 55/10000
+
+Epoch 55: loss did not improve from 0.31025
+1600/1600 - 12s - loss: 0.3114 - val_loss: 0.3284 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 56/10000
+
+Epoch 56: loss improved from 0.31025 to 0.31021, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3102 - val_loss: 0.3101 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 57/10000
+
+Epoch 57: loss did not improve from 0.31021
+1600/1600 - 11s - loss: 0.3119 - val_loss: 0.3097 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 58/10000
+
+Epoch 58: loss improved from 0.31021 to 0.30934, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3093 - val_loss: 0.3086 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 59/10000
+
+Epoch 59: loss did not improve from 0.30934
+1600/1600 - 13s - loss: 0.3103 - val_loss: 0.6307 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 60/10000
+
+Epoch 60: loss did not improve from 0.30934
+1600/1600 - 13s - loss: 0.3421 - val_loss: 0.3222 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 61/10000
+
+Epoch 61: loss improved from 0.30934 to 0.30882, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3088 - val_loss: 0.3115 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 62/10000
+
+Epoch 62: loss did not improve from 0.30882
+1600/1600 - 12s - loss: 0.3269 - val_loss: 0.3100 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 63/10000
+
+Epoch 63: loss did not improve from 0.30882
+1600/1600 - 12s - loss: 0.3100 - val_loss: 0.3109 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 64/10000
+
+Epoch 64: loss did not improve from 0.30882
+1600/1600 - 13s - loss: 0.3096 - val_loss: 0.3204 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 65/10000
+
+Epoch 65: loss did not improve from 0.30882
+1600/1600 - 13s - loss: 0.3091 - val_loss: 0.3098 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 66/10000
+
+Epoch 66: loss did not improve from 0.30882
+1600/1600 - 13s - loss: 0.3123 - val_loss: 0.3096 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 67/10000
+
+Epoch 67: loss did not improve from 0.30882
+1600/1600 - 13s - loss: 0.3098 - val_loss: 0.3096 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 68/10000
+
+Epoch 68: loss improved from 0.30882 to 0.30882, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3088 - val_loss: 0.3102 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 69/10000
+
+Epoch 69: loss did not improve from 0.30882
+1600/1600 - 13s - loss: 0.3138 - val_loss: 0.3106 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 70/10000
+
+Epoch 70: loss did not improve from 0.30882
+1600/1600 - 13s - loss: 0.3091 - val_loss: 0.3090 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 71/10000
+
+Epoch 71: loss improved from 0.30882 to 0.30879, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3088 - val_loss: 0.3075 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 72/10000
+
+Epoch 72: loss did not improve from 0.30879
+1600/1600 - 12s - loss: 0.3100 - val_loss: 0.3098 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 73/10000
+
+Epoch 73: loss did not improve from 0.30879
+1600/1600 - 11s - loss: 0.3089 - val_loss: 0.3106 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 74/10000
+
+Epoch 74: loss did not improve from 0.30879
+1600/1600 - 12s - loss: 0.3147 - val_loss: 0.3075 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 75/10000
+
+Epoch 75: loss improved from 0.30879 to 0.30810, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3081 - val_loss: 0.3128 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 76/10000
+
+Epoch 76: loss did not improve from 0.30810
+1600/1600 - 13s - loss: 0.3084 - val_loss: 0.3119 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 77/10000
+
+Epoch 77: loss did not improve from 0.30810
+1600/1600 - 13s - loss: 0.3086 - val_loss: 0.3091 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 78/10000
+
+Epoch 78: loss did not improve from 0.30810
+1600/1600 - 12s - loss: 0.3134 - val_loss: 0.3071 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 79/10000
+
+Epoch 79: loss improved from 0.30810 to 0.30810, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3081 - val_loss: 0.3085 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 80/10000
+
+Epoch 80: loss improved from 0.30810 to 0.30787, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3079 - val_loss: 0.3100 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 81/10000
+
+Epoch 81: loss did not improve from 0.30787
+1600/1600 - 13s - loss: 0.3153 - val_loss: 0.3088 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 82/10000
+
+Epoch 82: loss did not improve from 0.30787
+1600/1600 - 12s - loss: 0.3118 - val_loss: 0.3105 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 83/10000
+
+Epoch 83: loss improved from 0.30787 to 0.30766, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3077 - val_loss: 0.3077 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 84/10000
+
+Epoch 84: loss did not improve from 0.30766
+1600/1600 - 11s - loss: 0.3082 - val_loss: 0.3112 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 85/10000
+
+Epoch 85: loss did not improve from 0.30766
+1600/1600 - 13s - loss: 0.3077 - val_loss: 0.3086 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 86/10000
+
+Epoch 86: loss did not improve from 0.30766
+1600/1600 - 13s - loss: 0.3083 - val_loss: 0.3069 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 87/10000
+
+Epoch 87: loss did not improve from 0.30766
+1600/1600 - 13s - loss: 0.3079 - val_loss: 0.3091 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 88/10000
+
+Epoch 88: loss did not improve from 0.30766
+1600/1600 - 13s - loss: 0.3122 - val_loss: 0.3100 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 89/10000
+
+Epoch 89: loss improved from 0.30766 to 0.30723, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3072 - val_loss: 0.3086 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 90/10000
+
+Epoch 90: loss did not improve from 0.30723
+1600/1600 - 13s - loss: 0.3073 - val_loss: 0.3181 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 91/10000
+
+Epoch 91: loss did not improve from 0.30723
+1600/1600 - 13s - loss: 0.3075 - val_loss: 0.3086 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 92/10000
+
+Epoch 92: loss did not improve from 0.30723
+1600/1600 - 13s - loss: 0.3085 - val_loss: 0.3125 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 93/10000
+
+Epoch 93: loss improved from 0.30723 to 0.30710, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3071 - val_loss: 0.3081 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 94/10000
+
+Epoch 94: loss did not improve from 0.30710
+1600/1600 - 12s - loss: 0.3149 - val_loss: 0.3096 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 95/10000
+
+Epoch 95: loss did not improve from 0.30710
+1600/1600 - 11s - loss: 0.3071 - val_loss: 0.3083 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 96/10000
+
+Epoch 96: loss improved from 0.30710 to 0.30709, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3071 - val_loss: 0.3096 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 97/10000
+
+Epoch 97: loss did not improve from 0.30709
+1600/1600 - 13s - loss: 0.3074 - val_loss: 0.3115 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 98/10000
+
+Epoch 98: loss did not improve from 0.30709
+1600/1600 - 13s - loss: 0.3073 - val_loss: 0.3078 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 99/10000
+
+Epoch 99: loss improved from 0.30709 to 0.30693, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3069 - val_loss: 0.3083 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 100/10000
+
+Epoch 100: loss did not improve from 0.30693
+1600/1600 - 11s - loss: 0.3110 - val_loss: 0.3111 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 101/10000
+
+Epoch 101: loss did not improve from 0.30693
+1600/1600 - 13s - loss: 0.3070 - val_loss: 0.3144 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 102/10000
+
+Epoch 102: loss did not improve from 0.30693
+1600/1600 - 12s - loss: 0.3074 - val_loss: 0.3096 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 103/10000
+
+Epoch 103: loss improved from 0.30693 to 0.30644, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3064 - val_loss: 0.3100 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 104/10000
+
+Epoch 104: loss did not improve from 0.30644
+1600/1600 - 13s - loss: 0.3095 - val_loss: 0.3114 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 105/10000
+
+Epoch 105: loss did not improve from 0.30644
+1600/1600 - 11s - loss: 0.3068 - val_loss: 0.3109 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 106/10000
+
+Epoch 106: loss improved from 0.30644 to 0.30637, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3064 - val_loss: 0.3081 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 107/10000
+
+Epoch 107: loss did not improve from 0.30637
+1600/1600 - 13s - loss: 0.3077 - val_loss: 0.3087 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 108/10000
+
+Epoch 108: loss did not improve from 0.30637
+1600/1600 - 12s - loss: 0.3070 - val_loss: 0.3096 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 109/10000
+
+Epoch 109: loss did not improve from 0.30637
+1600/1600 - 12s - loss: 0.3100 - val_loss: 0.3097 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 110/10000
+
+Epoch 110: loss did not improve from 0.30637
+1600/1600 - 12s - loss: 0.3070 - val_loss: 0.3094 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 111/10000
+
+Epoch 111: loss did not improve from 0.30637
+1600/1600 - 12s - loss: 0.3069 - val_loss: 0.3115 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 112/10000
+
+Epoch 112: loss did not improve from 0.30637
+1600/1600 - 13s - loss: 0.3078 - val_loss: 0.3100 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 113/10000
+
+Epoch 113: loss did not improve from 0.30637
+1600/1600 - 13s - loss: 0.3065 - val_loss: 0.3081 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 114/10000
+
+Epoch 114: loss did not improve from 0.30637
+1600/1600 - 13s - loss: 0.3064 - val_loss: 0.3121 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 115/10000
+
+Epoch 115: loss did not improve from 0.30637
+1600/1600 - 13s - loss: 0.3083 - val_loss: 0.3069 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 116/10000
+
+Epoch 116: loss did not improve from 0.30637
+1600/1600 - 11s - loss: 0.3066 - val_loss: 0.3090 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 117/10000
+
+Epoch 117: loss did not improve from 0.30637
+1600/1600 - 13s - loss: 0.3065 - val_loss: 0.3102 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 118/10000
+
+Epoch 118: loss did not improve from 0.30637
+1600/1600 - 13s - loss: 0.3070 - val_loss: 0.3084 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 119/10000
+
+Epoch 119: loss improved from 0.30637 to 0.30619, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3062 - val_loss: 0.3089 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 120/10000
+
+Epoch 120: loss did not improve from 0.30619
+1600/1600 - 13s - loss: 0.3073 - val_loss: 0.3113 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 121/10000
+
+Epoch 121: loss did not improve from 0.30619
+1600/1600 - 11s - loss: 0.3065 - val_loss: 0.3062 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 122/10000
+
+Epoch 122: loss did not improve from 0.30619
+1600/1600 - 12s - loss: 0.3063 - val_loss: 0.3071 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 123/10000
+
+Epoch 123: loss did not improve from 0.30619
+1600/1600 - 13s - loss: 0.3068 - val_loss: 0.3098 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 124/10000
+
+Epoch 124: loss did not improve from 0.30619
+1600/1600 - 13s - loss: 0.3083 - val_loss: 0.3146 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 125/10000
+
+Epoch 125: loss improved from 0.30619 to 0.30593, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3059 - val_loss: 0.3058 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 126/10000
+
+Epoch 126: loss did not improve from 0.30593
+1600/1600 - 12s - loss: 0.3060 - val_loss: 0.3108 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 127/10000
+
+Epoch 127: loss did not improve from 0.30593
+1600/1600 - 11s - loss: 0.3061 - val_loss: 0.3060 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 128/10000
+
+Epoch 128: loss did not improve from 0.30593
+1600/1600 - 13s - loss: 0.3062 - val_loss: 0.3172 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 129/10000
+
+Epoch 129: loss did not improve from 0.30593
+1600/1600 - 13s - loss: 0.3074 - val_loss: 0.3070 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 130/10000
+
+Epoch 130: loss improved from 0.30593 to 0.30575, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3058 - val_loss: 0.3067 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 131/10000
+
+Epoch 131: loss did not improve from 0.30575
+1600/1600 - 13s - loss: 0.3065 - val_loss: 0.3118 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 132/10000
+
+Epoch 132: loss did not improve from 0.30575
+1600/1600 - 11s - loss: 0.3061 - val_loss: 0.3062 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 133/10000
+
+Epoch 133: loss did not improve from 0.30575
+1600/1600 - 13s - loss: 0.3059 - val_loss: 0.3070 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 134/10000
+
+Epoch 134: loss did not improve from 0.30575
+1600/1600 - 13s - loss: 0.3062 - val_loss: 0.3078 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 135/10000
+
+Epoch 135: loss did not improve from 0.30575
+1600/1600 - 13s - loss: 0.3072 - val_loss: 0.3075 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 136/10000
+
+Epoch 136: loss improved from 0.30575 to 0.30573, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3057 - val_loss: 0.3093 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 137/10000
+
+Epoch 137: loss improved from 0.30573 to 0.30566, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3057 - val_loss: 0.3076 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 138/10000
+
+Epoch 138: loss did not improve from 0.30566
+1600/1600 - 13s - loss: 0.3062 - val_loss: 0.3056 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 139/10000
+
+Epoch 139: loss did not improve from 0.30566
+1600/1600 - 13s - loss: 0.3062 - val_loss: 0.3064 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 140/10000
+
+Epoch 140: loss did not improve from 0.30566
+1600/1600 - 13s - loss: 0.3061 - val_loss: 0.3070 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 141/10000
+
+Epoch 141: loss improved from 0.30566 to 0.30563, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3056 - val_loss: 0.3084 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 142/10000
+
+Epoch 142: loss did not improve from 0.30563
+1600/1600 - 12s - loss: 0.3060 - val_loss: 0.3086 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 143/10000
+
+Epoch 143: loss did not improve from 0.30563
+1600/1600 - 12s - loss: 0.3060 - val_loss: 0.3073 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 144/10000
+
+Epoch 144: loss improved from 0.30563 to 0.30531, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3053 - val_loss: 0.3102 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 145/10000
+
+Epoch 145: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3060 - val_loss: 0.3065 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 146/10000
+
+Epoch 146: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3054 - val_loss: 0.3054 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 147/10000
+
+Epoch 147: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3057 - val_loss: 0.3077 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 148/10000
+
+Epoch 148: loss did not improve from 0.30531
+1600/1600 - 11s - loss: 0.3060 - val_loss: 0.3079 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 149/10000
+
+Epoch 149: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3057 - val_loss: 0.3114 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 150/10000
+
+Epoch 150: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3056 - val_loss: 0.3066 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 151/10000
+
+Epoch 151: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3062 - val_loss: 0.3099 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 152/10000
+
+Epoch 152: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3054 - val_loss: 0.3079 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 153/10000
+
+Epoch 153: loss did not improve from 0.30531
+1600/1600 - 11s - loss: 0.3060 - val_loss: 0.3071 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 154/10000
+
+Epoch 154: loss did not improve from 0.30531
+1600/1600 - 12s - loss: 0.3054 - val_loss: 0.3077 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 155/10000
+
+Epoch 155: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3060 - val_loss: 0.3058 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 156/10000
+
+Epoch 156: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3056 - val_loss: 0.3068 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 157/10000
+
+Epoch 157: loss did not improve from 0.30531
+1600/1600 - 12s - loss: 0.3056 - val_loss: 0.3158 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 158/10000
+
+Epoch 158: loss did not improve from 0.30531
+1600/1600 - 12s - loss: 0.3055 - val_loss: 0.3071 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 159/10000
+
+Epoch 159: loss did not improve from 0.30531
+1600/1600 - 11s - loss: 0.3054 - val_loss: 0.3097 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 160/10000
+
+Epoch 160: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3057 - val_loss: 0.3059 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 161/10000
+
+Epoch 161: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3055 - val_loss: 0.3108 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 162/10000
+
+Epoch 162: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3059 - val_loss: 0.3058 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 163/10000
+
+Epoch 163: loss did not improve from 0.30531
+1600/1600 - 13s - loss: 0.3055 - val_loss: 0.3075 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 164/10000
+
+Epoch 164: loss improved from 0.30531 to 0.30504, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3050 - val_loss: 0.3105 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 165/10000
+
+Epoch 165: loss did not improve from 0.30504
+1600/1600 - 12s - loss: 0.3053 - val_loss: 0.3101 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 166/10000
+
+Epoch 166: loss did not improve from 0.30504
+1600/1600 - 13s - loss: 0.3054 - val_loss: 0.3118 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 167/10000
+
+Epoch 167: loss did not improve from 0.30504
+1600/1600 - 13s - loss: 0.3053 - val_loss: 0.3064 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 168/10000
+
+Epoch 168: loss did not improve from 0.30504
+1600/1600 - 13s - loss: 0.3057 - val_loss: 0.3065 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 169/10000
+
+Epoch 169: loss did not improve from 0.30504
+1600/1600 - 11s - loss: 0.3050 - val_loss: 0.3065 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 170/10000
+
+Epoch 170: loss did not improve from 0.30504
+1600/1600 - 12s - loss: 0.3054 - val_loss: 0.3073 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 171/10000
+
+Epoch 171: loss did not improve from 0.30504
+1600/1600 - 13s - loss: 0.3051 - val_loss: 0.3115 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 172/10000
+
+Epoch 172: loss did not improve from 0.30504
+1600/1600 - 13s - loss: 0.3054 - val_loss: 0.3081 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 173/10000
+
+Epoch 173: loss did not improve from 0.30504
+1600/1600 - 13s - loss: 0.3052 - val_loss: 0.3060 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 174/10000
+
+Epoch 174: loss did not improve from 0.30504
+1600/1600 - 12s - loss: 0.3051 - val_loss: 0.3068 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 175/10000
+
+Epoch 175: loss improved from 0.30504 to 0.30486, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3049 - val_loss: 0.3086 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 176/10000
+
+Epoch 176: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3055 - val_loss: 0.3073 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 177/10000
+
+Epoch 177: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3051 - val_loss: 0.3085 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 178/10000
+
+Epoch 178: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3050 - val_loss: 0.3068 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 179/10000
+
+Epoch 179: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3061 - val_loss: 0.3088 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 180/10000
+
+Epoch 180: loss did not improve from 0.30486
+1600/1600 - 11s - loss: 0.3052 - val_loss: 0.3087 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 181/10000
+
+Epoch 181: loss did not improve from 0.30486
+1600/1600 - 12s - loss: 0.3051 - val_loss: 0.3053 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 182/10000
+
+Epoch 182: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3053 - val_loss: 0.3068 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 183/10000
+
+Epoch 183: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3051 - val_loss: 0.3065 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 184/10000
+
+Epoch 184: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3055 - val_loss: 0.3069 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 185/10000
+
+Epoch 185: loss did not improve from 0.30486
+1600/1600 - 11s - loss: 0.3050 - val_loss: 0.3061 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 186/10000
+
+Epoch 186: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3049 - val_loss: 0.3112 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 187/10000
+
+Epoch 187: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3051 - val_loss: 0.3078 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 188/10000
+
+Epoch 188: loss did not improve from 0.30486
+1600/1600 - 13s - loss: 0.3050 - val_loss: 0.3080 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 189/10000
+
+Epoch 189: loss did not improve from 0.30486
+1600/1600 - 12s - loss: 0.3049 - val_loss: 0.3072 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 190/10000
+
+Epoch 190: loss did not improve from 0.30486
+1600/1600 - 12s - loss: 0.3051 - val_loss: 0.3098 - lr: 1.0000e-04 - 12s/epoch - 7ms/step
+Epoch 191/10000
+
+Epoch 191: loss did not improve from 0.30486
+1600/1600 - 11s - loss: 0.3056 - val_loss: 0.3061 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 192/10000
+
+Epoch 192: loss improved from 0.30486 to 0.30477, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3048 - val_loss: 0.3097 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 193/10000
+
+Epoch 193: loss did not improve from 0.30477
+1600/1600 - 13s - loss: 0.3049 - val_loss: 0.3121 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 194/10000
+
+Epoch 194: loss did not improve from 0.30477
+1600/1600 - 13s - loss: 0.3053 - val_loss: 0.3090 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 195/10000
+
+Epoch 195: loss did not improve from 0.30477
+1600/1600 - 12s - loss: 0.3050 - val_loss: 0.3083 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 196/10000
+
+Epoch 196: loss did not improve from 0.30477
+1600/1600 - 11s - loss: 0.3050 - val_loss: 0.3055 - lr: 1.0000e-04 - 11s/epoch - 7ms/step
+Epoch 197/10000
+
+Epoch 197: loss did not improve from 0.30477
+1600/1600 - 13s - loss: 0.3051 - val_loss: 0.3076 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 198/10000
+
+Epoch 198: loss improved from 0.30477 to 0.30476, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3048 - val_loss: 0.3132 - lr: 1.0000e-04 - 12s/epoch - 8ms/step
+Epoch 199/10000
+
+Epoch 199: loss did not improve from 0.30476
+1600/1600 - 13s - loss: 0.3048 - val_loss: 0.3074 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 200/10000
+
+Epoch 200: loss did not improve from 0.30476
+1600/1600 - 13s - loss: 0.3049 - val_loss: 0.3066 - lr: 1.0000e-04 - 13s/epoch - 8ms/step
+Epoch 201/10000
+
+Epoch 201: loss improved from 0.30476 to 0.30314, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3031 - val_loss: 0.3061 - lr: 5.0000e-05 - 12s/epoch - 7ms/step
+Epoch 202/10000
+
+Epoch 202: loss improved from 0.30314 to 0.30310, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3031 - val_loss: 0.3056 - lr: 5.0000e-05 - 12s/epoch - 8ms/step
+Epoch 203/10000
+
+Epoch 203: loss improved from 0.30310 to 0.30303, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3030 - val_loss: 0.3063 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 204/10000
+
+Epoch 204: loss did not improve from 0.30303
+1600/1600 - 12s - loss: 0.3030 - val_loss: 0.3059 - lr: 5.0000e-05 - 12s/epoch - 8ms/step
+Epoch 205/10000
+
+Epoch 205: loss did not improve from 0.30303
+1600/1600 - 12s - loss: 0.3032 - val_loss: 0.3062 - lr: 5.0000e-05 - 12s/epoch - 8ms/step
+Epoch 206/10000
+
+Epoch 206: loss did not improve from 0.30303
+1600/1600 - 12s - loss: 0.3031 - val_loss: 0.3053 - lr: 5.0000e-05 - 12s/epoch - 8ms/step
+Epoch 207/10000
+
+Epoch 207: loss improved from 0.30303 to 0.30298, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3030 - val_loss: 0.3062 - lr: 5.0000e-05 - 11s/epoch - 7ms/step
+Epoch 208/10000
+
+Epoch 208: loss did not improve from 0.30298
+1600/1600 - 13s - loss: 0.3032 - val_loss: 0.3061 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 209/10000
+
+Epoch 209: loss did not improve from 0.30298
+1600/1600 - 13s - loss: 0.3032 - val_loss: 0.3057 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 210/10000
+
+Epoch 210: loss did not improve from 0.30298
+1600/1600 - 13s - loss: 0.3031 - val_loss: 0.3051 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 211/10000
+
+Epoch 211: loss did not improve from 0.30298
+1600/1600 - 13s - loss: 0.3032 - val_loss: 0.3057 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 212/10000
+
+Epoch 212: loss did not improve from 0.30298
+1600/1600 - 11s - loss: 0.3031 - val_loss: 0.3073 - lr: 5.0000e-05 - 11s/epoch - 7ms/step
+Epoch 213/10000
+
+Epoch 213: loss did not improve from 0.30298
+1600/1600 - 13s - loss: 0.3031 - val_loss: 0.3099 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 214/10000
+
+Epoch 214: loss did not improve from 0.30298
+1600/1600 - 13s - loss: 0.3033 - val_loss: 0.3051 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 215/10000
+
+Epoch 215: loss did not improve from 0.30298
+1600/1600 - 13s - loss: 0.3031 - val_loss: 0.3050 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 216/10000
+
+Epoch 216: loss did not improve from 0.30298
+1600/1600 - 13s - loss: 0.3031 - val_loss: 0.3057 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 217/10000
+
+Epoch 217: loss improved from 0.30298 to 0.30293, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3029 - val_loss: 0.3065 - lr: 5.0000e-05 - 11s/epoch - 7ms/step
+Epoch 218/10000
+
+Epoch 218: loss did not improve from 0.30293
+1600/1600 - 12s - loss: 0.3033 - val_loss: 0.3053 - lr: 5.0000e-05 - 12s/epoch - 8ms/step
+Epoch 219/10000
+
+Epoch 219: loss did not improve from 0.30293
+1600/1600 - 12s - loss: 0.3031 - val_loss: 0.3063 - lr: 5.0000e-05 - 12s/epoch - 8ms/step
+Epoch 220/10000
+
+Epoch 220: loss did not improve from 0.30293
+1600/1600 - 13s - loss: 0.3032 - val_loss: 0.3080 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 221/10000
+
+Epoch 221: loss did not improve from 0.30293
+1600/1600 - 13s - loss: 0.3031 - val_loss: 0.3060 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 222/10000
+
+Epoch 222: loss did not improve from 0.30293
+1600/1600 - 12s - loss: 0.3031 - val_loss: 0.3052 - lr: 5.0000e-05 - 12s/epoch - 8ms/step
+Epoch 223/10000
+
+Epoch 223: loss did not improve from 0.30293
+1600/1600 - 11s - loss: 0.3031 - val_loss: 0.3062 - lr: 5.0000e-05 - 11s/epoch - 7ms/step
+Epoch 224/10000
+
+Epoch 224: loss improved from 0.30293 to 0.30278, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3028 - val_loss: 0.3084 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 225/10000
+
+Epoch 225: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3032 - val_loss: 0.3065 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 226/10000
+
+Epoch 226: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3033 - val_loss: 0.3080 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 227/10000
+
+Epoch 227: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3033 - val_loss: 0.3051 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 228/10000
+
+Epoch 228: loss did not improve from 0.30278
+1600/1600 - 11s - loss: 0.3032 - val_loss: 0.3096 - lr: 5.0000e-05 - 11s/epoch - 7ms/step
+Epoch 229/10000
+
+Epoch 229: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3032 - val_loss: 0.3062 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 230/10000
+
+Epoch 230: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3032 - val_loss: 0.3055 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 231/10000
+
+Epoch 231: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3030 - val_loss: 0.3102 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 232/10000
+
+Epoch 232: loss did not improve from 0.30278
+1600/1600 - 12s - loss: 0.3030 - val_loss: 0.3053 - lr: 5.0000e-05 - 12s/epoch - 8ms/step
+Epoch 233/10000
+
+Epoch 233: loss did not improve from 0.30278
+1600/1600 - 12s - loss: 0.3031 - val_loss: 0.3060 - lr: 5.0000e-05 - 12s/epoch - 7ms/step
+Epoch 234/10000
+
+Epoch 234: loss did not improve from 0.30278
+1600/1600 - 12s - loss: 0.3030 - val_loss: 0.3050 - lr: 5.0000e-05 - 12s/epoch - 7ms/step
+Epoch 235/10000
+
+Epoch 235: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3030 - val_loss: 0.3062 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 236/10000
+
+Epoch 236: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3030 - val_loss: 0.3061 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 237/10000
+
+Epoch 237: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3030 - val_loss: 0.3057 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 238/10000
+
+Epoch 238: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3030 - val_loss: 0.3154 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 239/10000
+
+Epoch 239: loss did not improve from 0.30278
+1600/1600 - 11s - loss: 0.3031 - val_loss: 0.3067 - lr: 5.0000e-05 - 11s/epoch - 7ms/step
+Epoch 240/10000
+
+Epoch 240: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3031 - val_loss: 0.3060 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 241/10000
+
+Epoch 241: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3030 - val_loss: 0.3078 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 242/10000
+
+Epoch 242: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3031 - val_loss: 0.3093 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 243/10000
+
+Epoch 243: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3030 - val_loss: 0.3056 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 244/10000
+
+Epoch 244: loss did not improve from 0.30278
+1600/1600 - 11s - loss: 0.3033 - val_loss: 0.3077 - lr: 5.0000e-05 - 11s/epoch - 7ms/step
+Epoch 245/10000
+
+Epoch 245: loss did not improve from 0.30278
+1600/1600 - 12s - loss: 0.3031 - val_loss: 0.3050 - lr: 5.0000e-05 - 12s/epoch - 8ms/step
+Epoch 246/10000
+
+Epoch 246: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3030 - val_loss: 0.3051 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 247/10000
+
+Epoch 247: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3029 - val_loss: 0.3067 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 248/10000
+
+Epoch 248: loss did not improve from 0.30278
+1600/1600 - 13s - loss: 0.3031 - val_loss: 0.3071 - lr: 5.0000e-05 - 13s/epoch - 8ms/step
+Epoch 249/10000
+
+Epoch 249: loss did not improve from 0.30278
+1600/1600 - 12s - loss: 0.3031 - val_loss: 0.3062 - lr: 5.0000e-05 - 12s/epoch - 7ms/step
+Epoch 250/10000
+
+Epoch 250: loss improved from 0.30278 to 0.30231, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3055 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 251/10000
+
+Epoch 251: loss did not improve from 0.30231
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3051 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 252/10000
+
+Epoch 252: loss did not improve from 0.30231
+1600/1600 - 13s - loss: 0.3025 - val_loss: 0.3051 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 253/10000
+
+Epoch 253: loss did not improve from 0.30231
+1600/1600 - 13s - loss: 0.3024 - val_loss: 0.3049 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 254/10000
+
+Epoch 254: loss did not improve from 0.30231
+1600/1600 - 12s - loss: 0.3025 - val_loss: 0.3049 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 255/10000
+
+Epoch 255: loss did not improve from 0.30231
+1600/1600 - 11s - loss: 0.3023 - val_loss: 0.3059 - lr: 2.5000e-05 - 11s/epoch - 7ms/step
+Epoch 256/10000
+
+Epoch 256: loss did not improve from 0.30231
+1600/1600 - 12s - loss: 0.3025 - val_loss: 0.3055 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 257/10000
+
+Epoch 257: loss did not improve from 0.30231
+1600/1600 - 12s - loss: 0.3025 - val_loss: 0.3049 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 258/10000
+
+Epoch 258: loss improved from 0.30231 to 0.30231, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3052 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 259/10000
+
+Epoch 259: loss improved from 0.30231 to 0.30227, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3062 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 260/10000
+
+Epoch 260: loss did not improve from 0.30227
+1600/1600 - 11s - loss: 0.3024 - val_loss: 0.3049 - lr: 2.5000e-05 - 11s/epoch - 7ms/step
+Epoch 261/10000
+
+Epoch 261: loss did not improve from 0.30227
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3049 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 262/10000
+
+Epoch 262: loss did not improve from 0.30227
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3055 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 263/10000
+
+Epoch 263: loss did not improve from 0.30227
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3062 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 264/10000
+
+Epoch 264: loss did not improve from 0.30227
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3050 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 265/10000
+
+Epoch 265: loss did not improve from 0.30227
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3057 - lr: 2.5000e-05 - 12s/epoch - 7ms/step
+Epoch 266/10000
+
+Epoch 266: loss did not improve from 0.30227
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3048 - lr: 2.5000e-05 - 12s/epoch - 7ms/step
+Epoch 267/10000
+
+Epoch 267: loss did not improve from 0.30227
+1600/1600 - 13s - loss: 0.3024 - val_loss: 0.3051 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 268/10000
+
+Epoch 268: loss did not improve from 0.30227
+1600/1600 - 13s - loss: 0.3024 - val_loss: 0.3050 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 269/10000
+
+Epoch 269: loss did not improve from 0.30227
+1600/1600 - 13s - loss: 0.3025 - val_loss: 0.3050 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 270/10000
+
+Epoch 270: loss did not improve from 0.30227
+1600/1600 - 13s - loss: 0.3024 - val_loss: 0.3053 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 271/10000
+
+Epoch 271: loss improved from 0.30227 to 0.30223, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3022 - val_loss: 0.3058 - lr: 2.5000e-05 - 11s/epoch - 7ms/step
+Epoch 272/10000
+
+Epoch 272: loss improved from 0.30223 to 0.30221, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3022 - val_loss: 0.3049 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 273/10000
+
+Epoch 273: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3022 - val_loss: 0.3060 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 274/10000
+
+Epoch 274: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3066 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 275/10000
+
+Epoch 275: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3056 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 276/10000
+
+Epoch 276: loss did not improve from 0.30221
+1600/1600 - 11s - loss: 0.3024 - val_loss: 0.3054 - lr: 2.5000e-05 - 11s/epoch - 7ms/step
+Epoch 277/10000
+
+Epoch 277: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3024 - val_loss: 0.3067 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 278/10000
+
+Epoch 278: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3053 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 279/10000
+
+Epoch 279: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3070 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 280/10000
+
+Epoch 280: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3105 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 281/10000
+
+Epoch 281: loss did not improve from 0.30221
+1600/1600 - 12s - loss: 0.3024 - val_loss: 0.3052 - lr: 2.5000e-05 - 12s/epoch - 7ms/step
+Epoch 282/10000
+
+Epoch 282: loss did not improve from 0.30221
+1600/1600 - 12s - loss: 0.3024 - val_loss: 0.3060 - lr: 2.5000e-05 - 12s/epoch - 7ms/step
+Epoch 283/10000
+
+Epoch 283: loss did not improve from 0.30221
+1600/1600 - 12s - loss: 0.3022 - val_loss: 0.3060 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 284/10000
+
+Epoch 284: loss did not improve from 0.30221
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3049 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 285/10000
+
+Epoch 285: loss did not improve from 0.30221
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3053 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 286/10000
+
+Epoch 286: loss did not improve from 0.30221
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3073 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 287/10000
+
+Epoch 287: loss did not improve from 0.30221
+1600/1600 - 11s - loss: 0.3023 - val_loss: 0.3051 - lr: 2.5000e-05 - 11s/epoch - 7ms/step
+Epoch 288/10000
+
+Epoch 288: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3024 - val_loss: 0.3053 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 289/10000
+
+Epoch 289: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3051 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 290/10000
+
+Epoch 290: loss did not improve from 0.30221
+1600/1600 - 13s - loss: 0.3023 - val_loss: 0.3050 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 291/10000
+
+Epoch 291: loss did not improve from 0.30221
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3050 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 292/10000
+
+Epoch 292: loss improved from 0.30221 to 0.30220, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 11s - loss: 0.3022 - val_loss: 0.3051 - lr: 2.5000e-05 - 11s/epoch - 7ms/step
+Epoch 293/10000
+
+Epoch 293: loss did not improve from 0.30220
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3076 - lr: 2.5000e-05 - 12s/epoch - 8ms/step
+Epoch 294/10000
+
+Epoch 294: loss did not improve from 0.30220
+1600/1600 - 13s - loss: 0.3024 - val_loss: 0.3049 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 295/10000
+
+Epoch 295: loss did not improve from 0.30220
+1600/1600 - 13s - loss: 0.3024 - val_loss: 0.3051 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 296/10000
+
+Epoch 296: loss did not improve from 0.30220
+1600/1600 - 13s - loss: 0.3022 - val_loss: 0.3051 - lr: 2.5000e-05 - 13s/epoch - 8ms/step
+Epoch 297/10000
+
+Epoch 297: loss did not improve from 0.30220
+1600/1600 - 12s - loss: 0.3023 - val_loss: 0.3081 - lr: 2.5000e-05 - 12s/epoch - 7ms/step
+Epoch 298/10000
+
+Epoch 298: loss improved from 0.30220 to 0.30189, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 12s - loss: 0.3019 - val_loss: 0.3049 - lr: 1.2500e-05 - 12s/epoch - 7ms/step
+Epoch 299/10000
+
+Epoch 299: loss improved from 0.30189 to 0.30186, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3019 - val_loss: 0.3058 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 300/10000
+
+Epoch 300: loss did not improve from 0.30186
+1600/1600 - 13s - loss: 0.3019 - val_loss: 0.3052 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 301/10000
+
+Epoch 301: loss did not improve from 0.30186
+1600/1600 - 13s - loss: 0.3019 - val_loss: 0.3049 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 302/10000
+
+Epoch 302: loss improved from 0.30186 to 0.30183, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3018 - val_loss: 0.3051 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 303/10000
+
+Epoch 303: loss did not improve from 0.30183
+1600/1600 - 11s - loss: 0.3019 - val_loss: 0.3057 - lr: 1.2500e-05 - 11s/epoch - 7ms/step
+Epoch 304/10000
+
+Epoch 304: loss did not improve from 0.30183
+1600/1600 - 13s - loss: 0.3019 - val_loss: 0.3054 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 305/10000
+
+Epoch 305: loss did not improve from 0.30183
+1600/1600 - 12s - loss: 0.3019 - val_loss: 0.3050 - lr: 1.2500e-05 - 12s/epoch - 8ms/step
+Epoch 306/10000
+
+Epoch 306: loss did not improve from 0.30183
+1600/1600 - 12s - loss: 0.3018 - val_loss: 0.3053 - lr: 1.2500e-05 - 12s/epoch - 8ms/step
+Epoch 307/10000
+
+Epoch 307: loss did not improve from 0.30183
+1600/1600 - 13s - loss: 0.3018 - val_loss: 0.3049 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 308/10000
+
+Epoch 308: loss did not improve from 0.30183
+1600/1600 - 11s - loss: 0.3019 - val_loss: 0.3055 - lr: 1.2500e-05 - 11s/epoch - 7ms/step
+Epoch 309/10000
+
+Epoch 309: loss did not improve from 0.30183
+1600/1600 - 12s - loss: 0.3018 - val_loss: 0.3063 - lr: 1.2500e-05 - 12s/epoch - 8ms/step
+Epoch 310/10000
+
+Epoch 310: loss improved from 0.30183 to 0.30182, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3018 - val_loss: 0.3053 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 311/10000
+
+Epoch 311: loss improved from 0.30182 to 0.30179, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3018 - val_loss: 0.3050 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 312/10000
+
+Epoch 312: loss did not improve from 0.30179
+1600/1600 - 13s - loss: 0.3018 - val_loss: 0.3051 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 313/10000
+
+Epoch 313: loss did not improve from 0.30179
+1600/1600 - 12s - loss: 0.3019 - val_loss: 0.3050 - lr: 1.2500e-05 - 12s/epoch - 8ms/step
+Epoch 314/10000
+
+Epoch 314: loss did not improve from 0.30179
+1600/1600 - 11s - loss: 0.3019 - val_loss: 0.3049 - lr: 1.2500e-05 - 11s/epoch - 7ms/step
+Epoch 315/10000
+
+Epoch 315: loss improved from 0.30179 to 0.30178, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3018 - val_loss: 0.3052 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 316/10000
+
+Epoch 316: loss did not improve from 0.30178
+1600/1600 - 12s - loss: 0.3018 - val_loss: 0.3050 - lr: 1.2500e-05 - 12s/epoch - 8ms/step
+Epoch 317/10000
+
+Epoch 317: loss improved from 0.30178 to 0.30174, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3017 - val_loss: 0.3052 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 318/10000
+
+Epoch 318: loss did not improve from 0.30174
+1600/1600 - 13s - loss: 0.3018 - val_loss: 0.3052 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+Epoch 319/10000
+
+Epoch 319: loss did not improve from 0.30174
+1600/1600 - 11s - loss: 0.3018 - val_loss: 0.3053 - lr: 1.2500e-05 - 11s/epoch - 7ms/step
+Epoch 320/10000
+
+Epoch 320: loss did not improve from 0.30174
+1600/1600 - 12s - loss: 0.3018 - val_loss: 0.3054 - lr: 1.2500e-05 - 12s/epoch - 8ms/step
+Epoch 321/10000
+
+Epoch 321: loss improved from 0.30174 to 0.30172, saving model to experiments/2024-04-27_10-58-13/reg_ae_qz_bbh_retrain/checkpoints/best_mapper.hdf5
+1600/1600 - 13s - loss: 0.3017 - val_loss: 0.3065 - lr: 1.2500e-05 - 13s/epoch - 8ms/step
+
+
+Training complete!
+
+

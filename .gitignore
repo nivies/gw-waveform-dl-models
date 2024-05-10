@@ -6,6 +6,15 @@ __pycache__/
 # C extensions
 *.so
 
+# Random scripts
+
+retrainer.py
+from_config.py
+sxs_transfer_learning.py
+variational_interp.py
+transfer_learning.ipynb
+best_qzp.hdf5
+
 # Dataset
 data/
 

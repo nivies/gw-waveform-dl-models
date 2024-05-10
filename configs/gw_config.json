@@ -1,0 +1,41 @@
+{
+    "exp": {
+      "name": "gw_dense_q_lbd_bns"
+    },
+    "data_loader": {
+      "name": "GWDataLoader",
+      "args": {},
+      "data_path": "/home/nino/GW/data/bns_mass_lbd.hdf",
+      "scale_data": true,
+      "data_output_type": "hp",
+      "split_size": 0.2,
+      "sxs_sample_weight": 80
+    },
+    "model":{
+      "name": "MLP",
+      "args": {},
+      "optimizer_kwargs":{
+        "learning_rate": 0.0001
+      }
+    },
+    "trainer":{
+      "name": "GWModelTrainer",
+      "args": {},
+      "num_epochs": 10000,
+      "batch_size": 128,
+      "batch_size_test": 1024,
+      "verbose_training": 2
+    },
+    "callbacks":{
+      "checkpoint_monitor": "val_loss",
+      "checkpoint_mode": "min",
+      "checkpoint_save_best_only": true,
+      "checkpoint_save_weights_only": true,
+      "checkpoint_verbose": true,
+      "tensorboard_write_graph": true,
+      "early_stopping_patience": 130,
+      "lr_reduce_factor": 0.5,
+      "lr_reduce_patience": 60,
+      "min_lr": 5e-6
+    }
+  }
