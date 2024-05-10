@@ -5,8 +5,36 @@ from keras import layers
 import keras
 import os
 
+'''
+File for declaring the main architectures for the DL-based GW modelling neural networks. Every class inherits from the BaseModel
+class defined in the base folder.
+'''
 
 class MLP(BaseModel):
+
+    '''
+    Class for declaring a dense neural network. It can be called to be used directly as a GW model, or from the MappedAutoencoder 
+    class in order to map the latent space. It is built entirely from the data_loader instance and the config .json
+    file. If called from the MappedAutoencoder class, the latent dimension is given in the call. The class defines the model and compiles it.
+    
+
+    Input arguments:
+    ----------------
+    config: dict
+        Dictionary built from the configuration .json file.
+
+    data_loader: data_loader class instance
+        data_loader instance called. Information for the calling contained in the configuration .json file.
+
+    latent_mapper_dim: int
+        Value for the latent dimension in case of instancing for latent space mapping for the MappedAutoencoder class.
+
+    ----------------
+
+    Defined model stored in the .model method.
+    '''
+
+
     def __init__(self, config, data_loader, latent_mapper_dim = None):
         super(MLP, self).__init__(config)
         self.latent_dim = latent_mapper_dim
@@ -41,6 +69,27 @@ class MLP(BaseModel):
                            )
         
 class RegularizedAutoEncoder(BaseModel):
+
+    '''
+    Class for the definition of the 1D convolutional autoencoder architecture with a regularization in the latent space. Called from the 
+    RegularizedAutoEncoderGenerator class. It defines a preset autoencoder architecture with the necessary logic for the 
+    regularization implementation.
+
+    Input arguments:
+    ----------------
+
+    config: dict
+        Dict built from the configuration .json file.
+
+    out_shape: int
+        Parameter controlling the dimensionality of the data to fit. Particularly, the size of the waveform vectors.
+    ----------------
+
+    Autoencoder built stored in .autoencoder method. Similarly, the encoder and decoder are stored in the .encoder and the
+    .decoder methods.
+    '''
+
+
     def __init__(self, config, out_shape):
         super(RegularizedAutoEncoder, self).__init__(config)
         self.latent_dim = config.model.latent_dim
@@ -103,6 +152,25 @@ class RegularizedAutoEncoder(BaseModel):
                                 )
 
 class AutoEncoder(BaseModel):
+
+    '''
+    Class for the definition of a standard autoencoder architecture. This class is to be called from the MappedAutoEncoderGenerator class.
+    It declares a predefined 1D convolutional autoencoder architecture that will fit the waveforms.
+    
+    Input arguments:
+    ----------------
+
+    config: dict
+        Dict built from the configuration .json file.
+
+    out_shape: int
+        Parameter controlling the dimensionality of the data to fit. Particularly, the size of the waveform vectors.
+    ----------------
+
+    Autoencoder built stored in .autoencoder method. Similarly, the encoder and decoder are stored in the .encoder and the
+    .decoder methods.
+    '''
+
     def __init__(self, config, out_shape):
         super(AutoEncoder, self).__init__(config)
         self.latent_dim = config.model.latent_dim
@@ -164,8 +232,33 @@ class AutoEncoder(BaseModel):
                                 loss = 'mean_absolute_error'
                                 )
 
-
 class RegularizedAutoEncoderGenerator(BaseModel):
+
+    '''
+    Class for calling all the necessary models (UMAP embedder, UMAP mapper and regularized autoencoder) and ensembling the final
+    regularized autoencoder GW generation model.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+
+    data_loader: data_loader class instance
+        data_loader instance called for the particular problem. All information for this class' calling is contained in the configuration file.
+
+    inference: bool
+        Parameter for defining the model in inference or training mode. If True, it skips the building of the Parametric UMAP class, speeding 
+        up the loading time.
+    -----------------
+
+    Generator model built can be called from the .model method. Every network that composes the full model can also be called:
+
+    embedder    : UMAP embedder class.
+    mapper      : Mapper network from the UMAP embedder to the latent space of the regularized autoencoder.
+    autoencoder : Regularized autoencoder class.
+    '''
+
     def __init__(self, config, data_loader, inference = False):
         super(RegularizedAutoEncoderGenerator, self).__init__(config)
         
@@ -190,6 +283,27 @@ class RegularizedAutoEncoderGenerator(BaseModel):
         self.model = keras.Model(inp, opt)
 
 class MappedAutoEncoderGenerator(BaseModel):
+
+    '''
+    Class for calling all the necessary models (mapper and autoencoder) and ensembling the final mapped autoencoder
+    GW generation model.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+
+    data_loader: data_loader class instance
+        data_loader instance called for the particular problem. All information for this class' calling is contained in the configuration file.
+    -----------------
+
+    Generator model built can be called from the .model method. Every network that composes the full model can also be called:
+
+    mapper      : Mapper network from the input parameters to the latent space of the autoencoder.
+    autoencoder : Mapped autoencoder class.
+    '''
+
     def __init__(self, config, data_loader):
         super(MappedAutoEncoderGenerator, self).__init__(config)
         

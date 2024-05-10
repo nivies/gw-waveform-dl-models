@@ -9,8 +9,33 @@ from sklearn.utils import check_random_state
 from umap.umap_ import find_ab_params
 from umap.parametric_umap import construct_edge_dataset, umap_loss
 
+'''
+File for declaring the Parametric UMAP model. All classes inherit from the BaseModel class defined in the base directory.
+'''
+
 class Embedder(BaseModel):
-    def __init__(self,config, input_shape, output_shape):
+
+    '''
+    Class for declaring the embedding network that creates the UMAP embedding. This class is called either from the 
+    Parametric UMAP class, or from the RegularizedAutoEncoderGenerator directly if the inference parameter is set to True.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+
+    input_shape: int
+        Input parameter shape.
+
+    output_shape: int
+        Embedding dimensionality (which is set to match the latent space dimensionality of the autoencoder).
+    -----------------
+
+    Declared network is stored in the .embedder method.
+    '''
+
+    def __init__(self, config, input_shape, output_shape):
         super(Embedder, self).__init__(config)
 
         self.input_shape = input_shape
@@ -34,6 +59,25 @@ class Embedder(BaseModel):
         self.embedder = keras.Model(inp, opt)
 
 class ParametricUMAP(BaseModel):
+
+    '''
+    Class for computing the parametric UMAP, which is a neural network-based UMAP model. It computes the nearest neighbors graph and 
+    implements all the necessary logic for minimizing the UMAP loss. Built from config file and data_loader instance.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from configuration .json file.
+
+    data_loader: data_loader class instance
+        data_loader instance called for the particular problem. All information for this class' calling is contained in the configuration file.
+    -----------------
+
+    The embedder neural network is stored in the .embedder method, while the parametric UMAP definition for training is stored in the .parametric_umap
+    method.
+    '''
+
     def __init__(self, config, data_loader):
         super(ParametricUMAP, self).__init__(config)
 

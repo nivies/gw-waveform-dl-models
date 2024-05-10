@@ -4,8 +4,32 @@ import keras
 from keras.callbacks import ModelCheckpoint, TensorBoard, EarlyStopping, ReduceLROnPlateau
 from joblib import dump
 
+'''
+File for declaring the training classes. Every class inherits from the BaseTrain class defined in the base directory.
+'''
 
 class GWModelTrainer(BaseTrain):
+
+    '''
+    Class for the training of the dense GW generation models. Defines the ModelCheckpoint, Tensorboard, EarlyStopping and ReduceLROnPlateau callbacks
+    and calls the .fit method for an already compiled model. 
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+    
+    model: Instance from MLP class.
+        Model tasked with the GW generation.
+
+    data: data_loader class instance
+        data_loader instance called for the particular problem. All information for this class' calling is contained in the configuration file.
+    -----------------
+
+    The ModelCheckpoint automatically saves the model. The training history is also saved to the same directory, serialized using the joblib library.
+    '''
+
     def __init__(self, config, model, data):
         super(GWModelTrainer, self).__init__(model, data, config)
         self.callbacks = []
@@ -53,8 +77,30 @@ class GWModelTrainer(BaseTrain):
         self.history = history.history
         dump(history, os.path.join(self.config.callbacks.checkpoint_dir, "history.bin"))
         
-
 class GWRegularizedAutoEncoderModelTrainer(BaseTrain):
+
+    '''
+    Class for the training of the regularized autoencoder based GW generation models. Defines the ModelCheckpoint, Tensorboard, 
+    EarlyStopping and ReduceLROnPlateau callbacks and calls the .fit method for an already compiled model for every needed model 
+    and the final retraining. 
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+    
+    model: Instance from MLP class.
+        Model tasked with the GW generation.
+
+    data: data_loader class instance
+        data_loader instance called for the particular problem. All information for this class' calling is contained in the configuration file.
+    -----------------
+
+    The ModelCheckpoint automatically saves the best model, along with every sub network best weights. The training histories are also saved to 
+    the same directory, serialized using the joblib library.
+    '''
+
     def __init__(self, config, model, data):
         super(GWRegularizedAutoEncoderModelTrainer, self).__init__(model, data, config)
 
@@ -176,8 +222,30 @@ class GWRegularizedAutoEncoderModelTrainer(BaseTrain):
         dump(history_mapper.history, os.path.join(self.config.callbacks.checkpoint_dir, "history_mapper.bin"))
         dump(history_retrain.history, os.path.join(self.config.callbacks.checkpoint_dir, "history_generator.bin"))
 
-
 class GWMappedAutoEncoderModelTrainer(BaseTrain):
+
+    '''
+    Class for the training of the mapped autoencoder based GW generation models. Defines the ModelCheckpoint, Tensorboard, 
+    EarlyStopping and ReduceLROnPlateau callbacks and calls the .fit method for an already compiled model for every needed model 
+    and the final retraining. 
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+    
+    model: Instance from MLP class.
+        Model tasked with the GW generation.
+
+    data: data_loader class instance
+        data_loader instance called for the particular problem. All information for this class' calling is contained in the configuration file.
+    -----------------
+
+    The ModelCheckpoint automatically saves the best model, along with every sub network best weights. The training histories are also saved to 
+    the same directory, serialized using the joblib library.
+    '''
+
     def __init__(self, config, model, data):
         super(GWMappedAutoEncoderModelTrainer, self).__init__(model, data, config)
 

@@ -2,7 +2,38 @@ from base.base_model import BaseModel
 import keras
 from keras import layers
 
+'''
+File for declaring the neural networks needed for mapping the UMAP representation 
+to the autoencoder's latent space in the regularized autoencoder architecture.
+'''
+
 class ConvBlock1D(BaseModel):
+
+    '''
+    Convolutional block model instance.
+
+    Defines a 1D convolutional block consisting in 3 repetitions of:
+
+    1. 1D convolutional layer.
+    2. 1D Spatial Dropout.
+    3. 1D Upsampling layer.
+    4. Leaky ReLU activation.
+
+    Input and output dimensions are set equal in order to implement a residual network with Add layers. This block is set
+    to be called by the UMAP mapper class if the argument model.mapper_architecture is set to convolutional.
+
+    Input arguments:
+    ----------------
+    config: dict
+        Config dict loaded from config .json file.
+
+    input_shape: int 
+        Number of input and output dimensions of convolutional block.
+    ----------------
+    Declared model is stored in the .conv_block method.
+
+    '''
+
     def __init__(self, config, input_shape):
         super(ConvBlock1D, self).__init__(config)
 
@@ -38,6 +69,22 @@ class ConvBlock1D(BaseModel):
         self.conv_block = keras.Model(inp, x)
 
 class UMAPMapper(BaseModel):
+
+    '''
+    Regularized autoencoder mapper from the UMAP embedding to the autoencoder's latent space. Built entirely from 
+    .json configuration file. Declares a the model using Keras' functional api with the appropriate input and output
+    dimensions. If model.mapper_architecture field from configuration .json file is set to "dense", it defines a dense-based
+    architecture with concatenations of the input from the UMAP embedding. If, on the contrary, it is set to "convolutional" it
+    makes use of the ConvBlock1D class to build a residual network.
+
+    Input arguments:
+    ----------------
+    config: dict 
+        Configuration dictionary generated from loading the configuration .json file.
+    ----------------
+    Declared model is in the .mapper method.
+    '''
+
     def __init__(self, config):
         super(UMAPMapper, self).__init__(config)
 
