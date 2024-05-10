@@ -10,6 +10,8 @@ from tqdm import tqdm
 import tensorflow as tf
 import os
 
+# Change code for taking arguments
+
 cpu = False
 
 if cpu:
