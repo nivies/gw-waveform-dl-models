@@ -15,7 +15,7 @@ def main():
     parser.add_argument('-pu', '--processing_unit', dest='pu', help='Whether to run the generation method on cpu (\'cpu\') or on gpu (\'gpu\').', metavar='')
     parser.add_argument('-bs', '--batch_size', dest='batch_size', help='Batch size for predict method for NN based generation methods.', metavar='')
     parser.add_argument('-d', '--dataset', dest='data', help='Dataset to run the script on.\n1 -> Mass BNS\n2 -> Mass-lambda BNS\n3 -> Mass BBH\n4 -> Mass z-spin BBH\n5 -> Mass full-spin BBH', metavar='')
-    parser.add_argument('-N', '--N_datapoints', dest='N', help='Number of waveforms to generate.', metavar='')
+    parser.add_argument('-n', '--n_datapoints', dest='N', help='Number of waveforms to generate.', metavar='')
     parser.add_argument('-en', '--execution_number', dest='execution_number', help='Number of script executions for timing.', default = 5, metavar='')
 
     args = parser.parse_args()
