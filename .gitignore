@@ -15,14 +15,14 @@ variational_interp.py
 transfer_learning.ipynb
 best_qzp.hdf5
 evaluation.ipynb
-evaluater/
+evaluater
 utils/factory.py
 aux.py
 
 # Heavy content
-data/
-experiments/
-figures/
+data
+experiments
+figures
 
 # VSCode
 .vscode/
