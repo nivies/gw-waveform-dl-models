@@ -15,8 +15,8 @@ variational_interp.py
 transfer_learning.ipynb
 best_qzp.hdf5
 evaluation.ipynb
-experiment_note/
 evaluater/
+utils/factory.py
 
 # Dataset
 data/

@@ -5,7 +5,11 @@ from copy import deepcopy
 from sklearn.preprocessing import StandardScaler
 from base.base_data_loader import BaseDataLoader
 from utils.data_preprocessing import *
-    
+
+'''
+File for declaring data generators, data loaders and some utilities such as train-test splitting, input parameter scaling and sample weighting
+'''
+
 shuffle_seed = 42
 
 def split_data(x, y, split_size):
@@ -14,6 +18,31 @@ def split_data(x, y, split_size):
     return (x[:split_idx], y[:split_idx]), (x[split_idx:], y[split_idx:])
 
 class DataGenerator(Sequence):
+
+    '''
+    General data generator class for faster data loading.
+
+    Input parameters:
+    -----------------
+
+    x_set: numpy array
+        Input data.
+    
+    y_set: numpy array
+        Output data.
+
+    batch_size: int
+        Training/validation batch size.
+
+    sample_weights: int
+        Value for sample weighting.
+    -----------------
+
+    Output:
+        A keras' Sequence object for quick data loading into the keras' models fit method.
+    
+    '''
+
     def __init__(self, x_set, y_set, batch_size, sample_weights = None):
         
         if sample_weights is not None:
@@ -36,6 +65,31 @@ class DataGenerator(Sequence):
             return batch_x, batch_y
     
 class MultiOutputDataGenerator(Sequence):
+
+    '''
+    General data generator class for faster data loading. It allows for trainings with multiple outputs (regularized autoencoder).
+
+    Input parameters:
+    -----------------
+
+    x: numpy array
+        Input data.
+    
+    y: numpy array
+        Output data.
+
+    batch_size: int
+        Training/validation batch size.
+
+    sample_weights: int
+        Value for sample weighting.
+    -----------------
+
+    Output:
+        A keras' Sequence object for quick data loading into the keras' models fit method.
+    
+    '''
+
     def __init__(self, x, y, batch_size, sample_weights = None):
 
         if sample_weights is not None:
@@ -60,6 +114,18 @@ class MultiOutputDataGenerator(Sequence):
             return np.array(batch_x), [np.array(output) for output in batch_y]
     
 class GWDataLoader(BaseDataLoader):
+
+    '''
+    Data loader class for dense models. Loads data, splits in train and test sets, allows for input scaling and SXS augmented dataset 
+    loading. After data loading, calls the data generator classes.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary created from the parsed data of the .json file.
+    '''
+
     def __init__(self, config):
         super(GWDataLoader, self).__init__(config)
 
@@ -123,6 +189,19 @@ class GWDataLoader(BaseDataLoader):
             return split_data(x, y, split_size)
 
 class UMAPDataLoader(BaseDataLoader):
+
+    '''
+    Data loader class for regularized autoencoder models. Loads data, splits in train and test sets, allows for input scaling and SXS augmented dataset 
+    loading. Functions for including the latent space data and the UMAP projections are implemented. After data loading, calls the necessary data 
+    generator classes for each of the fit calls.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary created from the parsed data of the .json file.
+    '''
+
     def __init__(self, config):
         super(UMAPDataLoader, self).__init__(config)
 
@@ -210,6 +289,19 @@ class UMAPDataLoader(BaseDataLoader):
             return split_data(x, y, split_size)
     
 class MappedDataLoader(BaseDataLoader):
+
+    '''
+    Data loader class for mapped autoencoder models. Loads data, splits in train and test sets, allows for input scaling and SXS augmented dataset 
+    loading. Functions for including the latent space data are implemented. After data loading, calls the necessary data 
+    generator classes for each of the fit calls.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary created from the parsed data of the .json file.
+    '''
+
     def __init__(self, config):
         super(MappedDataLoader, self).__init__(config)
 
