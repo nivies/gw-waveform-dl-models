@@ -5,7 +5,7 @@
     "data_loader": {
       "name": "GWDataLoader",
       "args": {},
-      "data_path": "/home/nino/GW/data/bns_mass_lbd.hdf",
+      "data_path": "./data/bns_mass_lbd.hdf",
       "scale_data": true,
       "data_output_type": "hp",
       "split_size": 0.2,

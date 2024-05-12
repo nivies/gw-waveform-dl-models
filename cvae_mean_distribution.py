@@ -18,11 +18,8 @@ if cpu:
   os.environ["CUDA_VISIBLE_DEVICES"]=""
 else:
   gpus = tf.config.experimental.list_physical_devices('GPU')
-  if gpus:
-    try:
-      tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=10000)])
-    except RuntimeError as e:
-      print(e)
+  for gpu in gpus:
+      tf.config.experimental.set_memory_growth(gpu, True)
 
 def pycbc_mismatch(y_pred, y_true, delta_t, real = True):
 
@@ -86,9 +83,6 @@ def plot_mean_distribution(dec, y_ground, pars, N, delta_t, dir, train):
 
 dec = load_model("/home/nino/GW/Keras-Project-Template/experiments/cvae/decoder_cvae")
 f_sur = h5py.File("/home/nino/GW/data/bbh_qzp_data.hdf5")
-# sxs_x_train, sxs_y_train, sxs_x_test, sxs_y_test = load_sxs_data(700)
-# sxs_y_train = np.real(sxs_y_train)
-# sxs_y_test = np.real(sxs_y_test)
 
 plot_mean_distribution(dec, f_sur['waveforms'][80000:], f_sur['parameters'][80000:], 100, f_sur['waveforms'].attrs['delta_t_seconds'], "/home/nino/GW/Keras-Project-Template/figures/cvae_qzp", train = False)
 plot_mean_distribution(dec, f_sur['waveforms'][:80000], f_sur['parameters'][:80000], 100, f_sur['waveforms'].attrs['delta_t_seconds'], "/home/nino/GW/Keras-Project-Template/figures/cvae_qzp", train = True)

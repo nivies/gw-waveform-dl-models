@@ -17,9 +17,12 @@ best_qzp.hdf5
 evaluation.ipynb
 evaluater/
 utils/factory.py
+aux.py
 
-# Dataset
+# Heavy content
 data/
+experiments/
+figures/
 
 # VSCode
 .vscode/

@@ -22,7 +22,7 @@ Master's thesis project for developing a neural network based gravitational wave
 
 All the presented results can be reproduced from this project. The scripts in the root folder are:
 
-- <h4>Training script
+- <h3>Training script
 
 Script's name is `main.py`. It parses all the information in the config.json file then declares and trains the model. Usage:
 
@@ -30,12 +30,28 @@ Script's name is `main.py`. It parses all the information in the config.json fil
 python main.py -c [path to configuration file]
 ```
 
-- <h4>Timing script
 
-Script's name is `timing_script.py`. It loads trained model and uses python's `timeit` library to time the generation time for each model (and surrogate models). Usage:
+- <h3>Evaluation script
+
+Script's name is `evaluate.py`. It loads a trained model and evaluates on the training and testing data. It then plots a mismatch histogram and four examples of a waveform generated using the loaded model along with the ground truth. The best and worse case scenarios along with the case with a mismatch in the 50th percentile of the mismatch distribution and the case in the 10th percentile are plotted.
 
 ```
-python timing_script.py [-h] [-gm] [-pu] [-bs] [-d] [-n] [-en]
+usage: evaluate.py [-h] [-d D] [-l LC]
+
+options:
+  -h, --help            show this help message and exit
+  -d D, --output_directory D
+                        Output directory for the plots
+  -l LC, --load_checkpoint LC
+                        Directory of checkpoint to load model
+```
+
+- <h3>Timing script
+
+Script's name is `timing_script.py`. It loads trained model and uses python's `timeit` library to time the generation time for each model (and surrogate models). 
+
+```
+usage: timing_script.py [-h] [-gm] [-pu] [-bs] [-d] [-n] [-en]
 
 Script for timing generation times from different algorithms.
 
@@ -51,6 +67,7 @@ options:
   -en , --execution_number 
                         Number of script executions for timing.
 ```
+
 
 <a name="config-file-structure"></a>
 # Config file structure 
@@ -133,6 +150,11 @@ The config file contains all necessary information for training a model and load
 # Project architecture
 
 The project code is organized according to its function in different directories. The root directory is reserved for scripts that use the utilities defined in each folder.
+
+<a name="data"></a>
+## data
+
+Directory for the hdf5 data files.
 
 <a name="configs"></a>
 ## configs
