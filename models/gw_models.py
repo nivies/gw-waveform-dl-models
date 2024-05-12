@@ -3,7 +3,7 @@ from models.gw_latent_mappers import UMAPMapper
 from models.parametric_umap import ParametricUMAP, Embedder
 from keras import layers
 import keras
-import os
+from models.cVAE_utils import *
 
 '''
 File for declaring the main architectures for the DL-based GW modelling neural networks. Every class inherits from the BaseModel
@@ -320,3 +320,43 @@ class MappedAutoEncoderGenerator(BaseModel):
         opt = self.autoencoder.decoder(lat)
 
         self.model = keras.Model(inp, opt)
+
+class cVAEGenerator(BaseModel):
+
+    '''
+    Class for defining the cVAE model and include it in the project's pipeline.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+
+    data_loader: data_loader class instance
+        data_loader instance called for the particular problem. All information for this class' calling is contained in the configuration file.
+    -----------------
+
+    Generator model built can be called from the .model method. Every network that composes the full model can also be called:
+
+    encoder: Encoder network.
+    decoder: Decoder network.
+    model  : cVAE model.
+    '''
+
+    def __init__(self, config, data_loader, inference = False):
+        super(cVAEGenerator, self).__init__(config)
+        
+        self.in_out_shapes = data_loader.in_out_shapes
+
+        self.build_model()
+
+    def build_model(self):
+
+        self.encoder, self.decoder = cVAE_NN_declaration(self.in_out_shapes, self.config.model.latent_dim)
+
+        self.model = cVAE(self.encoder, self.decoder)
+
+        optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+        self.model.compile(optimizer = optimizer,
+                           loss = 'mae'
+                           )

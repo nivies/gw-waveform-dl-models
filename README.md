@@ -7,14 +7,15 @@ Master's thesis project for developing a neural network based gravitational wave
 - [Scripts](#scripts)
 - [Configuration file structure](#config-file-structure)
 - [Project architecture](#project-architecture)
-- [Template Details](#template-details)
-    - [Project Architecture](#project-architecture)
-    - [Folder Structure](#folder-structure)
-    - [Main Components](#main-components)
-- [Future Work](#future-work)
-- [Example Projects](#example-projects)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
+    - [Configs](#configs)
+    - [Experiment logs](#experiment_logs)
+    - [Experiments](#experiments)
+    - [Figures](#figures)
+    - [Base](#base)
+    - [Data loader](#data_loader)
+    - [Models](#models)
+    - [Trainers](#trainers)
+    - [Utils](#utils)
 
 <a name="scripts"></a>
 # Scripts 
@@ -133,14 +134,17 @@ The config file contains all necessary information for training a model and load
 
 The project code is organized according to its function in different directories. The root directory is reserved for scripts that use the utilities defined in each folder.
 
+<a name="configs"></a>
 ## configs
 
 The configs directory holds the .json configuration files.
 
+<a name="experiment_logs"></a>
 ## experiment_logs
 
 Directory for the training logs.
 
+<a name="experiments"></a>
 ## experiments
 
 Directory for the saved models. Every model is saved in a folder with the datetime and hour when the training starts. In this directory, another folder is created with the name specified in the configuration file. This folder contains two folders:
@@ -148,6 +152,7 @@ Directory for the saved models. Every model is saved in a folder with the dateti
 1. A checkpoint folder with the weights for every best model trained, (joblib's) serialized files with the training losses for each training performed and the particular configuration file used for the experiment.
 2. A tensorboard directory for the usage of the Tensorboard callback.
 
+<a name="figures"></a>
 ## figures
 
 Directory containing relevant figures and mismatch files for particular models. The directory name references the model used and the dataset in which it was trained.
@@ -158,22 +163,27 @@ Directory containing relevant figures and mismatch files for particular models. 
 
 In each folder, a serialized (using joblib) binary file with train and test set mismatches is stored. Two sub-directories with train and test figures are also in this folder. Each contains the corresponding mismatch histogram and four waveform plots in which a comparison between the generated waveform and the ground truth are compared. Each of the four plots correspond to the worst and best case scenarios, the waveform corresponding to the mismatch at the 50th percentile of the mismatch distribution and the one corresponding to the 10th percentile.
 
+<a name="base"></a>
 ## base
 
 Directory containing abstract definitions for the data loader, trainer and model classes. Each of the defined classes for these purposes are inherited from the base directory.
 
+<a name="data_loader"></a>
 ## data_loader
 
 Directory containing the data loader classes. It has code for data generation for the training loop, logic for the data loading and some preprocessing utilities, such as standard scaling,, shuffling and train-test splits.
 
+<a name="models"></a>
 ## models
 
 Directory containing the declaration of all the used neural networks and the overall architectures for each proposed model.
 
+<a name="trainers"></a>
 ## trainers
 
 Directory containing the classes where all the callbacks are defined and the fit methods are called according to the configuration file.
 
+<a name="utils"></a>
 ## utils
 
 Directory containing a set of functions to be called at any point of the project's pipeline.
@@ -205,139 +215,3 @@ Plotting utilities. There is code for plotting the waveform comparisons, the his
 ### utils
 
 Several miscellaneous.
-
-# Comet.ml Integration
-This template also supports reporting to Comet.ml which allows you to see all your hyper-params, metrics, graphs, dependencies and more including real-time metric.
-
-Add your API key [in the configuration file](configs/simple_mnist_config.json#L15):
-
-
-For example:  `"comet_api_key": "your key here"`
-
-Here's how it looks after you start training:
-<div align="center">
-
-<img align="center" width="800" src="https://comet-ml.nyc3.digitaloceanspaces.com/CometDemo.gif">
-
-</div>
-
-You can also link your Github repository to your comet.ml project for full version control.
-
-
-# Template Details
-
-## Project Architecture
-
-<div align="center">
-
-<img align="center" width="600" src="https://github.com/Ahmkel/Keras-Project-Template/blob/master/figures/ProjectArchitecture.jpg?raw=true">
-
-</div>
-
-
-## Folder Structure
-
-```
-├── main.py             - here's an example of main that is responsible for the whole pipeline.
-│
-│
-├── base                - this folder contains the abstract classes of the project components
-│   ├── base_data_loader.py   - this file contains the abstract class of the data loader.
-│   ├── base_model.py   - this file contains the abstract class of the model.
-│   └── base_train.py   - this file contains the abstract class of the trainer.
-│
-│
-├── model               - this folder contains the models of your project.
-│   └── simple_mnist_model.py
-│
-│
-├── trainer             - this folder contains the trainers of your project.
-│   └── simple_mnist_trainer.py
-│
-|
-├── data_loader         - this folder contains the data loaders of your project.
-│   └── simple_mnist_data_loader.py
-│
-│
-├── configs             - this folder contains the experiment and model configs of your project.
-│   └── simple_mnist_config.json
-│
-│
-├── datasets            - this folder might contain the datasets of your project.
-│
-│
-└── utils               - this folder contains any utils you need.
-     ├── config.py      - util functions for parsing the config files.
-     ├── dirs.py        - util functions for creating directories.
-     └── utils.py       - util functions for parsing arguments.
-```
-
-
-## Main Components
-
-### Models
-You need to:
-1. Create a model class that inherits from **BaseModel**.
-2. Override the ***build_model*** function which defines your model.
-3. Call ***build_model*** function from the constructor.
-
-
-### Trainers
-You need to:
-1. Create a trainer class that inherits from **BaseTrainer**.
-2. Override the ***train*** function which defines the training logic.
-
-**Note:** To add functionalities after each training epoch such as saving checkpoints or logs for tensorboard using Keras callbacks:
-1. Declare a callbacks array in your constructor.
-2. Define an ***init_callbacks*** function to populate your callbacks array and call it in your constructor.
-3. Pass the callbacks array to the ***fit*** function on the model object.
-
-**Note:** You can use ***fit_generator*** instead of ***fit*** to support generating new batches of data instead of loading the whole dataset at one time.
-
-### Data Loaders
-You need to:
-1. Create a data loader class that inherits from **BaseDataLoader**.
-2. Override the ***get_train_data()*** and the ***get_test_data()*** functions to return your train and test dataset splits.
-
-**Note:** You can also define a different logic where the data loader class has a function ***get_next_batch*** if you want the data reader to read batches from your dataset each time.
-
-### Configs
-You need to define a .json file that contains your experiment and model configurations such as the experiment name, the batch size, and the number of epochs.
-
-
-### Main
-Responsible for building the pipeline.
-1. Parse the config file
-2. Create an instance of your data loader class.
-3. Create an instance of your model class.
-4. Create an instance of your trainer class.
-5. Train your model using ".Train()" function on the trainer object.
-
-### From Config
-We can now load models without having to explicitly create an instance of each class. Look at:
-1. from_config.py: this can load any config file set up to point to the right modules/classes to import
-2. Look at configs/simple_mnist_from_config.json to get an idea of how this works from the config. Run it with:
-```shell
-python from_config.py -c configs/simple_mnist_from_config.json
-```
-3. See conv_mnist_from_config.json (and the additional data_loader/model) to see how easy it is to run a different experiment with just a different config file:
-```shell
-python from_config.py -c configs/conv_mnist_from_config.json
-```
-
-# Example Projects
-* [Toxic comments classification using Convolutional Neural Networks and Word Embedding](https://github.com/Ahmkel/Toxic-Comments-Competition-Kaggle)
-
-
-# Future Work
-Create a command line tool for Keras project scaffolding where the user defines a data loader, a model, a trainer and runs the tool to generate the whole project. (This is somewhat complete now by loading each of these from the config)
-
-
-# Contributing
-Any contributions are welcome including improving the template and example projects.
-
-# Acknowledgements
-This project template is based on [MrGemy95](https://github.com/MrGemy95)'s [Tensorflow Project Template](https://github.com/MrGemy95/Tensorflow-Project-Template).
-
-
-Thanks for my colleagues [Mahmoud Khaled](https://github.com/MahmoudKhaledAli), [Ahmed Waleed](https://github.com/Rombux) and [Ahmed El-Gammal](https://github.com/AGammal) who worked on the initial project that spawned this template.

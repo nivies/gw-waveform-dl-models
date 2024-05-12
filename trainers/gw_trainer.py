@@ -11,7 +11,7 @@ File for declaring the training classes. Every class inherits from the BaseTrain
 class GWModelTrainer(BaseTrain):
 
     '''
-    Class for the training of the dense GW generation models. Defines the ModelCheckpoint, Tensorboard, EarlyStopping and ReduceLROnPlateau callbacks
+    Class for the training of the dense and cVAE GW generation models. Defines the ModelCheckpoint, Tensorboard, EarlyStopping and ReduceLROnPlateau callbacks
     and calls the .fit method for an already compiled model. 
 
     Input parameters:
