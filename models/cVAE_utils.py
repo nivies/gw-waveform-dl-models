@@ -2,9 +2,24 @@ import tensorflow as tf
 import keras
 from keras import layers
 
+'''
+File for architecture definition and internal logic coding of conditional variational autoencoder.
+'''
+
+
 class Sampling(layers.Layer):
     """
     Uses (z_mean, z_log_var) to sample z, the latent space vector.
+
+    Input parameters:
+    -----------------
+
+    inputs: tuple
+        z_mean and z_log_var learnt from the encoder network.
+    -----------------
+
+    Output parameters:
+        z_sampled: A sample from the learned distribution.
     """
 
     def call(self, inputs):
@@ -15,6 +30,23 @@ class Sampling(layers.Layer):
         return z_mean + tf.exp(0.5 * z_log_var) * epsilon
 
 def cVAE_NN_declaration(in_out_shapes, latent_dim):
+
+    '''
+    Defines the encoder and decoder architectures for the cVAE.
+
+    Input parameters:
+    -----------------
+
+    in_out_shapes: data_loader built-in dictionary
+        Input and output shapes for the model.
+
+    latent_dim: int
+        Latent dimensionality
+    -----------------
+
+    Output parameters:
+        Encoder and decoder keras' models.
+    '''
 
     input_shape = in_out_shapes['input_shape']
     output_shape = in_out_shapes['output_shape']
@@ -70,6 +102,22 @@ def cVAE_NN_declaration(in_out_shapes, latent_dim):
     return encoder, decoder
 
 class cVAE(keras.Model):
+
+    '''
+    Defines the training logic of the conditional variational autoencoder. Inherits from keras.Model. Defined to be called with two inputs in the correct 
+    order: [Outputs, Conditions]. (For calling only the decoder, the input order is inversed).
+
+    Input parameters:
+    -----------------
+
+    encoder: keras.Model
+        Encoder model.
+
+    decoder: keras.Model
+        Decoder model.
+    -----------------
+    '''
+
     def __init__(self, encoder, decoder, **kwargs):
         super(cVAE, self).__init__(**kwargs)
         self.encoder = encoder
