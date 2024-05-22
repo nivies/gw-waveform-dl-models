@@ -4,6 +4,7 @@ from models.parametric_umap import ParametricUMAP, Embedder
 from keras import layers
 import keras
 from models.cVAE_utils import *
+from models.gw_test_models import *
 
 '''
 File for declaring the main architectures for the DL-based GW modelling neural networks. Every class inherits from the BaseModel
@@ -259,18 +260,29 @@ class RegularizedAutoEncoderGenerator(BaseModel):
     autoencoder : Regularized autoencoder class.
     '''
 
-    def __init__(self, config, data_loader, inference = False):
+    def __init__(self, config, data_loader, test = False, inference = False):
         super(RegularizedAutoEncoderGenerator, self).__init__(config)
         
         self.in_out_shapes = data_loader.in_out_shapes
         self.inference = inference
 
-        self.mapper = UMAPMapper(config).mapper
-        if self.inference:
-            self.embedder = Embedder(config, self.in_out_shapes['input_shape'], config.model.latent_dim)
+        if test:
+
+            self.mapper = UMAPMapper_test(config).mapper
+            if self.inference:
+                self.embedder = Embedder_test(config, self.in_out_shapes['input_shape'], config.model.latent_dim)
+            else:
+                self.embedder = ParametricUMAP(config, data_loader, test = True)
+            self.autoencoder = RegularizedAutoEncoder_test(config, self.in_out_shapes['output_shape'])
+
         else:
-            self.embedder = ParametricUMAP(config, data_loader)
-        self.autoencoder = RegularizedAutoEncoder(config, self.in_out_shapes['output_shape'])
+
+            self.mapper = UMAPMapper(config).mapper
+            if self.inference:
+                self.embedder = Embedder(config, self.in_out_shapes['input_shape'], config.model.latent_dim)
+            else:
+                self.embedder = ParametricUMAP(config, data_loader)
+            self.autoencoder = RegularizedAutoEncoder(config, self.in_out_shapes['output_shape'])
         self.build_model()
 
     def build_model(self):

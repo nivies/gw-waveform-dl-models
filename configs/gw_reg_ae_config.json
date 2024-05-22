@@ -5,7 +5,7 @@
     "data_loader": {
       "name": "UMAPDataLoader",
       "args": {},
-      "data_path": "./data/bbh_qz_data.hdf5",
+      "data_path": "./data/bbh_q_data.hdf5",
       "scale_data": false,
       "data_output_type": "hp",
       "split_size": 0.2,
@@ -13,7 +13,7 @@
     },
     "model":{
       "name": "RegularizedAutoEncoderGenerator",
-      "args": {},
+      "args": {"test": true},
       "latent_dim": 10,
       "reg_weight": 0.01,
       "mapper_architecture": "dense",

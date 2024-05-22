@@ -2,6 +2,7 @@ import numpy as np
 import tensorflow as tf
 import keras
 from base.base_model import BaseModel
+from gw_test_models import Embedder_test
 from keras import layers
 from pynndescent import NNDescent
 from umap.umap_ import fuzzy_simplicial_set
@@ -78,7 +79,7 @@ class ParametricUMAP(BaseModel):
     method.
     '''
 
-    def __init__(self, config, data_loader):
+    def __init__(self, config, data_loader, test = False):
         super(ParametricUMAP, self).__init__(config)
 
         data_reg_tr = data_loader.X_train
@@ -90,7 +91,11 @@ class ParametricUMAP(BaseModel):
         self.epochs = config.paramteric_umap.epochs
         self.input_shape_reg = data_loader.in_out_shapes["input_shape"]
 
-        self.embedder = Embedder(config, self.input_shape_reg, config.model.latent_dim).embedder
+        if test:
+
+            self.embedder = Embedder_test(config, self.input_shape_reg, config.model.latent_dim).embedder
+        else:
+            self.embedder = Embedder(config, self.input_shape_reg, config.model.latent_dim).embedder
 
         n_trees = 5 + int(round((data_reg_tr.shape[0]) ** 0.5 / 20.0))
 
