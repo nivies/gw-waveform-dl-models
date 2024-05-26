@@ -2,6 +2,15 @@ from base.base_model import BaseModel
 import keras
 from keras import layers
 
+
+'''
+Much lighter model than the M's th big convolutional model. 
+    - Works perfectly for q BBH. Recreates all l=2 multipoles.
+
+    
+'''
+
+
 class ConvBlock1D_test(BaseModel):
 
     '''
@@ -96,14 +105,14 @@ class RegularizedAutoEncoder_test(BaseModel):
         inp = keras.Input(self.out_shape)
 
         x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(inp)
-        x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-        x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-        x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-        x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        x = layers.Dense(units=512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        x = layers.Dense(units=512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
         enc = layers.Dense(units=self.latent_dim, name = 'encoding')(x)
 
-        y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(enc)
+        y = layers.Dense(units=512, activation='leaky_relu', kernel_initializer='glorot_uniform')(enc)
+        y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
+        y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
         
         dec = layers.Dense(units=self.out_shape, activation='linear', name = 'reconstruction')(y)
 
@@ -194,8 +203,6 @@ class UMAPMapper_test(BaseModel):
         x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(inp)
         x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
         x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
-
-        x = layers.Concatenate()([x, inp])
 
         opt = layers.Dense(input_output_shape)(x)
 

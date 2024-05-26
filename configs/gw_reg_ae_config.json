@@ -1,11 +1,11 @@
 {
     "exp": {
-      "name": "reg_qz_bbh"
+      "name": "reg_q_bbh_light"
     },
     "data_loader": {
       "name": "UMAPDataLoader",
       "args": {},
-      "data_path": "./data/bbh_q_data.hdf5",
+      "data_path": "./data/nonhyb_noprec_dataset_q8.hdf",
       "scale_data": false,
       "data_output_type": "hp",
       "split_size": 0.2,
@@ -29,28 +29,28 @@
         "steps_per_epoch": 100,
         "edge_dataset_batch_size": 2000,
         "edge_dataset_n_epochs": 200,
-        "epochs": 10        
+        "epochs": 5        
     },
     "trainer":{
       "name": "GWRegularizedAutoEncoderModelTrainer",
       "args": {},
-      "num_epochs": 1500,
-      "mapper_epochs": 1500,
-      "generator_epochs": 1500,
+      "num_epochs": 1000,
+      "mapper_epochs": 1000,
+      "generator_epochs": 1000,
       "batch_size": 50,
       "batch_size_test": 1024,
-      "verbose_training": 2
+      "verbose_training": 1
     },
     "callbacks":{
-      "checkpoint_monitor": "loss",
+      "checkpoint_monitor": "val_loss",
       "checkpoint_mode": "min",
       "checkpoint_save_best_only": true,
       "checkpoint_save_weights_only": true,
       "checkpoint_verbose": true,
       "tensorboard_write_graph": true,
-      "early_stopping_patience": 55,
-      "lr_reduce_factor": 0.5,
-      "lr_reduce_patience": 25,
-      "min_lr": 5e-6
+      "early_stopping_patience": 40,
+      "lr_reduce_factor": 0.2,
+      "lr_reduce_patience": 20,
+      "min_lr": 5e-8
     }
   }

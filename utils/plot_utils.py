@@ -78,7 +78,7 @@ def plot_waveform_comparison(y_pred, y_true, delta_t, dir, title, save_name):
 
     fig, ax = plt.subplots()
 
-    max_amp = max([np.max(np.real(y_true)), np.max(np.real(y_pred))])
+    max_amp = max([np.max(np.abs(y_true)), np.max(np.abs(y_pred))])
 
     ax.plot(times, y_pred, 'r', linewidth = 1.5, label = "Generated waveform")
     ax.plot(times, y_true, 'k--', linewidth = 1, label = "Targeted waveform")
@@ -90,9 +90,9 @@ def plot_waveform_comparison(y_pred, y_true, delta_t, dir, title, save_name):
 
     # inset axes....
     if total_length == 2048:
-        x1, x2, y1, y2 = times[1850], times[-1], -max_amp-0.1, max_amp+0.1
+        x1, x2, y1, y2 = times[1850], times[-1], -max_amp*1.1, max_amp*1.1
     else:
-        x1, x2, y1, y2 = times[3200], times[3800], -max_amp-0.1, max_amp+0.1
+        x1, x2, y1, y2 = times[3200], times[3800], -max_amp*1.1, max_amp*1.1
 
     axins = ax.inset_axes(
         [0.06, 0.73, 0.73, 0.25],
@@ -103,7 +103,7 @@ def plot_waveform_comparison(y_pred, y_true, delta_t, dir, title, save_name):
     ax.indicate_inset_zoom(axins, edgecolor="black")
 
     fig.savefig(os.path.join(dir, save_name))
-    plt.clf()
+    plt.close()
     return
 
 def plot_mismatch_comparison(dir, data_dict, train_test):
@@ -128,7 +128,7 @@ def plot_mismatch_comparison(dir, data_dict, train_test):
     plt.ylabel('Count')
     plt.xlabel('Mismatch')
     plt.savefig(os.path.join(dir, "mismatch_comparison.jpg"))
-    plt.clf()
+    plt.close()
 
 def make_plots(model, dir, data_loader):
 

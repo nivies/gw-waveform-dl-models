@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 import keras
 from base.base_model import BaseModel
-from gw_test_models import Embedder_test
+from models.gw_test_models import Embedder_test
 from keras import layers
 from pynndescent import NNDescent
 from umap.umap_ import fuzzy_simplicial_set

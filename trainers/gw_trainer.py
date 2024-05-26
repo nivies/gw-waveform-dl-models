@@ -154,7 +154,7 @@ class GWRegularizedAutoEncoderModelTrainer(BaseTrain):
                 write_graph=self.config.callbacks.tensorboard_write_graph,
             )
         )
-        self.callbacks_common.append(EarlyStopping(monitor = 'val_loss', patience = self.config.callbacks.early_stopping_patience, min_delta = 1e-6))
+        self.callbacks_common.append(EarlyStopping(monitor = 'loss', patience = self.config.callbacks.early_stopping_patience, min_delta = 1e-6))
         self.callbacks_common.append(ReduceLROnPlateau(monitor = 'loss', factor = self.config.callbacks.lr_reduce_factor, patience = self.config.callbacks.lr_reduce_patience, verbose = 1, min_lr = self.config.callbacks.min_lr))
 
         self.callbacks_embedder = self.callbacks_common

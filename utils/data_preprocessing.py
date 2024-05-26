@@ -31,6 +31,8 @@ def load_data_(data, output_type):
             return data['parameters'][:], amplitudes*np.sin(phases), delta_t
         elif output_type == 'amplitude_phase':
             return data['parameters'][:], np.concatenate([amplitudes, phases]), delta_t
+        elif output_type == 'complex':
+            return data['parameters'][:], amplitudes*np.cos(phases) + 1.0j*amplitudes*np.sin(phases), delta_t
         else:
             NameError("output_type specified not implemented.")
     else:
@@ -40,6 +42,8 @@ def load_data_(data, output_type):
             return data['parameters'][:], amplitudes*np.sin(phases)
         elif output_type == 'amplitude_phase':
             return data['parameters'][:], np.concatenate([amplitudes, phases])
+        elif output_type == 'complex':
+            return data['parameters'][:], amplitudes*np.cos(phases) + 1.0j*amplitudes*np.sin(phases)
         else:
             NameError("output_type specified not implemented.")
 

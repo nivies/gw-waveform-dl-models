@@ -41,7 +41,7 @@ def main():
         "mapped5": "/home/nino/GW/Keras-Project-Template/experiments/mapper_qzp_bbh/mapper_qzp_bbh/checkpoints",
         "regularized1": "/home/nino/GW/Keras-Project-Template/experiments/reg_q_bns/reg_q_bns/checkpoints",
         "regularized2": "/home/nino/GW/Keras-Project-Template/experiments/reg_q_lbd_bns/reg_q_lbd_bns/checkpoints",
-        "regularized3": "/home/nino/GW/Keras-Project-Template/experiments/reg_q_bbh/reg_q_bbh/checkpoints",
+        "regularized3": "/home/nino/GW/Keras-Project-Template/experiments/q_bbh_reg_light/reg_q_bbh_light/checkpoints",
         "regularized4": "/home/nino/GW/Keras-Project-Template/experiments/reg_qz_bbh_def/reg_qz_bbh/checkpoints",
         "regularized5": "/home/nino/GW/Keras-Project-Template/experiments/reg_qzp_bbh_good/reg_qzp_bbh/checkpoints"
     }
