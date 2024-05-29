@@ -30,7 +30,7 @@ def load_data_(data, output_type):
         elif output_type == 'hc':
             return data['parameters'][:], amplitudes*np.sin(phases), delta_t
         elif output_type == 'amplitude_phase':
-            return data['parameters'][:], np.concatenate([amplitudes, phases]), delta_t
+            return data['parameters'][:], np.concatenate([amplitudes, phases], axis = 1), delta_t
         elif output_type == 'complex':
             return data['parameters'][:], amplitudes*np.cos(phases) + 1.0j*amplitudes*np.sin(phases), delta_t
         else:

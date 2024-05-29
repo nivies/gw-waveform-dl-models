@@ -3,6 +3,7 @@ import os
 import keras
 from keras.callbacks import ModelCheckpoint, TensorBoard, EarlyStopping, ReduceLROnPlateau
 from joblib import dump
+from utils.loss import *
 
 '''
 File for declaring the training classes. Every class inherits from the BaseTrain class defined in the base directory.
@@ -206,7 +207,13 @@ class GWRegularizedAutoEncoderModelTrainer(BaseTrain):
         print("\n\nTraining complete!\n\n")
 
         self.mapper.load_weights(os.path.join(self.config.callbacks.checkpoint_dir, 'best_mapper.hdf5'))
-        self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = 'mae')
+
+        if self.config.model.loss == 'overlap':
+
+            self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = ovlp_mae_loss, metrics = [overlap, 'mean_absolute_error'])
+        else:
+
+            self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = 'mae', metrics = [overlap, 'mean_absolute_error'])
 
         history_retrain = self.generator.model.fit(
             self.data.get_generator_train_data(),

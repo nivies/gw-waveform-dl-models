@@ -7,7 +7,7 @@
       "args": {},
       "data_path": "./data/nonhyb_noprec_dataset_q8.hdf",
       "scale_data": false,
-      "data_output_type": "hp",
+      "data_output_type": "amplitude_phase",
       "split_size": 0.2,
       "sxs_sample_weight": 50 
     },
@@ -17,6 +17,7 @@
       "latent_dim": 10,
       "reg_weight": 0.01,
       "mapper_architecture": "dense",
+      "loss": "overlap",
       "mapper_dropout": 1e-7,
       "optimizer_kwargs":{
         "learning_rate": 0.0001
@@ -34,9 +35,9 @@
     "trainer":{
       "name": "GWRegularizedAutoEncoderModelTrainer",
       "args": {},
-      "num_epochs": 1000,
-      "mapper_epochs": 1000,
-      "generator_epochs": 1000,
+      "num_epochs": 1500,
+      "mapper_epochs": 1500,
+      "generator_epochs": 1500,
       "batch_size": 50,
       "batch_size_test": 1024,
       "verbose_training": 1
@@ -51,6 +52,6 @@
       "early_stopping_patience": 40,
       "lr_reduce_factor": 0.2,
       "lr_reduce_patience": 20,
-      "min_lr": 5e-8
+      "min_lr": 1e-9
     }
   }

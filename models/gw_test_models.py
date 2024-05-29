@@ -1,6 +1,7 @@
 from base.base_model import BaseModel
 import keras
 from keras import layers
+from utils.loss import *
 
 class ConvBlock1D_test(BaseModel):
 
@@ -98,12 +99,12 @@ class RegularizedAutoEncoder_test(BaseModel):
         x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(inp)
         x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
         x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-        x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-        x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
         enc = layers.Dense(units=self.latent_dim, name = 'encoding')(x)
 
         y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(enc)
+        y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
+        y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
         
         dec = layers.Dense(units=self.out_shape, activation='linear', name = 'reconstruction')(y)
 
@@ -112,10 +113,21 @@ class RegularizedAutoEncoder_test(BaseModel):
         self.decoder = keras.Model(enc, dec)
 
         optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+
+        # if self.config.model.loss == "overlap":
+
+        #     self.autoencoder.compile(optimizer = optimizer,
+        #                         loss_weights=[self.config.model.reg_weight, 1-self.config.model.reg_weight],
+        #                         loss = {'encoding' : 'mean_absolute_error', 'reconstruction' : ovlp_mae_loss},
+        #                         metrics = {'encoding' : 'mean_absolute_error', 'reconstruction' : [overlap, 'mean_absolute_error']}
+        #                         )
+        # else:
+
         self.autoencoder.compile(optimizer = optimizer,
-                                loss_weights=[self.config.model.reg_weight, 1-self.config.model.reg_weight],
-                                loss = {'encoding' : 'mean_absolute_error', 'reconstruction' : 'mean_absolute_error'}
-                                )
+                            loss_weights=[self.config.model.reg_weight, 1-self.config.model.reg_weight],
+                            loss = {'encoding' : 'mean_absolute_error', 'reconstruction' : 'mean_absolute_error'}
+                            )
+
         
 
 class Embedder_test(BaseModel):
@@ -153,6 +165,7 @@ class Embedder_test(BaseModel):
         inp = keras.Input(self.input_shape)
 
         x = layers.Dense(512, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+        x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
         opt = layers.Dense(self.output_shape)(x)
 
@@ -193,11 +206,12 @@ class UMAPMapper_test(BaseModel):
 
         x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(inp)
         x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
-        x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
-
         x = layers.Concatenate()([x, inp])
+        x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
+        x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
+        pre_opt = layers.Dense(input_output_shape)(x)
 
-        opt = layers.Dense(input_output_shape)(x)
+        opt = layers.Add()([inp, pre_opt])
 
         self.mapper = keras.Model(inp, opt)
 

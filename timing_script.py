@@ -14,7 +14,7 @@ def main():
     parser.add_argument('-gm', '--generation_method', dest='method', help='Method for GW generation: dense, mapped, regularized, cvae or surrogate.', metavar='')
     parser.add_argument('-pu', '--processing_unit', dest='pu', help='Whether to run the generation method on cpu (\'cpu\') or on gpu (\'gpu\').', metavar='')
     parser.add_argument('-bs', '--batch_size', dest='batch_size', help='Batch size for predict method for NN based generation methods.', metavar='')
-    parser.add_argument('-d', '--dataset', dest='data', help='Dataset to run the script on.\n1 -> Mass BNS\n2 -> Mass-lambda BNS\n3 -> Mass BBH\n4 -> Mass z-spin BBH\n5 -> Mass full-spin BBH', metavar='')
+    parser.add_argument('-d', '--dataset', dest='data', help='Dataset to run the script on.\n1 -> Mass BNS\n2 -> Mass-lambda BNS\n3 -> Mass BBH\n4 -> Mass z-spin BBH\n5 -> Mass full-spin BBH\n6 -> Osvaldo\'s dataset (z-spin BBH)', metavar='')
     parser.add_argument('-n', '--n_datapoints', dest='N', help='Number of waveforms to generate.', metavar='')
     parser.add_argument('-en', '--execution_number', dest='execution_number', help='Number of script executions for timing.', default = 5, metavar='')
 
@@ -25,7 +25,8 @@ def main():
         '2': "/home/nino/GW/data/bns_mass_lbd.hdf",
         '3': "/home/nino/GW/data/bbh_q_data.hdf5",
         '4': "/home/nino/GW/data/bbh_qz_data.hdf5",
-        '5': "/home/nino/GW/data/bbh_qzp_data.hdf5"
+        '5': "/home/nino/GW/data/bbh_qzp_data.hdf5",
+        '6': "/home/nino/GW/Keras-Project-Template/data/nonhyb_noprec_dataset_q8.hdf"
     }
 
     model_selector = {
@@ -43,7 +44,8 @@ def main():
         "regularized2": "/home/nino/GW/Keras-Project-Template/experiments/reg_q_lbd_bns/reg_q_lbd_bns/checkpoints",
         "regularized3": "/home/nino/GW/Keras-Project-Template/experiments/q_bbh_reg_light/reg_q_bbh_light/checkpoints",
         "regularized4": "/home/nino/GW/Keras-Project-Template/experiments/reg_qz_bbh_def/reg_qz_bbh/checkpoints",
-        "regularized5": "/home/nino/GW/Keras-Project-Template/experiments/reg_qzp_bbh_good/reg_qzp_bbh/checkpoints"
+        "regularized5": "/home/nino/GW/Keras-Project-Template/experiments/reg_qzp_bbh_good/reg_qzp_bbh/checkpoints",
+        "light_amp6" : "/home/nino/GW/Keras-Project-Template/experiments/osv_amp_phs_overlap/reg_q_bbh_light/checkpoints"
     }
 
     def code_generator(method, data, N, bs = None, pu = None):
