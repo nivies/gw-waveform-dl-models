@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import matplotlib
+from utils.data_preprocessing import load_data, get_data_split
 from joblib import dump
 from pycbc.filter.matchedfilter import match
 from pycbc.types import TimeSeries
@@ -9,15 +10,25 @@ from tqdm import tqdm
 import tensorflow as tf
 import keras.backend as K
 
-def wavewise_overlap(h1, h2, dt=2*4.925794970773135e-06, df=None):
+def wavewise_overlap(h1, h2, config, dt=2*4.925794970773135e-06, df=None):
     
     split_size = int(4096/2)
 
-    h1_amp, h1_phs = h1[:split_size], h1[split_size:]
-    h2_amp, h2_phs = h2[:split_size], h2[split_size:]
+    if config.data_loader.data_output_type == 'amplitude_phase':
 
-    h1 =  tf.cast(h1_amp, tf.complex64)*tf.math.exp(1j*(tf.cast(h1_phs, tf.complex64)))
-    h2 = tf.cast(h2_amp, tf.complex64)*tf.math.exp(1j*(tf.cast(h2_phs, tf.complex64)))
+        h1_amp, h1_phs = h1[:split_size], h1[split_size:]
+        h2_amp, h2_phs = h2[:split_size], h2[split_size:]
+
+        h1 =  tf.cast(h1_amp, tf.complex64)*tf.math.exp(1j*(tf.cast(h1_phs, tf.complex64)))
+        h2 = tf.cast(h2_amp, tf.complex64)*tf.math.exp(1j*(tf.cast(h2_phs, tf.complex64)))
+
+    elif config.data_loader.data_output_type == 'hphc':
+
+        h1_hp, h1_hc = h1[:split_size], h1[split_size:]
+        h2_hp, h2_hc = h2[:split_size], h2[split_size:]
+
+        h1 =  tf.cast(h1_hp, tf.complex64) + 1j*(tf.cast(h1_hc, tf.complex64))
+        h2 = tf.cast(h2_hp, tf.complex64) + 1j*(tf.cast(h2_hc, tf.complex64))
 
     h1_f = tf.signal.fft(h1)*dt
     h2_f = tf.signal.fft(h2)*dt
@@ -34,7 +45,7 @@ def wavewise_overlap(h1, h2, dt=2*4.925794970773135e-06, df=None):
     
     return  K.abs(1. - overl)
 
-def osvaldos_overlap(y_pred, y_true, delta_t):
+def osvaldos_overlap(y_pred, y_true, delta_t, config):
 
     N = y_pred.shape[0]
     mm = []
@@ -44,7 +55,7 @@ def osvaldos_overlap(y_pred, y_true, delta_t):
 
     for y_prd, y_tr in tqdm(zip(y_pred, y_true), total = N, desc = "Calculating 1 - overlap"):
 
-        mm.append(wavewise_overlap(y_prd, y_tr, delta_t))
+        mm.append(wavewise_overlap(h1 = y_prd, h2 = y_tr, dt = delta_t, config = config))
 
     return np.array(mm), np.argmin(mm), np.argmax(mm)
 
@@ -56,20 +67,36 @@ def get_percentile_index(mm, percentile):
 
     return perc_idx
 
-def make_plotting_dirs(dir):
+def make_plotting_dirs(dir, val = False):
     
     if not os.path.isdir(dir):
         os.mkdir(dir)
 
-    dir_train = os.path.join(dir, "train/")
-    dir_test = os.path.join(dir, "test/")
+    if val:
 
-    if not os.path.isdir(dir_train):
-        os.mkdir(dir_train)
-    if not os.path.isdir(dir_test):
-        os.mkdir(dir_test)
+        dir_train = os.path.join(dir, "train/")
+        dir_test = os.path.join(dir, "test/")
+        dir_val = os.path.join(dir, "validation/")
+
+        if not os.path.isdir(dir_train):
+            os.mkdir(dir_train)
+        if not os.path.isdir(dir_test):
+            os.mkdir(dir_test)
+        if not os.path.isdir(dir_val):
+            os.mkdir(dir_val)
+        
+        return dir_train, dir_test, dir_val
     
-    return dir_train, dir_test
+    else:
+        dir_train = os.path.join(dir, "train/")
+        dir_test = os.path.join(dir, "test/")
+
+        if not os.path.isdir(dir_train):
+            os.mkdir(dir_train)
+        if not os.path.isdir(dir_test):
+            os.mkdir(dir_test)
+        
+        return dir_train, dir_test
     
 def pycbc_mismatch(y_pred, y_true, delta_t, real = "real"):
 
@@ -89,12 +116,7 @@ def pycbc_mismatch(y_pred, y_true, delta_t, real = "real"):
     
     return np.array(mm), np.argmin(mm), np.argmax(mm)
 
-def plot_mismatch_histogram(mismatches, dir, train):
-
-    if train:
-        train_test = "Train"
-    else:
-        train_test = "Test"
+def plot_mismatch_histogram(mismatches, dir, train_test):
 
     matplotlib.rc('font', size=16)
     plt.rcParams["figure.figsize"] = (10,7)
@@ -181,8 +203,8 @@ def make_plots(model, dir, data_loader, config, metric):
     if metric == "overlap":
 
         split_idx = int(y_pred_tr.shape[-1]/2)
-        mm_tr, bst_tr, wrst_tr = osvaldos_overlap(y_pred_tr, data_loader.y_train, data_loader.delta_t)
-        mm_ts, bst_ts, wrst_ts = osvaldos_overlap(y_pred_ts, data_loader.y_test, data_loader.delta_t)
+        mm_tr, bst_tr, wrst_tr = osvaldos_overlap(y_pred_tr, data_loader.y_train, data_loader.delta_t, config)
+        mm_ts, bst_ts, wrst_ts = osvaldos_overlap(y_pred_ts, data_loader.y_test, data_loader.delta_t, config)
         
         y_pred_tr = np.real(y_pred_tr[:, :split_idx]*np.exp(1.0j*y_pred_tr[:, split_idx:]))
         y_pred_ts = np.real(y_pred_ts[:, :split_idx]*np.exp(1.0j*y_pred_ts[:, split_idx:]))
@@ -221,8 +243,8 @@ def make_plots(model, dir, data_loader, config, metric):
     dump(mm_ts, os.path.join(dir, "mismatches_test.bin"))
 
     print("Plotting histogram", end='\r')
-    plot_mismatch_histogram(mm_tr, dir_tr, True)
-    plot_mismatch_histogram(mm_ts, dir_ts, False)
+    plot_mismatch_histogram(mm_tr, dir_tr, "Train")
+    plot_mismatch_histogram(mm_ts, dir_ts, "Test")
 
     print("Plotting waveforms", end='\r')
     plot_waveform_comparison(y_pred_tr[bst_tr], data_loader.y_train[bst_tr], data_loader.delta_t, dir_tr, title = f"Best train case. Mismatch: {mm_tr[bst_tr]:.3e}", save_name = "best_waveform.jpg")
@@ -236,6 +258,102 @@ def make_plots(model, dir, data_loader, config, metric):
 
     plot_waveform_comparison(y_pred_tr[perc_50_tr], data_loader.y_train[perc_50_tr], data_loader.delta_t, dir_tr, title = f"50th percentile train waveform. Mismatch: {mm_tr[perc_50_tr]:.3e}", save_name = "perc_50_waveform.jpg")
     plot_waveform_comparison(y_pred_ts[perc_50_ts], data_loader.y_test[perc_50_ts], data_loader.delta_t, dir_ts, title = f"50th percentile test waveform. Mismatch: {mm_ts[perc_50_ts]:.3e}", save_name = "perc_50_waveform.jpg")
+
+def make_plots_sxs(model, dir, config, metric):
+
+    if "_q_" in config.data_loader.data_path:
+        sxs_pars, sxs_data, delta_t = load_data("./data/sxs_q_data.hdf5", config.data_loader.data_output_type)
+
+    elif "_qz_" in config.data_loader.data_path:
+        sxs_pars, sxs_data, delta_t = load_data("./data/sxs_qz_data.hdf5", config.data_loader.data_output_type)
+        
+    elif "_qzp_" in config.data_loader.data_path:
+        sxs_pars, sxs_data, delta_t = load_data("./data/sxs_qzp_data.hdf5", config.data_loader.data_output_type)
+
+    
+    data_tr, data_ts, data_val, pars_tr, pars_ts, pars_val = get_data_split(sxs_data, sxs_pars, split = [0.4, 0.4, 0.2])
+
+    dir_tr, dir_ts, dir_val = make_plotting_dirs(dir, val=True)
+
+    y_pred_tr = model.predict(pars_tr, batch_size = 1024)
+    y_pred_ts = model.predict(pars_ts, batch_size = 1024)
+    y_pred_val = model.predict(pars_val, batch_size = 1024)
+
+    if metric == "overlap":
+
+        split_idx = int(y_pred_tr.shape[-1]/2)
+        mm_tr, bst_tr, wrst_tr = osvaldos_overlap(y_pred_tr, data_tr, delta_t)
+        mm_ts, bst_ts, wrst_ts = osvaldos_overlap(y_pred_ts, data_ts, delta_t)
+        mm_val, bst_val, wrst_val = osvaldos_overlap(y_pred_val, data_val, delta_t)
+        
+        y_pred_tr = np.real(y_pred_tr[:, :split_idx]*np.exp(1.0j*y_pred_tr[:, split_idx:]))
+        y_pred_ts = np.real(y_pred_ts[:, :split_idx]*np.exp(1.0j*y_pred_ts[:, split_idx:]))
+        y_pred_val = np.real(y_pred_val[:, :split_idx]*np.exp(1.0j*y_pred_val[:, split_idx:]))
+
+        data_tr = np.real(data_tr[:, :split_idx]*np.exp(1.0j*data_tr[:, split_idx:]))
+        data_ts = np.real(data_ts[:, :split_idx]*np.exp(1.0j*data_ts[:, split_idx:]))
+        data_val = np.real(data_val[:, :split_idx]*np.exp(1.0j*data_val[:, split_idx:]))
+
+    elif config.data_loader.data_output_type == "amplitude_phase":
+
+        split_idx = int(y_pred_tr.shape[-1]/2)
+        y_pred_tr = y_pred_tr[:, :split_idx]*np.exp(1.0j*y_pred_tr[:, split_idx:])
+        y_pred_ts = y_pred_ts[:, :split_idx]*np.exp(1.0j*y_pred_ts[:, split_idx:])
+        y_pred_val = y_pred_val[:, :split_idx]*np.exp(1.0j*y_pred_val[:, split_idx:])
+        
+        data_tr = np.real(data_tr[:, :split_idx]*np.exp(1.0j*data_tr[:, split_idx:]))
+        data_ts = np.real(data_ts[:, :split_idx]*np.exp(1.0j*data_ts[:, split_idx:]))
+        data_val = np.real(data_val[:, :split_idx]*np.exp(1.0j*data_val[:, split_idx:]))
+
+        mm_tr, bst_tr, wrst_tr = pycbc_mismatch(y_pred_tr, data_tr, delta_t, metric)
+        mm_ts, bst_ts, wrst_ts = pycbc_mismatch(y_pred_ts, data_ts, delta_t, metric)
+        mm_val, bst_val, wrst_val = pycbc_mismatch(y_pred_val, data_val, delta_t, metric)
+
+        y_pred_tr = np.real(y_pred_tr)
+        y_pred_ts = np.real(y_pred_ts)
+        y_pred_val = np.real(y_pred_val)
+
+    
+    else:
+
+        mm_tr, bst_tr, wrst_tr = pycbc_mismatch(y_pred_tr, data_tr, delta_t, metric)
+        mm_ts, bst_ts, wrst_ts = pycbc_mismatch(y_pred_ts, data_ts, delta_t, metric)
+        mm_val, bst_val, wrst_val = pycbc_mismatch(y_pred_val, data_val, delta_t, metric)
+
+    perc_10_tr = get_percentile_index(mm_tr, 0.9)
+    perc_50_tr = get_percentile_index(mm_tr, 0.5)
+
+    perc_10_ts = get_percentile_index(mm_ts, 0.9)
+    perc_50_ts = get_percentile_index(mm_ts, 0.5)
+
+    perc_10_val = get_percentile_index(mm_val, 0.9)
+    perc_50_val = get_percentile_index(mm_val, 0.5)
+
+    dump(mm_tr, os.path.join(dir, "mismatches_train.bin"))
+    dump(mm_ts, os.path.join(dir, "mismatches_test.bin"))
+    dump(mm_val, os.path.join(dir, "mismatches_validation.bin"))
+
+    print("Plotting histogram", end='\r')
+    plot_mismatch_histogram(mm_tr, dir_tr, "Train")
+    plot_mismatch_histogram(mm_ts, dir_ts, "Test")
+    plot_mismatch_histogram(mm_val, dir_val, "Validation")
+
+    print("Plotting waveforms", end='\r')
+    plot_waveform_comparison(y_pred_tr[bst_tr], data_tr[bst_tr], delta_t, dir_tr, title = f"Best train case. Mismatch: {mm_tr[bst_tr]:.3e}", save_name = "best_waveform.jpg")
+    plot_waveform_comparison(y_pred_ts[bst_ts], data_ts[bst_ts], delta_t, dir_ts, title = f"Best test case. Mismatch: {mm_ts[bst_ts]:.3e}", save_name = "best_waveform.jpg")
+    plot_waveform_comparison(y_pred_val[bst_val], data_val[bst_val], delta_t, dir_val, title = f"Best validation case. Mismatch: {mm_val[bst_val]:.3e}", save_name = "best_waveform.jpg")
+    
+    plot_waveform_comparison(y_pred_tr[wrst_tr], data_tr[wrst_tr], delta_t, dir_tr, title = f"Worst train case. Mismatch: {mm_tr[wrst_tr]:.3e}", save_name = "worst_waveform.jpg")
+    plot_waveform_comparison(y_pred_ts[wrst_ts], data_ts[wrst_ts], delta_t, dir_ts, title = f"Worst test case. Mismatch: {mm_ts[wrst_ts]:.3e}", save_name = "worst_waveform.jpg")
+    plot_waveform_comparison(y_pred_val[wrst_val], data_val[wrst_val], delta_t, dir_val, title = f"Worst validation case. Mismatch: {mm_val[wrst_val]:.3e}", save_name = "worst_waveform.jpg")
+
+    plot_waveform_comparison(y_pred_tr[perc_10_tr], data_tr[perc_10_tr], delta_t, dir_tr, title = f"10th percentile train waveform. Mismatch: {mm_tr[perc_10_tr]:.3e}", save_name = "perc_10_waveform.jpg")
+    plot_waveform_comparison(y_pred_ts[perc_10_ts], data_ts[perc_10_ts], delta_t, dir_ts, title = f"10th percentile test waveform. Mismatch: {mm_ts[perc_10_ts]:.3e}", save_name = "perc_10_waveform.jpg")
+    plot_waveform_comparison(y_pred_val[perc_10_val], data_val[perc_10_val], delta_t, dir_val, title = f"10th percentile validation waveform. Mismatch: {mm_val[perc_10_val]:.3e}", save_name = "perc_10_waveform.jpg")
+
+    plot_waveform_comparison(y_pred_tr[perc_50_tr], data_tr[perc_50_tr], delta_t, dir_tr, title = f"50th percentile train waveform. Mismatch: {mm_tr[perc_50_tr]:.3e}", save_name = "perc_50_waveform.jpg")
+    plot_waveform_comparison(y_pred_ts[perc_50_ts], data_ts[perc_50_ts], delta_t, dir_ts, title = f"50th percentile test waveform. Mismatch: {mm_ts[perc_50_ts]:.3e}", save_name = "perc_50_waveform.jpg")
+    plot_waveform_comparison(y_pred_val[perc_50_val], data_val[perc_50_val], delta_t, dir_val, title = f"50th percentile validation waveform. Mismatch: {mm_val[perc_50_val]:.3e}", save_name = "perc_50_waveform.jpg")
 
 def nb_plot_waveform_comparison(y_pred, y_true, delta_t, title):
 
@@ -283,5 +401,5 @@ def nb_evaluate_model(y_pred, y_true, delta_t):
     mismatches, best_mm, worst_mm = pycbc_mismatch(y_pred, y_true, delta_t)
 
     nb_plot_mismatch(mismatches)
-    nb_plot_waveform_comparison(y_pred[best_mm], y_true[best_mm], delta_t, "Best case scenario")
-    nb_plot_waveform_comparison(y_pred[worst_mm], y_true[worst_mm], delta_t, "Worst case scenario")
+    nb_plot_waveform_comparison(y_pred[best_mm], y_true[best_mm], delta_t, f"Best case scenario. Mismatch: {mismatches[best_mm]:.3e}")
+    nb_plot_waveform_comparison(y_pred[worst_mm], y_true[worst_mm], delta_t, f"Worst case scenario. Mismatch: {mismatches[worst_mm]:.3e}")

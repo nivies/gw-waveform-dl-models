@@ -32,7 +32,12 @@ def main():
     data_loader = init_obj(config, "data_loader", data_loader_module)
     print("Data loaded!")
     print("Loading model...", end="\r")
-    model = init_obj(config, "model", models_module, data_loader = data_loader)
+
+    if config.trainer.name == "GWModelTrainer" and config.model.name == "RegularizedAutoEncoderGenerator":
+        model = init_obj(config, "model", models_module, data_loader = data_loader, inference = True)
+    else:
+        model = init_obj(config, "model", models_module, data_loader = data_loader)
+    
     print("Model loaded!")
     print("Initialising training...")
     trainer = init_obj(config, "trainer", trainers_module, model = model, data = data_loader)

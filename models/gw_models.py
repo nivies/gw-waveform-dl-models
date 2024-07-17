@@ -3,8 +3,10 @@ from models.gw_latent_mappers import UMAPMapper
 from models.parametric_umap import ParametricUMAP, Embedder
 from keras import layers
 import keras
+from keras.losses import mean_absolute_error
 from models.cVAE_utils import *
 from models.gw_test_models import *
+from utils.loss import *
 
 '''
 File for declaring the main architectures for the DL-based GW modelling neural networks. Every class inherits from the BaseModel
@@ -36,39 +38,75 @@ class MLP(BaseModel):
     '''
 
 
-    def __init__(self, config, data_loader, latent_mapper_dim = None):
+    def __init__(self, config, data_loader, test = False, latent_mapper_dim = None):
         super(MLP, self).__init__(config)
+
+        if self.config.data_loader.data_output_type == 'amplitude_phase':
+            self.overlap = overlap_amp_phs
+            self.ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+        elif self.config.data_loader.data_output_type == 'hphc':
+            self.overlap = overlap_hphc
+            self.ovlp_mae_loss = ovlp_mae_loss_hphc
+        else:
+            self.overlap = 'mean_squared_error'
+
         self.latent_dim = latent_mapper_dim
         self.in_out_shapes = data_loader.in_out_shapes
+        self.test = test
         self.build_model()
 
     def build_model(self):
 
-        params = keras.Input(self.in_out_shapes['input_shape'])
+        if self.test == True:
 
-        x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(params) 
-        x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x) 
-        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            if self.latent_dim:
+                self.model = MLP_test(self.config, self.in_out_shapes['input_shape'], self.latent_dim).model
 
-        if self.latent_dim:
-            opt = layers.Dense(self.latent_dim)(x)
+            else:
+                self.model = MLP_test(self.config, self.in_out_shapes['input_shape'], self.in_out_shapes['output_shape'], self.config.model.model_id).model
         else:
-            opt = layers.Dense(self.in_out_shapes['output_shape'])(x)
 
-        self.model = keras.Model(params, opt)
+            params = keras.Input(self.in_out_shapes['input_shape'])
+
+            x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(params) 
+            x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x) 
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+            if self.latent_dim:
+                opt = layers.Dense(self.latent_dim)(x)
+            else:
+                opt = layers.Dense(self.in_out_shapes['output_shape'])(x)
+
+            self.model = keras.Model(params, opt)
 
         optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
 
-        self.model.compile(optimizer = optimizer,
-                           loss = 'mae'
-                           )
+        if self.latent_dim:
+
+            self.model.compile(optimizer = optimizer,
+                               loss = 'mae'
+                               )
         
+        elif self.config.model.loss == "overlap":
+
+            self.model.compile(optimizer = optimizer,
+                        loss = self.ovlp_mae_loss,
+                        metrics = [self.overlap, mean_absolute_error]
+                        )
+        else:
+
+            self.model.compile(optimizer = optimizer,
+                        loss = 'mae',
+                        metrics = [self.overlap, mean_absolute_error]
+                        )
+   
 class RegularizedAutoEncoder(BaseModel):
 
     '''
@@ -266,6 +304,16 @@ class RegularizedAutoEncoderGenerator(BaseModel):
         self.in_out_shapes = data_loader.in_out_shapes
         self.inference = inference
 
+        if self.config.data_loader.data_output_type == 'amplitude_phase':
+            self.overlap = overlap_amp_phs
+            self.ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+        elif self.config.data_loader.data_output_type == 'hphc':
+            self.overlap = overlap_hphc
+            self.ovlp_mae_loss = ovlp_mae_loss_hphc
+        else:
+            self.overlap = 'mean_squared_error'
+
         if test:
 
             self.mapper = UMAPMapper_test(config).mapper
@@ -294,6 +342,12 @@ class RegularizedAutoEncoderGenerator(BaseModel):
 
         self.model = keras.Model(inp, opt)
 
+        if self.inference:
+            if self.config.model.loss == 'overlap':
+                self.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = self.ovlp_mae_loss, metrics = [self.overlap, 'mean_absolute_error'])
+            else:
+                self.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = 'mae', metrics = [self.overlap, 'mean_absolute_error'])
+
 class MappedAutoEncoderGenerator(BaseModel):
 
     '''
@@ -316,13 +370,27 @@ class MappedAutoEncoderGenerator(BaseModel):
     autoencoder : Mapped autoencoder class.
     '''
 
-    def __init__(self, config, data_loader):
+    def __init__(self, config, data_loader, test = False):
         super(MappedAutoEncoderGenerator, self).__init__(config)
         
         self.in_out_shapes = data_loader.in_out_shapes
 
-        self.mapper = MLP(config, data_loader, self.config.model.latent_dim).model
-        self.autoencoder = AutoEncoder(config, self.in_out_shapes['output_shape'])
+        if self.config.data_loader.data_output_type == 'amplitude_phase':
+            self.overlap = overlap_amp_phs
+            self.ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+        elif self.config.data_loader.data_output_type == 'hphc':
+            self.overlap = overlap_hphc
+            self.ovlp_mae_loss = ovlp_mae_loss_hphc
+        else:
+            self.overlap = 'mean_squared_error'
+
+        if test:
+            self.mapper = MLP(config, data_loader, test, self.config.model.latent_dim).model
+            self.autoencoder = AutoEncoder_test(config, self.in_out_shapes['output_shape'])
+        else:
+            self.mapper = MLP(config, data_loader, test, self.config.model.latent_dim).model
+            self.autoencoder = AutoEncoder(config, self.in_out_shapes['output_shape'])
         self.build_model()
 
     def build_model(self):
@@ -332,6 +400,11 @@ class MappedAutoEncoderGenerator(BaseModel):
         opt = self.autoencoder.decoder(lat)
 
         self.model = keras.Model(inp, opt)
+        # Careful, compiling twice if executed in mode without initialization!!
+        if self.config.model.loss == 'overlap':
+            self.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = self.ovlp_mae_loss, metrics = [self.overlap, 'mean_absolute_error'])
+        else:
+            self.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = 'mae', metrics = [self.overlap, 'mean_absolute_error'])
 
 class cVAEGenerator(BaseModel):
 

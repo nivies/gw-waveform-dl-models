@@ -5,7 +5,12 @@ import models.gw_models as models_module
 
 def load_model_and_data_loader(model_dir):
 
-    config, _ = process_config(os.path.join(model_dir, "config.json"))
+    try:
+
+        config, _ = process_config(os.path.join(model_dir, "config.json"))
+    except:
+
+        config, _ = process_config(os.path.join(os.path.dirname(model_dir), "config.json"))
 
     print("Loading data...", end="\r")
     data_loader = init_obj(config, "data_loader", data_loader_module)

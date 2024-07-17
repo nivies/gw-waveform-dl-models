@@ -117,6 +117,16 @@ class GWRegularizedAutoEncoderModelTrainer(BaseTrain):
         self.val_acc = []
         self.init_callbacks()
 
+        if self.config.data_loader.data_output_type == 'amplitude_phase':
+            self.overlap = overlap_amp_phs
+            self.ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+        elif self.config.data_loader.data_output_type == 'hphc':
+            self.overlap = overlap_hphc
+            self.ovlp_mae_loss = ovlp_mae_loss_hphc
+        else:
+            self.overlap = 'mean_squared_error'
+
     def init_callbacks(self):
     
         checkpoint_ae = ModelCheckpoint(
@@ -210,10 +220,11 @@ class GWRegularizedAutoEncoderModelTrainer(BaseTrain):
 
         if self.config.model.loss == 'overlap':
 
-            self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = ovlp_mae_loss, metrics = [overlap, 'mean_absolute_error'])
+            self.config.model.optimizer_kwargs.learning_rate = self.config.model.optimizer_kwargs.learning_rate*0.1
+            self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = self.ovlp_mae_loss, metrics = [self.overlap, 'mean_absolute_error'])
         else:
 
-            self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = 'mae', metrics = [overlap, 'mean_absolute_error'])
+            self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = 'mae', metrics = [self.overlap, 'mean_absolute_error'])
 
         history_retrain = self.generator.model.fit(
             self.data.get_generator_train_data(),
@@ -224,7 +235,7 @@ class GWRegularizedAutoEncoderModelTrainer(BaseTrain):
             callbacks=self.callbacks_generator
         )
 
-        dump(history_embedder.history, os.path.join(self.config.callbacks.checkpoint_dir, "history_embdedder.bin"))
+        dump(history_embedder.history, os.path.join(self.config.callbacks.checkpoint_dir, "history_embedder.bin"))
         dump(history_autoencoder.history, os.path.join(self.config.callbacks.checkpoint_dir, "history_autoencoder.bin"))
         dump(history_mapper.history, os.path.join(self.config.callbacks.checkpoint_dir, "history_mapper.bin"))
         dump(history_retrain.history, os.path.join(self.config.callbacks.checkpoint_dir, "history_generator.bin"))
@@ -341,7 +352,13 @@ class GWMappedAutoEncoderModelTrainer(BaseTrain):
         )   
 
         self.mapper.load_weights(os.path.join(self.config.callbacks.checkpoint_dir, 'best_mapper.hdf5'))
-        self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = 'mae')
+
+        if self.config.model.loss == 'overlap':
+
+            self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = ovlp_mae_loss, metrics = [overlap, 'mean_absolute_error'])
+        else:
+
+            self.generator.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = 'mae', metrics = [overlap, 'mean_absolute_error'])
 
         print("\n\nRetraining generator...\n\n")
 

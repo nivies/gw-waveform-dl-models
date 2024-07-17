@@ -126,9 +126,7 @@ class RegularizedAutoEncoder_test(BaseModel):
         self.autoencoder.compile(optimizer = optimizer,
                             loss_weights=[self.config.model.reg_weight, 1-self.config.model.reg_weight],
                             loss = {'encoding' : 'mean_absolute_error', 'reconstruction' : 'mean_absolute_error'}
-                            )
-
-        
+                            )      
 
 class Embedder_test(BaseModel):
 
@@ -244,3 +242,156 @@ class UMAPMapper_test(BaseModel):
                            loss = 'mae'
                            )
         
+class MLP_test(BaseModel):
+
+    '''
+    Class for declaring the embedding network that creates the UMAP embedding. This class is called either from the 
+    Parametric UMAP class, or from the RegularizedAutoEncoderGenerator directly if the inference parameter is set to True.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+
+    input_shape: int
+        Input parameter shape.
+
+    output_shape: int
+        Embedding dimensionality (which is set to match the latent space dimensionality of the autoencoder).
+    -----------------
+
+    Declared network is stored in the .embedder method.
+    '''
+
+    def __init__(self, config, input_shape, output_shape, model_id):
+        super(MLP_test, self).__init__(config)
+
+        self.input_shape = input_shape
+        self.output_shape = output_shape
+        self.model_id = model_id
+
+        self.build_model()
+
+    def build_model(self):
+        
+        inp = keras.Input(self.input_shape)
+
+        if self.model_id == '0':
+
+            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+
+        elif self.model_id == '1':
+
+            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+
+        elif self.model_id == '2':
+
+            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+
+        elif self.model_id == '3':
+
+            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+
+        elif self.model_id == '4':
+
+            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+
+        elif self.model_id == '5':
+
+            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+
+        elif self.model_id == '6':
+
+            x = layers.Dense(512, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+
+            x_1 = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
+            x = layers.Concatenate()([x, x_1])
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
+            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
+            pre_opt = layers.Dense(512)(x)
+
+            x = layers.Add()([x_1, pre_opt])
+
+            y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+            y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
+            x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
+
+
+        opt = layers.Dense(self.output_shape)(x)
+
+        self.model = keras.Model(inp, opt)
+
+class AutoEncoder_test(BaseModel):
+
+    '''
+    Class for the definition of a standard autoencoder architecture. This class is to be called from the MappedAutoEncoderGenerator class.
+    It declares a predefined 1D convolutional autoencoder architecture that will fit the waveforms.
+    
+    Input arguments:
+    ----------------
+
+    config: dict
+        Dict built from the configuration .json file.
+
+    out_shape: int
+        Parameter controlling the dimensionality of the data to fit. Particularly, the size of the waveform vectors.
+    ----------------
+
+    Autoencoder built stored in .autoencoder method. Similarly, the encoder and decoder are stored in the .encoder and the
+    .decoder methods.
+    '''
+
+    def __init__(self, config, out_shape):
+        super(AutoEncoder_test, self).__init__(config)
+        self.latent_dim = config.model.latent_dim
+        self.out_shape = out_shape
+        self.build_model()
+
+    def build_model(self):
+        
+        inp = keras.Input(self.out_shape)
+
+        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(inp)
+        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+        enc = layers.Dense(units=self.latent_dim, name = 'encoding')(x)
+
+        y = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(enc)
+        y = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+        y = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+        
+        dec = layers.Dense(units=self.out_shape, activation='linear', name = 'reconstruction')(y)
+
+        self.autoencoder = keras.Model(inp, dec)
+        self.encoder = keras.Model(inp, enc)
+        self.decoder = keras.Model(enc, dec)
+
+        optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+        self.autoencoder.compile(optimizer = optimizer,
+                                loss_weights=[self.config.model.reg_weight, 1-self.config.model.reg_weight],
+                                loss = 'mean_absolute_error'
+                                )

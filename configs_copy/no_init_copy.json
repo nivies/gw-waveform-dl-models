@@ -1,21 +1,24 @@
 {
     "exp": {
-      "name": "gw_dense_qz_hphc_overcomplex"
+      "name": "gw_no_init_qz_bbh_osv"
     },
     "data_loader": {
       "name": "GWDataLoader",
       "args": {},
-      "data_path": "./data/bbh_qz_data.hdf5",
+      "data_path": "./data/nonhyb_noprec_dataset_q8.hdf",
       "scale_data": false,
-      "data_output_type": "hphc",
+      "data_output_type": "amplitude_phase",
       "split_size": 0.2,
       "sxs_sample_weight": 80
     },
     "model":{
-      "name": "MLP",
-      "args": {"test": false},
-      "model_id": "6",
+      "name": "RegularizedAutoEncoderGenerator",
+      "args": {"test": true},
+      "latent_dim": 10,
+      "reg_weight": 0.01,
+      "mapper_architecture": "dense",
       "loss": "mae",
+      "mapper_dropout": 1e-7,
       "optimizer_kwargs":{
         "learning_rate": 0.0001
       }
@@ -35,9 +38,9 @@
       "checkpoint_save_weights_only": true,
       "checkpoint_verbose": true,
       "tensorboard_write_graph": true,
-      "early_stopping_patience": 40,
+      "early_stopping_patience": 61,
       "lr_reduce_factor": 0.5,
       "lr_reduce_patience": 15,
-      "min_lr": 1e-9
+      "min_lr": 1e-11
     }
   }

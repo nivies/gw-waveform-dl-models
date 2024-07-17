@@ -1,5 +1,6 @@
 import numpy as np
 import h5py
+from sklearn.utils import shuffle
 
 def unwrap_phase(complex_array):
     phase = np.angle(complex_array)
@@ -33,6 +34,8 @@ def load_data_(data, output_type):
             return data['parameters'][:], np.concatenate([amplitudes, phases], axis = 1), delta_t
         elif output_type == 'complex':
             return data['parameters'][:], amplitudes*np.cos(phases) + 1.0j*amplitudes*np.sin(phases), delta_t
+        elif output_type == 'hphc':
+            return data['parameters'][:], np.concatenate([amplitudes*np.cos(phases), amplitudes*np.sin(phases)], axis = 1), delta_t
         else:
             NameError("output_type specified not implemented.")
     else:
@@ -44,6 +47,8 @@ def load_data_(data, output_type):
             return data['parameters'][:], np.concatenate([amplitudes, phases])
         elif output_type == 'complex':
             return data['parameters'][:], amplitudes*np.cos(phases) + 1.0j*amplitudes*np.sin(phases)
+        elif output_type == 'hphc':
+            return data['parameters'][:], np.concatenate([amplitudes*np.cos(phases), amplitudes*np.sin(phases)], axis = 1)
         else:
             NameError("output_type specified not implemented.")
 
@@ -95,3 +100,21 @@ def load_data(path, output_type):
         return load_data_(data, output_type)
     else:
         return load_sxs_data_(data, output_type)
+    
+def get_data_split(data, params, split = [0.4, 0.4, 0.2]):
+
+    data, params = shuffle(data, params, random_state = 42)
+
+    train_idx = np.floor(len(data)*split[0]).astype(int)
+    test_idx = np.floor(len(data)*(split[0] + split[1])).astype(int)
+
+    data_tr = data[:train_idx]
+    pars_tr = params[:train_idx]
+
+    data_ts = data[train_idx:test_idx]
+    pars_ts = params[train_idx:test_idx]
+
+    data_val = data[test_idx:]
+    pars_val = params[test_idx:]
+
+    return data_tr, data_ts, data_val, pars_tr, pars_ts, pars_val

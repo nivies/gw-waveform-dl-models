@@ -7,7 +7,7 @@
       "args": {},
       "data_path": "./data/bbh_qz_data.hdf5",
       "scale_data": false,
-      "data_output_type": "hp",
+      "data_output_type": "amplitude_phase",
       "split_size": 0.2,
       "sxs_sample_weight": 50 
     },

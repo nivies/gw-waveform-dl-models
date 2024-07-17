@@ -1,6 +1,6 @@
 {
     "exp": {
-      "name": "gw_dense_qz_hphc_overcomplex"
+      "name": "gw_dense_qz_hphc_mae_5"
     },
     "data_loader": {
       "name": "GWDataLoader",
@@ -13,8 +13,8 @@
     },
     "model":{
       "name": "MLP",
-      "args": {"test": false},
-      "model_id": "6",
+      "args": {"test": true},
+      "model_id": "5",
       "loss": "mae",
       "optimizer_kwargs":{
         "learning_rate": 0.0001

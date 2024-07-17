@@ -1,23 +1,24 @@
 {
     "exp": {
-      "name": "mapper_qzp_bbh"
+      "name": "mapped_qzp_bbh"
     },
     "data_loader": {
       "name": "MappedDataLoader",
       "args": {},
       "data_path": "./data/bbh_qzp_data.hdf5",
       "scale_data": false,
-      "data_output_type": "hp",
+      "data_output_type": "amplitude_phase",
       "split_size": 0.2
     },
     "model":{
       "name": "MappedAutoEncoderGenerator",
-      "args": {},
+      "args": {"test": true},
       "latent_dim": 10,
+      "loss": "mae",
       "reg_weight": 0.05,
       "mapper_dropout": 0.001,
       "optimizer_kwargs":{
-        "learning_rate": 0.0001
+        "learning_rate": 0.00005
       }
     },
     "trainer":{
@@ -28,7 +29,7 @@
       "generator_epochs": 10000,
       "batch_size": 1024,
       "batch_size_test": 1024,
-      "verbose_training": 2
+      "verbose_training": 1
     },
     "callbacks":{
       "checkpoint_monitor": "val_loss",
@@ -40,6 +41,6 @@
       "early_stopping_patience": 50,
       "lr_reduce_factor": 0.5,
       "lr_reduce_patience": 15,
-      "min_lr": 5e-6
+      "min_lr": 1e-9
     }
   }
