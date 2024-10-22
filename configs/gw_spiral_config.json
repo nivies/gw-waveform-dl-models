@@ -1,43 +1,30 @@
 {
     "exp": {
-      "name": "reg_qz_bbh_osv"
+      "name": "spiral_qz_bbh"
     },
     "data_loader": {
-      "name": "UMAPDataLoader",
+      "name": "GWDataLoader",
       "args": {},
-      "data_path": "./data/nonhyb_noprec_dataset_q8.hdf",
+      "data_path": "./data/bbh_qz_data.hdf5",
       "scale_data": false,
-      "data_output_type": "amplitude_phase",
+      "data_output_type": "hphc",
       "split_size": 0.2,
       "sxs_sample_weight": 50 
     },
     "model":{
-      "name": "RegularizedAutoEncoderGenerator",
-      "args": {"test": true},
+      "name": "GWSpiralGenerator",
+      "args": {},
+      "loss": "overlap",
       "latent_dim": 10,
       "reg_weight": 0.01,
-      "mapper_architecture": "dense",
-      "loss": "mae",
-      "mapper_dropout": 1e-7,
       "optimizer_kwargs":{
         "learning_rate": 0.0001
       }
     },
-    "parametric_umap":{
-        "n_neighbors": 20,
-        "metric": "euclidean",
-        "min_dist": 0.8,
-        "steps_per_epoch": 100,
-        "edge_dataset_batch_size": 2000,
-        "edge_dataset_n_epochs": 200,
-        "epochs": 5        
-    },
     "trainer":{
-      "name": "GWRegularizedAutoEncoderModelTrainer",
+      "name": "GWSpiralTrainer",
       "args": {},
-      "num_epochs": 5000,
-      "mapper_epochs": 5000,
-      "generator_epochs": 5000,
+      "num_epochs": 1500,
       "batch_size": 128,
       "batch_size_test": 1024,
       "verbose_training": 1
@@ -52,6 +39,6 @@
       "early_stopping_patience": 61,
       "lr_reduce_factor": 0.5,
       "lr_reduce_patience": 15,
-      "min_lr": 1e-11
+      "min_lr": 5e-11
     }
   }

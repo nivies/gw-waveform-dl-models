@@ -1,0 +1,44 @@
+Training for N PCA components: [5, 15]
+Training for models: [0, 1, 2, 3]
+------------------------------------------------
+
+N PCA components: 5
+Model ID     : 0
+
+N PCA components: 5
+Model ID     : 1
+
+N PCA components: 5
+Model ID     : 2
+
+N PCA components: 5
+Model ID     : 3
+
+N PCA components: 15
+Model ID     : 0
+
+N PCA components: 15
+Model ID     : 1
+
+N PCA components: 15
+Model ID     : 2
+
+N PCA components: 15
+Model ID     : 3
+
+Latent dimensions: 5
+Maping model ID     : 0
+Autoencoder model ID        : 0
+
+Latent dimensions: 5
+Maping model ID     : 0
+Autoencoder model ID        : 1
+
+Latent dimensions: 5
+Maping model ID     : 0
+Autoencoder model ID        : 2
+
+Latent dimensions: 5
+Maping model ID     : 0
+Autoencoder model ID        : 3
+

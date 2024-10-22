@@ -197,8 +197,24 @@ def make_plots(model, dir, data_loader, config, metric):
 
     dir_tr, dir_ts = make_plotting_dirs(dir)
 
-    y_pred_tr = model.predict(data_loader.X_train, batch_size = 1024)
-    y_pred_ts = model.predict(data_loader.X_test, batch_size = 1024)
+    if config.trainer.uninitialised == False:
+        
+        y_pred_tr = model.predict(data_loader.X_train, batch_size = 1024)[1]
+        y_pred_ts = model.predict(data_loader.X_test, batch_size = 1024)[1]
+
+    elif config.model.name == "cVAEGenerator":
+
+        model = model.decoder
+        z_tr = np.random.normal(0, 1, size = [data_loader.X_train.shape[0], config.model.latent_dim])
+        z_ts = np.random.normal(0, 1, size = [data_loader.X_test.shape[0], config.model.latent_dim])
+
+        y_pred_tr = model.predict([z_tr, data_loader.X_train], batch_size = 1024)
+        y_pred_ts = model.predict([z_ts, data_loader.X_test], batch_size = 1024)
+
+    else:          
+
+        y_pred_tr = model.predict(data_loader.X_train, batch_size = 1024)
+        y_pred_ts = model.predict(data_loader.X_test, batch_size = 1024)
 
     if metric == "overlap":
 
@@ -282,9 +298,9 @@ def make_plots_sxs(model, dir, config, metric):
     if metric == "overlap":
 
         split_idx = int(y_pred_tr.shape[-1]/2)
-        mm_tr, bst_tr, wrst_tr = osvaldos_overlap(y_pred_tr, data_tr, delta_t)
-        mm_ts, bst_ts, wrst_ts = osvaldos_overlap(y_pred_ts, data_ts, delta_t)
-        mm_val, bst_val, wrst_val = osvaldos_overlap(y_pred_val, data_val, delta_t)
+        mm_tr, bst_tr, wrst_tr = osvaldos_overlap(y_pred_tr, data_tr, delta_t, config)
+        mm_ts, bst_ts, wrst_ts = osvaldos_overlap(y_pred_ts, data_ts, delta_t, config)
+        mm_val, bst_val, wrst_val = osvaldos_overlap(y_pred_val, data_val, delta_t, config)
         
         y_pred_tr = np.real(y_pred_tr[:, :split_idx]*np.exp(1.0j*y_pred_tr[:, split_idx:]))
         y_pred_ts = np.real(y_pred_ts[:, :split_idx]*np.exp(1.0j*y_pred_ts[:, split_idx:]))

@@ -20,9 +20,12 @@ utils/factory.py
 aux.py
 
 # Heavy content
-data
-experiments
-figures
+data/
+experiments/
+figures/
+configs_copy/
+temp/
+old_scripts/
 
 # VSCode
 .vscode/

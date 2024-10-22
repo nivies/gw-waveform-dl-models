@@ -1,0 +1,69 @@
+Training for latent dimensions: [5, 15]
+Training for mapper models: [0, 1, 2, 3]
+Training for autoencoder models: [0, 1]
+------------------------------------------------
+
+Latent dimensions: 5
+Maping model ID     : 0
+Autoencoder model ID        : 0
+
+Latent dimensions: 5
+Maping model ID     : 0
+Autoencoder model ID        : 1
+
+Latent dimensions: 5
+Maping model ID     : 1
+Autoencoder model ID        : 0
+
+Latent dimensions: 5
+Maping model ID     : 1
+Autoencoder model ID        : 1
+
+Latent dimensions: 5
+Maping model ID     : 2
+Autoencoder model ID        : 0
+
+Latent dimensions: 5
+Maping model ID     : 2
+Autoencoder model ID        : 1
+
+Latent dimensions: 5
+Maping model ID     : 3
+Autoencoder model ID        : 0
+
+Latent dimensions: 5
+Maping model ID     : 3
+Autoencoder model ID        : 1
+
+Latent dimensions: 15
+Maping model ID     : 0
+Autoencoder model ID        : 0
+
+Latent dimensions: 15
+Maping model ID     : 0
+Autoencoder model ID        : 1
+
+Latent dimensions: 15
+Maping model ID     : 1
+Autoencoder model ID        : 0
+
+Latent dimensions: 15
+Maping model ID     : 1
+Autoencoder model ID        : 1
+
+Latent dimensions: 15
+Maping model ID     : 2
+Autoencoder model ID        : 0
+
+Latent dimensions: 15
+Maping model ID     : 2
+Autoencoder model ID        : 1
+
+Latent dimensions: 15
+Maping model ID     : 3
+Autoencoder model ID        : 0
+
+Latent dimensions: 15
+Maping model ID     : 3
+Autoencoder model ID        : 1
+

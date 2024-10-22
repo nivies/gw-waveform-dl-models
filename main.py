@@ -8,6 +8,7 @@ import trainers.gw_trainer as trainers_module
 from utils.config import process_config, init_obj
 from utils.dirs import create_dirs
 from utils.utils import get_args
+from utils.plot_utils import make_plots
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 for gpu in gpus:
@@ -43,6 +44,12 @@ def main():
     trainer = init_obj(config, "trainer", trainers_module, model = model, data = data_loader)
 
     trainer.train()
+
+    root_dir = os.path.dirname(config.callbacks.checkpoint_dir)
+    fig_directory = os.path.join(os.path.dirname(root_dir), "figures")
+
+    make_plots(model = model.model, dir = fig_directory, data_loader = data_loader, config = config, metric = 'overlap')
+
 
 if __name__ == '__main__':
     main()

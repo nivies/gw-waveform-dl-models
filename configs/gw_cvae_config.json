@@ -5,7 +5,7 @@
     "data_loader": {
       "name": "GWcVAEDataLoader",
       "args": {},
-      "data_path": "./data/bbh_qz_data.hdf5",
+      "data_path": "/home/nino/GW/Keras-Project-Template/data/bbh_hyb_qz_data.hdf5",
       "scale_data": false,
       "data_output_type": "amplitude_phase",
       "split_size": 0.2,
@@ -14,7 +14,9 @@
     "model":{
       "name": "cVAEGenerator",
       "args": {},
-      "latent_dim": 10,
+      "latent_dim": 15,
+      "encoder_id": "conv",
+      "decoder_id": "1",
       "reg_weight": 0.01,
       "optimizer_kwargs":{
         "learning_rate": 0.0001
@@ -23,23 +25,23 @@
     "trainer":{
       "name": "GWModelTrainer",
       "args": {},
-      "num_epochs": 1500,
-      "mapper_epochs": 1500,
-      "generator_epochs": 1500,
-      "batch_size": 50,
+      "num_epochs": 4000,
+      "mapper_epochs": 4000,
+      "generator_epochs": 4000,
+      "batch_size": 64,
       "batch_size_test": 1024,
-      "verbose_training": 2
+      "verbose_training": 1
     },
     "callbacks":{
-      "checkpoint_monitor": "loss",
+      "checkpoint_monitor": "val_loss",
       "checkpoint_mode": "min",
       "checkpoint_save_best_only": true,
       "checkpoint_save_weights_only": true,
       "checkpoint_verbose": true,
       "tensorboard_write_graph": true,
-      "early_stopping_patience": 55,
+      "early_stopping_patience": 100,
       "lr_reduce_factor": 0.5,
-      "lr_reduce_patience": 25,
-      "min_lr": 5e-6
+      "lr_reduce_patience": 30,
+      "min_lr": 1e-9
     }
   }

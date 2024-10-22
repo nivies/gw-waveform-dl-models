@@ -1,33 +1,36 @@
 {
     "exp": {
-      "name": "mapped_qzp_bbh"
+      "name": "mapped_qz_bbh"
     },
     "data_loader": {
       "name": "MappedDataLoader",
       "args": {},
-      "data_path": "./data/bbh_qzp_data.hdf5",
+      "data_path": "/home/nino/GW/Keras-Project-Template/data/bbh_hyb_qz_data.hdf5",
       "scale_data": false,
       "data_output_type": "amplitude_phase",
       "split_size": 0.2
     },
     "model":{
-      "name": "MappedAutoEncoderGenerator",
+      "name": "MappedAutoEncoderGeneratorComparisonVersion",
       "args": {"test": true},
-      "latent_dim": 10,
-      "loss": "mae",
+      "latent_dim": 15,
+      "ae_id": "0",
+      "model_id": "3",
+      "loss": "overlap",
       "reg_weight": 0.05,
       "mapper_dropout": 0.001,
       "optimizer_kwargs":{
-        "learning_rate": 0.00005
+        "learning_rate": 0.0001
       }
     },
     "trainer":{
-      "name": "GWMappedAutoEncoderModelTrainer",
+      "name": "GWMappedAutoEncoderModelTrainerComparisonVersion",
       "args": {},
-      "num_epochs": 10000,
-      "mapper_epochs": 10000,
-      "generator_epochs": 10000,
-      "batch_size": 1024,
+      "uninitialised": false,
+      "num_epochs": 4000,
+      "mapper_epochs": 4000,
+      "generator_epochs": 4000,
+      "batch_size": 128,
       "batch_size_test": 1024,
       "verbose_training": 1
     },
@@ -38,9 +41,9 @@
       "checkpoint_save_weights_only": true,
       "checkpoint_verbose": true,
       "tensorboard_write_graph": true,
-      "early_stopping_patience": 50,
+      "early_stopping_patience": 60,
       "lr_reduce_factor": 0.5,
       "lr_reduce_patience": 15,
-      "min_lr": 1e-9
+      "min_lr": 1e-10
     }
   }

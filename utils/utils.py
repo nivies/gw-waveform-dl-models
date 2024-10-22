@@ -1,6 +1,59 @@
 import argparse
 import h5py
 import numpy as np
+import tensorflow as tf
+import nvidia_smi
+
+def query_gpu():
+    nvidia_smi.nvmlInit()
+
+    handle = nvidia_smi.nvmlDeviceGetHandleByIndex(0)
+    # card id 0 hardcoded here, there is also a call to get all available card ids, so we could iterate
+
+    info = nvidia_smi.nvmlDeviceGetMemoryInfo(handle)
+
+    print("\n")
+    print(f"Total memory: {info.total*10**(-9):.3f} Gb.")
+    print(f"Free memory: {info.free*10**(-9):.3f} Gb.")
+    print(f"Used memory: {info.used*10**(-9):.3f} Gb.")
+    print("\n")
+
+    nvidia_smi.nvmlShutdown()
+
+def configure_device(use_cpu=False, memory_growth=True, gpu_memory_limit=None):
+    
+    if use_cpu:
+        print("Using CPU...")
+        tf.config.set_visible_devices([], 'GPU')  # Disable GPU, force TensorFlow to use CPU
+    else:
+        # List available GPUs
+        gpus = tf.config.list_physical_devices('GPU')
+        
+        if gpus:
+            print(f"Found {len(gpus)} GPU(s), configuring memory settings...")
+
+            for gpu in gpus:
+                if memory_growth:
+                    try:
+                        # Set memory growth if enabled
+                        tf.config.experimental.set_memory_growth(gpu, True)
+                        print(f"Enabled memory growth for GPU: {gpu}")
+                    except RuntimeError as e:
+                        print(f"Error setting memory growth: {e}")
+                
+                if gpu_memory_limit:
+                    try:
+                        # Set a specific GPU memory limit if provided
+                        tf.config.set_logical_device_configuration(
+                            gpu,
+                            [tf.config.LogicalDeviceConfiguration(memory_limit=gpu_memory_limit)])
+                        print(f"Set memory limit of {gpu_memory_limit} MB for GPU: {gpu}")
+                    except RuntimeError as e:
+                        print(f"Error setting memory limit: {e}")
+        else:
+            print("No GPU found, falling back to CPU...")
+            tf.config.set_visible_devices([], 'GPU')  # No GPU available, fallback to CPU
+
 
 def get_args():
     argparser = argparse.ArgumentParser(description=__doc__)

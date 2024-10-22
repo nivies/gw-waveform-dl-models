@@ -7,11 +7,36 @@ from keras.losses import mean_absolute_error
 from models.cVAE_utils import *
 from models.gw_test_models import *
 from utils.loss import *
+from models.spiral_utils import *
+from sklearn.decomposition import PCA
 
 '''
 File for declaring the main architectures for the DL-based GW modelling neural networks. Every class inherits from the BaseModel
 class defined in the base folder.
 '''
+
+def get_pca_model_from_id(input, model_id):
+        
+    if model_id == '0' or '2':
+        units = 128
+
+    elif model_id == '1' or '3':
+        units = 512
+
+    
+    if model_id == '0' or '1':
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+    
+    elif model_id == '2' or '3':
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
 
 class MLP(BaseModel):
 
@@ -61,7 +86,7 @@ class MLP(BaseModel):
         if self.test == True:
 
             if self.latent_dim:
-                self.model = MLP_test(self.config, self.in_out_shapes['input_shape'], self.latent_dim).model
+                self.model = MLP_test(self.config, self.in_out_shapes['input_shape'], self.latent_dim, self.config.model.model_id).model
 
             else:
                 self.model = MLP_test(self.config, self.in_out_shapes['input_shape'], self.in_out_shapes['output_shape'], self.config.model.model_id).model
@@ -386,7 +411,7 @@ class MappedAutoEncoderGenerator(BaseModel):
             self.overlap = 'mean_squared_error'
 
         if test:
-            self.mapper = MLP(config, data_loader, test, self.config.model.latent_dim).model
+            self.mapper = MLP_test(config, data_loader, test, self.config.model.latent_dim).model
             self.autoencoder = AutoEncoder_test(config, self.in_out_shapes['output_shape'])
         else:
             self.mapper = MLP(config, data_loader, test, self.config.model.latent_dim).model
@@ -405,6 +430,105 @@ class MappedAutoEncoderGenerator(BaseModel):
             self.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = self.ovlp_mae_loss, metrics = [self.overlap, 'mean_absolute_error'])
         else:
             self.model.compile(optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs), loss = 'mae', metrics = [self.overlap, 'mean_absolute_error'])
+
+
+
+class MappedAutoEncoderGeneratorComparisonVersion(BaseModel):
+
+    '''
+    Class for calling all the necessary models (mapper and autoencoder) and ensembling the final mapped autoencoder
+    GW generation model.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+
+    data_loader: data_loader class instance
+        data_loader instance called for the particular problem. All information for this class' calling is contained in the configuration file.
+    -----------------
+
+    Generator model built can be called from the .model method. Every network that composes the full model can also be called:
+
+    mapper      : Mapper network from the input parameters to the latent space of the autoencoder.
+    autoencoder : Mapped autoencoder class.
+    '''
+
+    def __init__(self, config, data_loader, test = False):
+        super(MappedAutoEncoderGeneratorComparisonVersion, self).__init__(config)
+        
+        self.in_out_shapes = data_loader.in_out_shapes
+
+        if self.config.data_loader.data_output_type == 'amplitude_phase':
+            self.overlap = overlap_amp_phs
+            self.ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+        elif self.config.data_loader.data_output_type == 'hphc':
+            self.overlap = overlap_hphc
+            self.ovlp_mae_loss = ovlp_mae_loss_hphc
+        else:
+            self.overlap = 'mean_squared_error'
+
+        if test:
+            self.mapper = MLP_test(config = config, input_shape = self.in_out_shapes['input_shape'], output_shape = config.model.latent_dim, model_id = config.mode.model_id).model
+            self.autoencoder = AutoEncoder_test(config, self.in_out_shapes['output_shape'])
+        else:
+            self.mapper = MLP(config, data_loader, test, self.config.model.latent_dim).model
+            self.autoencoder = AutoEncoder(config, self.in_out_shapes['output_shape'])
+
+        self.build_model()
+
+    def build_model(self):
+
+        inp = keras.Input(self.in_out_shapes['input_shape'])
+
+        self.mapper._name = "latent_components"
+        self.autoencoder.decoder._name = "output"
+
+        lat = self.mapper(inp)
+        opt = self.autoencoder.decoder(lat)
+
+        if self.config.trainer.uninitialised:
+            
+            self.model = keras.Model(inp, opt)
+            # Careful, compiling twice if executed in mode without initialization!!
+
+            optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+
+            if self.config.model.loss == "overlap":
+
+                self.model.compile(optimizer = optimizer,
+                            loss = self.ovlp_mae_loss, 
+                            metrics = ['mean_absolute_error', self.overlap]
+                            )
+            else:
+
+                self.model.compile(optimizer = optimizer,
+                            loss = 'mean_absolute_error',
+                            metrics = ['mean_absolute_error', self.overlap]
+                            )
+                
+        else:
+
+            self.model = keras.Model(inp, [lat, opt])
+            # Careful, compiling twice if executed in mode without initialization!!
+
+            optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+
+            if self.config.model.loss == "overlap":
+
+                self.model.compile(optimizer = optimizer,
+                            loss = {'latent_components': 'mean_absolute_error', 'output' : self.overlap}
+                            )
+            else:
+
+                self.model.compile(optimizer = optimizer,
+                            loss = {'latent_components': 'mean_absolute_error', 'output' : 'mean_absolute_error'},
+                            metrics = {'latent_components': 'mean_absolute_error', 'output': self.overlap}
+                            )
+
+
 
 class cVAEGenerator(BaseModel):
 
@@ -437,7 +561,7 @@ class cVAEGenerator(BaseModel):
 
     def build_model(self):
 
-        self.encoder, self.decoder = cVAE_NN_declaration(self.in_out_shapes, self.config.model.latent_dim)
+        self.encoder, self.decoder = cVAE_NN_declaration(self.in_out_shapes, self.config.model.latent_dim, self.config.model.encoder_id, self.config.model.decoder_id)
 
         self.model = cVAE(self.encoder, self.decoder)
 
@@ -445,3 +569,224 @@ class cVAEGenerator(BaseModel):
         self.model.compile(optimizer = optimizer,
                            loss = 'mae'
                            )
+        
+class GWSpiralGenerator(BaseModel):
+
+    def __init__(self, config, data_loader):
+        super(GWSpiralGenerator, self).__init__(config)
+        
+        self.in_out_shapes = data_loader.in_out_shapes
+
+        self.build_model()
+
+    def build_model(self):
+
+        self.par_encoder, self.wv_encoder, self.decoder = declare_NN(self.in_out_shapes, self.config.model.latent_dim)
+
+        self.model = SpiralAutoEncoder(self.par_encoder, self.wv_encoder, self.decoder, self.config.model.reg_weight)
+        _ = self.model(np.random.uniform(0, 1, (10, self.in_out_shapes['input_shape'])))
+
+        optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs) # change to include overlap loss
+        self.model.compile(optimizer = optimizer,
+                           loss = 'mae'
+                           )
+        
+
+class PCA_MLP(BaseModel):
+
+    '''
+    Class for declaring a dense neural network. It can be called to be used directly as a GW model, or from the MappedAutoencoder 
+    class in order to map the latent space. It is built entirely from the data_loader instance and the config .json
+    file. If called from the MappedAutoencoder class, the latent dimension is given in the call. The class defines the model and compiles it.
+    
+
+    Input arguments:
+    ----------------
+    config: dict
+        Dictionary built from the configuration .json file.
+
+    data_loader: data_loader class instance
+        data_loader instance called. Information for the calling contained in the configuration .json file.
+
+    latent_mapper_dim: int
+        Value for the latent dimension in case of instancing for latent space mapping for the MappedAutoencoder class.
+
+    ----------------
+
+    Defined model stored in the .model method.
+    '''
+
+
+    def __init__(self, config, data_loader, test = False, latent_mapper_dim = None):
+        super(PCA_MLP, self).__init__(config)
+
+        if self.config.data_loader.data_output_type == 'amplitude_phase':
+            self.overlap = overlap_amp_phs
+            self.ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+        elif self.config.data_loader.data_output_type == 'hphc':
+            self.overlap = overlap_hphc
+            self.ovlp_mae_loss = ovlp_mae_loss_hphc
+        else:
+            self.overlap = 'mean_squared_error'
+
+        self.latent_dim = latent_mapper_dim
+        self.in_out_shapes = data_loader.in_out_shapes
+        self.test = test
+        self.build_model()
+
+    def build_model(self):
+
+        if self.test == True:
+
+            if self.latent_dim:
+                self.model = MLP_test(self.config, self.in_out_shapes['input_shape'], self.latent_dim, self.config.model.model_id).model
+
+            else:
+                self.model = MLP_test(self.config, self.in_out_shapes['input_shape'], self.in_out_shapes['output_shape'], self.config.model.model_id).model
+        else:
+
+            params = keras.Input(self.in_out_shapes['input_shape'])
+
+            x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(params) 
+            x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(512, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x) 
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+            if self.latent_dim:
+                opt = layers.Dense(self.latent_dim)(x)
+            else:
+                opt = layers.Dense(self.in_out_shapes['output_shape'])(x)
+
+            self.model = keras.Model(params, opt)
+
+        optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+
+        if self.latent_dim:
+
+            self.model.compile(optimizer = optimizer,
+                               loss = 'mae'
+                               )
+        
+        elif self.config.model.loss == "overlap":
+
+            self.model.compile(optimizer = optimizer,
+                        loss = self.ovlp_mae_loss,
+                        metrics = [self.overlap, mean_absolute_error]
+                        )
+        else:
+
+            self.model.compile(optimizer = optimizer,
+                        loss = 'mae',
+                        metrics = [self.overlap, mean_absolute_error]
+                        )
+            
+
+class PCA_MLP(BaseModel):
+
+    '''
+    Class for declaring a dense neural network that includes PCA as a layer.  It is built entirely from the data_loader instance and the config .json
+    file. The class defines the model and compiles it.
+    
+
+    Input arguments:
+    ----------------
+    config: dict
+        Dictionary built from the configuration .json file.
+
+    data_loader: data_loader class instance
+        data_loader instance called. Information for the calling contained in the configuration .json file.
+
+    latent_mapper_dim: int
+        Value for the latent dimension in case of instancing for latent space mapping for the MappedAutoencoder class.
+
+    ----------------
+
+    Defined model stored in the .model method.
+    '''
+
+
+    def __init__(self, config, data_loader, test = False):
+        super(PCA_MLP, self).__init__(config)
+
+        if self.config.data_loader.data_output_type == 'amplitude_phase':
+            self.overlap = overlap_amp_phs
+            self.ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+        elif self.config.data_loader.data_output_type == 'hphc':
+            self.overlap = overlap_hphc
+            self.ovlp_mae_loss = ovlp_mae_loss_hphc
+        else:
+            self.overlap = 'mean_squared_error'
+
+        self.latent_dim = config.model.pca_n_components
+        self.in_out_shapes = data_loader.in_out_shapes
+        self.test = test
+
+        if not self.config.trainer.uninitialised:
+
+            self.pca = PCA(config.model.pca_n_components)
+            self.pca.fit(data_loader.y_train)
+            self.pca_data_train = self.pca.transform(data_loader.y_train)
+            self.pca_data_test = self.pca.transform(data_loader.y_test)
+
+        self.build_model()
+
+        self.model.summary()
+
+    def build_model(self):
+
+        params = keras.Input(self.in_out_shapes['input_shape'])
+
+        if self.config.trainer.uninitialised:
+
+            x = get_pca_model_from_id(params, self.config.model.model_id)
+
+            x = layers.Dense(self.config.model.pca_n_components)(x)
+            opt = layers.Dense(self.in_out_shapes['output_shape'])(x)
+
+            self.model = keras.Model(params, opt)
+
+            optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+            
+            if self.config.model.loss == "overlap":
+
+                self.model.compile(optimizer = optimizer,
+                            loss = self.ovlp_mae_loss,
+                            metrics = ['mean_absolute_error', self.overlap]
+                            )
+            else:
+
+                self.model.compile(optimizer = optimizer,
+                            loss = 'mean_absolute_error',
+                            metrics = ['mean_absolute_error', self.overlap]
+                            )
+
+        else:
+
+            x = get_pca_model_from_id(params, self.config.model.model_id)
+
+            x = layers.Dense(self.config.model.pca_n_components, name = 'pca_components')(x)
+            opt = layers.Dense(self.in_out_shapes['output_shape'], trainable = False, name = 'output')(x)
+
+            self.model = keras.Model(params, [x, opt])
+            self.model.layers[-1].set_weights([self.pca.components_, self.pca.mean_])
+
+            optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+            
+            if self.config.model.loss == "overlap":
+
+                self.model.compile(optimizer = optimizer,
+                            loss = {'pca_components': 'mean_absolute_error', 'output' : self.overlap}
+                            )
+            else:
+
+                self.model.compile(optimizer = optimizer,
+                            loss = {'pca_components': 'mean_absolute_error', 'output' : 'mean_absolute_error'},
+                            metrics = {'pca_components': 'mean_absolute_error', 'output': self.overlap}
+                            )

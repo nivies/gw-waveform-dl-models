@@ -1,11 +1,11 @@
 {
     "exp": {
-      "name": "reg_qz_bbh"
+      "name": "reg_qzp_bbh"
     },
     "data_loader": {
       "name": "UMAPDataLoader",
       "args": {},
-      "data_path": "./data/bbh_qz_data.hdf5",
+      "data_path": "./data/bbh_qzp_data.hdf5",
       "scale_data": false,
       "data_output_type": "hphc",
       "split_size": 0.2,

@@ -1,32 +1,31 @@
 {
     "exp": {
-      "name": "gw_no_init_qz_bbh_osv"
+      "name": "gw_qz_pca_hphc"
     },
     "data_loader": {
       "name": "GWDataLoader",
       "args": {},
-      "data_path": "./data/nonhyb_noprec_dataset_q8.hdf",
+      "data_path": "/home/nino/GW/Keras-Project-Template/data/bbh_hyb_qz_data.hdf5",
       "scale_data": false,
       "data_output_type": "amplitude_phase",
       "split_size": 0.2,
       "sxs_sample_weight": 80
     },
     "model":{
-      "name": "RegularizedAutoEncoderGenerator",
+      "name": "PCA_MLP",
       "args": {"test": true},
-      "latent_dim": 10,
-      "reg_weight": 0.01,
-      "mapper_architecture": "dense",
-      "loss": "mae",
-      "mapper_dropout": 1e-7,
+      "model_id": "0",
+      "pca_n_components": 15,
+      "loss": "overlap",
       "optimizer_kwargs":{
         "learning_rate": 0.0001
-      }
+      } 
     },
     "trainer":{
-      "name": "GWModelTrainer",
+      "name": "GWPCAModelTrainer",
       "args": {},
-      "num_epochs": 10000,
+      "uninitialised": true,
+      "num_epochs": 2,
       "batch_size": 128,
       "batch_size_test": 1024,
       "verbose_training": 1
@@ -38,9 +37,9 @@
       "checkpoint_save_weights_only": true,
       "checkpoint_verbose": true,
       "tensorboard_write_graph": true,
-      "early_stopping_patience": 61,
+      "early_stopping_patience": 60,
       "lr_reduce_factor": 0.5,
       "lr_reduce_patience": 15,
-      "min_lr": 1e-11
+      "min_lr": 1e-9
     }
   }

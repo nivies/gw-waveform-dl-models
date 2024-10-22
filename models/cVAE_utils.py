@@ -6,6 +6,123 @@ from keras import layers
 File for architecture definition and internal logic coding of conditional variational autoencoder.
 '''
 
+def declare_encoder(inputs: tf.Tensor, model_id: str) -> tf.Tensor:
+
+    if model_id == "conv":
+        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(inputs)
+        x = layers.Reshape((1024, 1))(x)
+        x = layers.Conv1D(64, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
+        x = layers.AveragePooling1D(2)(x)
+        x = layers.Conv1D(64, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
+        x = layers.AveragePooling1D(2)(x)
+        x = layers.Conv1D(128, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
+        x = layers.AveragePooling1D(2)(x)
+        x = layers.Conv1D(128, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
+        x = layers.AveragePooling1D(2)(x)
+        x = layers.Conv1D(256, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
+        x = layers.AveragePooling1D(2)(x)
+        x = layers.Conv1D(256, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
+        x = layers.AveragePooling1D(2)(x)
+        x = layers.Flatten()(x)
+        x = layers.Dense(1024, activation="leaky_relu", kernel_initializer = 'glorot_normal')(x)
+        return layers.Dense(1024, activation="leaky_relu", kernel_initializer = 'glorot_normal')(x)
+
+    elif model_id == "0":
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(inputs)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+
+    elif model_id == "1":
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(inputs)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+    
+    elif model_id == "2":
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(inputs)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+    
+    elif model_id == "3":
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(inputs)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+        return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
+    
+    else:
+        raise ValueError(f"Model id supplied ({model_id}) is not implemented.")
+
+def declare_decoder(z_cond: tf.Tensor, model_id: str) -> tf.Tensor:
+
+    if model_id == "conv":
+        y = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(z_cond)
+        y = layers.Dense(16*256, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+        y = layers.Reshape((16, 256))(y)
+        y = layers.Conv1DTranspose(256, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
+        y = layers.UpSampling1D(2)(y)
+        y = layers.Conv1DTranspose(256, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
+        y = layers.UpSampling1D(2)(y)
+        y = layers.Conv1DTranspose(128, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
+        y = layers.UpSampling1D(2)(y)
+        y = layers.Conv1DTranspose(128, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
+        y = layers.UpSampling1D(2)(y)
+        y = layers.Conv1DTranspose(64, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
+        y = layers.UpSampling1D(2)(y)
+        y = layers.Conv1DTranspose(64, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
+        y = layers.UpSampling1D(2)(y)
+        y = layers.Conv1DTranspose(1, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
+        return layers.Flatten()(y)
+
+    elif model_id == "0":
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(z_cond)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+
+    elif model_id == "1":
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(z_cond)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+    
+    elif model_id == "2":
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(z_cond)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+    
+    elif model_id == "3":
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(z_cond)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+        return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
+    
+    else:
+        raise ValueError(f"Model id supplied ({model_id}) is not implemented.")
 
 class Sampling(layers.Layer):
     """
@@ -29,7 +146,7 @@ class Sampling(layers.Layer):
         epsilon = tf.random.normal(shape=(batch, dim))
         return z_mean + tf.exp(0.5 * z_log_var) * epsilon
 
-def cVAE_NN_declaration(in_out_shapes, latent_dim):
+def cVAE_NN_declaration(in_out_shapes: dict, latent_dim: int, encoder_id: str, decoder_id: str) -> keras.Model:
 
     '''
     Defines the encoder and decoder architectures for the cVAE.
@@ -54,47 +171,17 @@ def cVAE_NN_declaration(in_out_shapes, latent_dim):
     wave_inputs = keras.Input(shape=output_shape)
     par_inputs = keras.Input(shape=input_shape)
     inputs = layers.Concatenate(axis=1)([wave_inputs, par_inputs])
-    x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(inputs)
-    x = layers.Reshape((1024, 1))(x)
-    x = layers.Conv1D(64, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
-    x = layers.AveragePooling1D(2)(x)
-    x = layers.Conv1D(64, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
-    x = layers.AveragePooling1D(2)(x)
-    x = layers.Conv1D(128, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
-    x = layers.AveragePooling1D(2)(x)
-    x = layers.Conv1D(128, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
-    x = layers.AveragePooling1D(2)(x)
-    x = layers.Conv1D(256, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
-    x = layers.AveragePooling1D(2)(x)
-    x = layers.Conv1D(256, 7, activation="leaky_relu", padding="causal", dilation_rate = 2)(x)
-    x = layers.AveragePooling1D(2)(x)
-    x = layers.Flatten()(x)
-    x = layers.Dense(1024, activation="leaky_relu", kernel_initializer = 'glorot_normal')(x)
-    x = layers.Dense(1024, activation="leaky_relu", kernel_initializer = 'glorot_normal')(x)
+
+    x = declare_encoder(inputs, encoder_id)
+
     z_mean = layers.Dense(latent_dim, kernel_initializer = 'glorot_normal', name="z_mean")(x)
     z_log_var = layers.Dense(latent_dim, kernel_initializer = 'glorot_normal', name="z_log_var")(x)
     z = Sampling()([z_mean, z_log_var])
     z_cond = layers.Concatenate(axis=1)([z, par_inputs])
 
-    y = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(z_cond)
-    y = layers.Dense(16*256, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
-    y = layers.Reshape((16, 256))(y)
-    y = layers.Conv1DTranspose(256, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
-    y = layers.UpSampling1D(2)(y)
-    y = layers.Conv1DTranspose(256, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
-    y = layers.UpSampling1D(2)(y)
-    y = layers.Conv1DTranspose(128, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
-    y = layers.UpSampling1D(2)(y)
-    y = layers.Conv1DTranspose(128, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
-    y = layers.UpSampling1D(2)(y)
-    y = layers.Conv1DTranspose(64, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
-    y = layers.UpSampling1D(2)(y)
-    y = layers.Conv1DTranspose(64, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
-    y = layers.UpSampling1D(2)(y)
-    y = layers.Conv1DTranspose(1, 7, activation = 'leaky_relu', padding = 'same', dilation_rate = 2)(y)
-    y = layers.Flatten()(y)
-    output = layers.Dense(output_shape, kernel_initializer = 'glorot_uniform')(y)
+    y = declare_decoder(z_cond, decoder_id)
 
+    output = layers.Dense(output_shape, kernel_initializer = 'glorot_uniform')(y)
 
     encoder = keras.Model([wave_inputs, par_inputs], [z_mean, z_log_var, z], name="encoder")
     decoder = keras.Model([z, par_inputs], output, name = 'decoder')

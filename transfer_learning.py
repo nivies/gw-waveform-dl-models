@@ -7,14 +7,14 @@ import joblib
 from utils.config import process_config, init_obj
 from utils.data_preprocessing import load_data, get_data_split
 from utils.loss import *
+from utils.plot_utils import make_plots_sxs
 import data_loader.gw_dataloader as data_loader_module
 import models.gw_models as models_module
-from keras.callbacks import EarlyStopping, ReduceLROnPlateau, TensorBoard
+from keras.callbacks import EarlyStopping, ReduceLROnPlateau
+from utils.utils import configure_device
 
-gpus = tf.config.experimental.list_physical_devices('GPU')
-for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)
-
+print("\n")
+configure_device()
 print("\n")
 
 def main():
@@ -26,6 +26,16 @@ def main():
     args = parser.parse_args()
 
     config, _ = process_config(os.path.join(args.model_path, "config.json"))
+
+    if config.data_loader.data_output_type == 'amplitude_phase':
+        overlap = overlap_amp_phs
+        overlap_batched = overlap_amp_phs_batched
+        ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+    elif config.data_loader.data_output_type == 'hphc':
+        overlap = overlap_hphc
+        overlap_batched = overlap_hphc_batched
+        ovlp_mae_loss = ovlp_mae_loss_hphc
 
     print("Loading data...", end="\r")
 
@@ -50,6 +60,17 @@ def main():
         model = init_obj(config, "model", models_module, data_loader = data_loader)
 
     model.model.load_weights(os.path.join(args.model_path, "best_model.hdf5"))
+    
+    for layer in model.model.layers:
+        layer.trainable = True
+
+    inp = model.model.input
+    x = model.model.layers[0](inp)
+    for layer in model.model.layers[1:-1]:
+        x = layer(x)
+    opt = model.model.layers[-1](x)
+
+    model = keras.Model(inp, opt)
 
     print("Model loaded!", end = "\r")
  
@@ -64,44 +85,46 @@ def main():
     callbacks.append(EarlyStopping(monitor = 'val_loss', patience = 30))
     callbacks.append(ReduceLROnPlateau(monitor = 'loss', factor = 0.5, cooldown = 2, patience = 10, verbose = 1, min_lr = 1e-10))       
 
-    pre_tr = model.model.predict(pars_tr, batch_size = 64, verbose = 0)
-    pre_ts = model.model.predict(pars_ts, batch_size = 64, verbose = 0)
-    pre_val = model.model.predict(pars_val, batch_size = 64, verbose = 0)
 
-    train_mae_prev = np.mean(mean_absolute_error(pre_tr, data_tr))
-    test_mae_prev = np.mean(mean_absolute_error(pre_ts, data_ts))
-    val_mae_prev = np.mean(mean_absolute_error(pre_val, data_val))
+    pre_tr = model.predict(pars_tr, batch_size = 1024)
+    pre_ts = model.predict(pars_ts, batch_size = 1024)
+    pre_val = model.predict(pars_val, batch_size = 1024)
 
-    train_ovlp_prev = np.mean(overlap(tf.convert_to_tensor(pre_tr), tf.convert_to_tensor(data_tr)))
-    test_ovlp_prev = np.mean(overlap(tf.convert_to_tensor(pre_ts), tf.convert_to_tensor(data_ts)))
-    val_ovlp_prev = np.mean(overlap(tf.convert_to_tensor(pre_val), tf.convert_to_tensor(data_val)))
+    train_mae_prev = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_tr, dtype = tf.float32), tf.convert_to_tensor(data_tr, dtype = tf.float32), batch_size = 64))
+    test_mae_prev = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_ts, dtype = tf.float32), tf.convert_to_tensor(data_ts, dtype = tf.float32), batch_size = 64))
+    val_mae_prev = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_val, dtype = tf.float32), tf.convert_to_tensor(data_val, dtype = tf.float32), batch_size = 64))
 
+    train_ovlp_prev = np.mean(overlap_batched(tf.convert_to_tensor(pre_tr), tf.convert_to_tensor(data_tr), batch_size = 64))
+    test_ovlp_prev = np.mean(overlap_batched(tf.convert_to_tensor(pre_ts), tf.convert_to_tensor(data_ts), batch_size = 64))
+    val_ovlp_prev = np.mean(overlap_batched(tf.convert_to_tensor(pre_val), tf.convert_to_tensor(data_val), batch_size = 64))
+
+    root_path = os.path.dirname(args.model_path)
     
     if args.loss == 'overlap':
 
-        folder_path = os.path.join(args.model_path, "transfer_learning_overlap")
+        folder_path = os.path.join(root_path, "transfer_learning_overlap")
 
         if not os.path.isdir(folder_path):
             os.mkdir(folder_path)
 
-        model.model.compile(optimizer = keras.optimizers.Adam(learning_rate = 1e-6), loss = ovlp_mae_loss, metrics = [overlap, 'mean_absolute_error'])
+        model.compile(optimizer = keras.optimizers.Adam(learning_rate = 1e-6), loss = ovlp_mae_loss, metrics = [overlap, 'mean_absolute_error'])
         history_path = os.path.join(folder_path, "history.bin")
         model_path = os.path.join(folder_path, "best_model.hdf5")
         training_txt_path = os.path.join(folder_path, "training_summary.txt")
     else:
 
-        folder_path = os.path.join(args.model_path, "transfer_learning_mae")
+        folder_path = os.path.join(root_path, "transfer_learning_mae")
 
         if not os.path.isdir(folder_path):
             os.mkdir(folder_path)
 
-        model.model.compile(optimizer = keras.optimizers.Adam(learning_rate = 1e-6), loss = 'mae', metrics = [overlap, 'mean_absolute_error'])
+        model.compile(optimizer = keras.optimizers.Adam(learning_rate = 1e-6), loss = 'mae', metrics = [overlap, 'mean_absolute_error'])
         history_path = os.path.join(folder_path, "history.bin")
         model_path = os.path.join(folder_path, "best_model.hdf5")
         training_txt_path = os.path.join(folder_path, "training_summary.txt")
 
     
-    history_retrain = model.model.fit(
+    history_retrain = model.fit(
         x = pars_tr,
         y = data_tr,
         validation_data = (pars_val, data_val),
@@ -112,24 +135,26 @@ def main():
     )
 
     joblib.dump(history_retrain, history_path)
-    model.model.save_weights(model_path)
+    model.save_weights(model_path)
 
-    pre_tr = model.model.predict(pars_tr, batch_size = 64, verbose = 0)
-    pre_ts = model.model.predict(pars_ts, batch_size = 64, verbose = 0)
-    pre_val = model.model.predict(pars_val, batch_size = 64, verbose = 0)
+    pre_tr = model.predict(pars_tr, batch_size = 64, verbose = 0)
+    pre_ts = model.predict(pars_ts, batch_size = 64, verbose = 0)
+    pre_val = model.predict(pars_val, batch_size = 64, verbose = 0)
 
-    train_mae_post = np.mean(mean_absolute_error(pre_tr, data_tr))
-    test_mae_post = np.mean(mean_absolute_error(pre_ts, data_ts))
-    val_mae_post = np.mean(mean_absolute_error(pre_val, data_val))
+    train_mae_post = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_tr, dtype = tf.float32), tf.convert_to_tensor(data_tr, dtype = tf.float32), batch_size = 64))
+    test_mae_post = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_ts, dtype = tf.float32), tf.convert_to_tensor(data_ts, dtype = tf.float32), batch_size = 64))
+    val_mae_post = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_val, dtype = tf.float32), tf.convert_to_tensor(data_val, dtype = tf.float32), batch_size = 64))
 
-    train_ovlp_post = np.mean(overlap(tf.convert_to_tensor(pre_tr), tf.convert_to_tensor(data_tr)))
-    test_ovlp_post = np.mean(overlap(tf.convert_to_tensor(pre_ts), tf.convert_to_tensor(data_ts)))
-    val_ovlp_post = np.mean(overlap(tf.convert_to_tensor(pre_val), tf.convert_to_tensor(data_val)))
+    train_ovlp_post = np.mean(overlap_batched(tf.convert_to_tensor(pre_tr), tf.convert_to_tensor(data_tr), batch_size = 64))
+    test_ovlp_post = np.mean(overlap_batched(tf.convert_to_tensor(pre_ts), tf.convert_to_tensor(data_ts), batch_size = 64))
+    val_ovlp_post = np.mean(overlap_batched(tf.convert_to_tensor(pre_val), tf.convert_to_tensor(data_val), batch_size = 64))
 
     with open(training_txt_path, "w") as f:
         f.write(f"Train SXS error:\n - MAE:     {train_mae_prev:.4e} --> {train_mae_post:.4e}\n - Overlap: {train_ovlp_prev:.4e} --> {train_ovlp_post:.4e}\n\n")
         f.write(f"Test SXS error:\n - MAE:     {test_mae_prev:.4e} --> {test_mae_post:.4e}\n - Overlap: {test_ovlp_prev:.4e} --> {test_ovlp_post:.4e}\n\n")
         f.write(f"Validation SXS error:\n - MAE:     {val_mae_prev:.4e} --> {val_mae_post:.4e}\n - Overlap: {val_ovlp_prev:.4e} --> {val_ovlp_post:.4e}\n\n")
+
+    make_plots_sxs(model = model, dir = os.path.join(folder_path, "tl_figures"), config = config, metric = 'overlap')
 
 
 if __name__ == '__main__':

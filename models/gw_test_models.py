@@ -3,6 +3,75 @@ import keras
 from keras import layers
 from utils.loss import *
 
+def get_pca_model_from_id(input, model_id):
+        
+    if model_id == '0' or '2':
+        units = 128
+
+    elif model_id == '1' or '3':
+        units = 512
+
+    
+    if model_id == '0' or '1':
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+    
+    elif model_id == '2' or '3':
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+
+
+def get_ae_model_from_id(input, model_id, latent_dimension, output_dimension, config):
+
+    # Improve on how the arguments are passed: most of this stuff is in the config file
+
+    units = 512
+
+    
+    if model_id == '0':
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+        enc = layers.Dense(units = latent_dimension, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform', name = 'latent_components')(x)
+        dec = layers.Dense(units = output_dimension, kernel_initializer = 'glorot_uniform', name = 'output')(enc)
+    
+    elif model_id == '1':
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        enc = layers.Dense(units = latent_dimension, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform', name = 'latent_components')(x)
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(enc)
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+        dec = layers.Dense(units = output_dimension, kernel_initializer = 'glorot_uniform', name = 'output')(y)
+
+    elif model_id == "l1_regularized":
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        enc = layers.Dense(units = latent_dimension, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform', name = 'latent_components', kernel_regularizer = keras.regularizers.L1(l1 = config.model.reg_weight))(x)
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(enc)
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+        dec = layers.Dense(units = output_dimension, kernel_initializer = 'glorot_uniform', name = 'output')(y)
+
+    elif model_id == "custom_regularized":
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        enc = layers.Dense(units = latent_dimension, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform', name = 'latent_components', kernel_regularizer = ComponentWiseRegularizer(coef = config.model.reg_weight))(x)
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(enc)
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+        dec = layers.Dense(units = output_dimension, kernel_initializer = 'glorot_uniform', name = 'output')(y)
+
+    else:
+        raise Exception("Autoencoder ID not defined!")
+        
+    return enc, dec
+
 class ConvBlock1D_test(BaseModel):
 
     '''
@@ -269,7 +338,7 @@ class MLP_test(BaseModel):
 
         self.input_shape = input_shape
         self.output_shape = output_shape
-        self.model_id = model_id
+        self.model_id = str(model_id)
 
         self.build_model()
 
@@ -277,68 +346,79 @@ class MLP_test(BaseModel):
         
         inp = keras.Input(self.input_shape)
 
-        if self.model_id == '0':
+        x = get_pca_model_from_id(input=inp, model_id = self.model_id)
 
-            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
-            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        # if self.model_id == '0':
 
-        elif self.model_id == '1':
+        #     x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+        #     x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
-            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
-            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        # elif self.model_id == '1':
 
-        elif self.model_id == '2':
+        #     print("\n\nCheckpoint -1\n\n")
 
-            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
-            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+        #     x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
-        elif self.model_id == '3':
+        # elif self.model_id == '2':
 
-            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
-            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+        #     x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
-        elif self.model_id == '4':
+        # elif self.model_id == '3':
 
-            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
-            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+        #     x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
-        elif self.model_id == '5':
+        # elif self.model_id == '4':
 
-            x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
-            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+        #     x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
-        elif self.model_id == '6':
+        # elif self.model_id == '5':
 
-            x = layers.Dense(512, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+        #     x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(10, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
-            x_1 = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
-            x = layers.Concatenate()([x, x_1])
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
-            x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
-            pre_opt = layers.Dense(512)(x)
+        # elif self.model_id == '6':
 
-            x = layers.Add()([x_1, pre_opt])
+        #     x = layers.Dense(512, activation = "leaky_relu", kernel_initializer = "glorot_uniform")(inp)
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
 
-            y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
-            y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
-            x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
+        #     x_1 = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x_1)
+        #     x = layers.Concatenate()([x, x_1])
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
+        #     x = layers.Dense(512, activation='leaky_relu', kernel_initializer='he_uniform')(x)
+        #     pre_opt = layers.Dense(512)(x)
 
+        #     x = layers.Add()([x_1, pre_opt])
+
+        #     y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(x)
+        #     y = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
+        #     x = layers.Dense(units=1024, activation='leaky_relu', kernel_initializer='glorot_uniform')(y)
+
+        # elif self.model_id == '7':
+
+        #     params = keras.Input(self.in_out_shapes['input_shape'])
+
+        #     x = layers.Dense(128, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(params) 
+        #     x = layers.Dense(128, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        #     x = layers.Dense(128, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
 
         opt = layers.Dense(self.output_shape)(x)
 
@@ -368,30 +448,35 @@ class AutoEncoder_test(BaseModel):
         super(AutoEncoder_test, self).__init__(config)
         self.latent_dim = config.model.latent_dim
         self.out_shape = out_shape
+
+        if self.config.data_loader.data_output_type == 'amplitude_phase':
+            self.overlap = overlap_amp_phs
+            self.ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+        elif self.config.data_loader.data_output_type == 'hphc':
+            self.overlap = overlap_hphc
+            self.ovlp_mae_loss = ovlp_mae_loss_hphc
+        else:
+            self.overlap = 'mean_squared_error'
+
         self.build_model()
 
     def build_model(self):
-        
+
         inp = keras.Input(self.out_shape)
-
-        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(inp)
-        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-
-        enc = layers.Dense(units=self.latent_dim, name = 'encoding')(x)
-
-        y = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(enc)
-        y = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
-        y = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
         
-        dec = layers.Dense(units=self.out_shape, activation='linear', name = 'reconstruction')(y)
+        enc, dec = get_ae_model_from_id(input = inp, model_id = self.config.model.ae_id, latent_dimension = self.latent_dim, output_dimension = self.out_shape, config = self.config)
 
         self.autoencoder = keras.Model(inp, dec)
         self.encoder = keras.Model(inp, enc)
         self.decoder = keras.Model(enc, dec)
 
         optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
-        self.autoencoder.compile(optimizer = optimizer,
-                                loss_weights=[self.config.model.reg_weight, 1-self.config.model.reg_weight],
-                                loss = 'mean_absolute_error'
-                                )
+
+        if self.config.model.loss == 'overlap':
+
+            self.autoencoder.compile(optimizer = optimizer, loss = self.ovlp_mae_loss, metrics = [self.overlap, 'mean_absolute_error'])
+        else:
+
+            self.autoencoder.compile(optimizer = optimizer, loss = 'mae', metrics = [self.overlap, 'mean_absolute_error'])
+

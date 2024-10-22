@@ -1,11 +1,11 @@
 {
     "exp": {
-      "name": "gw_dense_qz_hphc_overcomplex"
+      "name": "gw_dense_qz_amp_phs_test"
     },
     "data_loader": {
       "name": "GWDataLoader",
       "args": {},
-      "data_path": "./data/bbh_qz_data.hdf5",
+      "data_path": "/home/nino/GW/Keras-Project-Template/data/bbh_hyb_qz_data.hdf5",
       "scale_data": false,
       "data_output_type": "hphc",
       "split_size": 0.2,
@@ -23,7 +23,7 @@
     "trainer":{
       "name": "GWModelTrainer",
       "args": {},
-      "num_epochs": 10000,
+      "num_epochs": 2,
       "batch_size": 128,
       "batch_size_test": 1024,
       "verbose_training": 1
