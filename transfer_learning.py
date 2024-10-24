@@ -56,21 +56,43 @@ def main():
 
     if config.model.name == "RegularizedAutoEncoderGenerator":
         model = init_obj(config, "model", models_module, data_loader = data_loader, inference = True)
+
+    elif config.model.name == "cVAEGenerator":
+        model = init_obj(config, "model", models_module, data_loader = data_loader)
+
+        import tensorflow as tf
+
+        sample_waves = tf.random.normal([100, data_loader.in_out_shapes['output_shape']])  # Replace with actual dimensions
+        sample_conditions = tf.random.normal([100, data_loader.in_out_shapes['input_shape']])  # Replace with actual dimensions
+
+        # Call the model once to initialize the layers and variables
+        model.model([sample_waves, sample_conditions])
+    
     else:
         model = init_obj(config, "model", models_module, data_loader = data_loader)
 
     model.model.load_weights(os.path.join(args.model_path, "best_model.hdf5"))
-    
-    for layer in model.model.layers:
-        layer.trainable = True
 
-    inp = model.model.input
-    x = model.model.layers[0](inp)
-    for layer in model.model.layers[1:-1]:
-        x = layer(x)
-    opt = model.model.layers[-1](x)
+    try:
+        for layer_model in model.model.layers:
+            for layer in layer_model.layers:
+                layer.trainable = True
+    except:
+        for layer in model.model.layers:
+            layer.trainable = True
 
-    model = keras.Model(inp, opt)
+    model = model.model
+
+    # for layer in model.model.layers:
+    #     layer.trainable = True
+
+    # inp = model.model.input
+    # x = model.model.layers[0](inp)
+    # for layer in model.model.layers[1:-1]:
+    #     x = layer(x)
+    # opt = model.model.layers[-1](x)
+
+    # model = keras.Model(inp, opt)
 
     print("Model loaded!", end = "\r")
  
@@ -82,13 +104,24 @@ def main():
     #         write_graph=config.callbacks.tensorboard_write_graph,
     #     )
     # )
-    callbacks.append(EarlyStopping(monitor = 'val_loss', patience = 30))
-    callbacks.append(ReduceLROnPlateau(monitor = 'loss', factor = 0.5, cooldown = 2, patience = 10, verbose = 1, min_lr = 1e-10))       
+    callbacks.append(EarlyStopping(monitor = 'val_loss', patience = 500))
+    callbacks.append(ReduceLROnPlateau(monitor = 'loss', factor = 0.5, cooldown = 2, patience = 30, verbose = 1, min_lr = 1e-10))       
 
 
-    pre_tr = model.predict(pars_tr, batch_size = 1024)
-    pre_ts = model.predict(pars_ts, batch_size = 1024)
-    pre_val = model.predict(pars_val, batch_size = 1024)
+    if config.model.name == "cVAEGenerator":
+
+        rand_tr = tf.random.normal(shape = (pars_tr.shape[0], config.model.latent_dim))
+        rand_ts = tf.random.normal(shape = (pars_ts.shape[0], config.model.latent_dim))
+        rand_val = tf.random.normal(shape = (pars_val.shape[0], config.model.latent_dim))
+
+        pre_tr = model.decoder.predict([rand_tr, pars_tr], batch_size = 1024)
+        pre_ts = model.decoder.predict([rand_ts, pars_ts], batch_size = 1024)
+        pre_val = model.decoder.predict([rand_val, pars_val], batch_size = 1024)    
+
+    else:
+        pre_tr = model.predict(pars_tr, batch_size = 1024)
+        pre_ts = model.predict(pars_ts, batch_size = 1024)
+        pre_val = model.predict(pars_val, batch_size = 1024)
 
     train_mae_prev = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_tr, dtype = tf.float32), tf.convert_to_tensor(data_tr, dtype = tf.float32), batch_size = 64))
     test_mae_prev = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_ts, dtype = tf.float32), tf.convert_to_tensor(data_ts, dtype = tf.float32), batch_size = 64))
@@ -123,23 +156,48 @@ def main():
         model_path = os.path.join(folder_path, "best_model.hdf5")
         training_txt_path = os.path.join(folder_path, "training_summary.txt")
 
-    
-    history_retrain = model.fit(
-        x = pars_tr,
-        y = data_tr,
-        validation_data = (pars_val, data_val),
-        epochs=int(args.epochs),
-        verbose=1,
-        batch_size=np.floor(len(data_tr)/20).astype(int),
-        callbacks=callbacks
-    )
+    if config.model.name == "cVAEGenerator":
+
+        # model.encoder.trainable = False
+
+        history_retrain = model.fit(
+            x = [data_tr, pars_tr],
+            y = data_tr,
+            validation_data = ([data_val, pars_val], data_val),
+            epochs=int(args.epochs),
+            verbose=1,
+            batch_size=np.floor(len(data_tr)/20).astype(int),
+            callbacks=callbacks
+        )
+
+    else:
+        history_retrain = model.fit(
+            x = pars_tr,
+            y = data_tr,
+            validation_data = (pars_val, data_val),
+            epochs=int(args.epochs),
+            verbose=1,
+            batch_size=np.floor(len(data_tr)/20).astype(int),
+            callbacks=callbacks
+        )
 
     joblib.dump(history_retrain, history_path)
     model.save_weights(model_path)
 
-    pre_tr = model.predict(pars_tr, batch_size = 64, verbose = 0)
-    pre_ts = model.predict(pars_ts, batch_size = 64, verbose = 0)
-    pre_val = model.predict(pars_val, batch_size = 64, verbose = 0)
+    if config.model.name == "cVAEGenerator":
+
+        rand_tr = tf.random.normal(shape = (pars_tr.shape[0], config.model.latent_dim))
+        rand_ts = tf.random.normal(shape = (pars_ts.shape[0], config.model.latent_dim))
+        rand_val = tf.random.normal(shape = (pars_val.shape[0], config.model.latent_dim))
+
+        pre_tr = model.decoder.predict([rand_tr, pars_tr], batch_size = 1024)
+        pre_ts = model.decoder.predict([rand_ts, pars_ts], batch_size = 1024)
+        pre_val = model.decoder.predict([rand_val, pars_val], batch_size = 1024)    
+
+    else:
+        pre_tr = model.predict(pars_tr, batch_size = 1024)
+        pre_ts = model.predict(pars_ts, batch_size = 1024)
+        pre_val = model.predict(pars_val, batch_size = 1024)
 
     train_mae_post = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_tr, dtype = tf.float32), tf.convert_to_tensor(data_tr, dtype = tf.float32), batch_size = 64))
     test_mae_post = np.mean(mean_absolute_error_batched(tf.convert_to_tensor(pre_ts, dtype = tf.float32), tf.convert_to_tensor(data_ts, dtype = tf.float32), batch_size = 64))

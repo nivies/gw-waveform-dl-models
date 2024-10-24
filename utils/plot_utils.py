@@ -291,9 +291,24 @@ def make_plots_sxs(model, dir, config, metric):
 
     dir_tr, dir_ts, dir_val = make_plotting_dirs(dir, val=True)
 
-    y_pred_tr = model.predict(pars_tr, batch_size = 1024)
-    y_pred_ts = model.predict(pars_ts, batch_size = 1024)
-    y_pred_val = model.predict(pars_val, batch_size = 1024)
+    if config.model.name == "cVAEGenerator":
+
+        model = model.decoder
+        z_tr = np.random.normal(0, 1, size = [pars_tr.shape[0], config.model.latent_dim])
+        z_ts = np.random.normal(0, 1, size = [pars_ts.shape[0], config.model.latent_dim])
+        z_val = np.random.normal(0, 1, size = [pars_val.shape[0], config.model.latent_dim])
+
+        y_pred_tr = model.predict([z_tr, pars_tr], batch_size = 1024)
+        y_pred_ts = model.predict([z_ts, pars_ts], batch_size = 1024)
+        y_pred_val = model.predict([z_val, pars_val], batch_size = 1024)
+
+    else:          
+
+        y_pred_tr = model.predict(pars_tr, batch_size = 1024)
+        y_pred_ts = model.predict(pars_ts, batch_size = 1024)
+        y_pred_val = model.predict(pars_val, batch_size = 1024)
+
+
 
     if metric == "overlap":
 

@@ -15,6 +15,7 @@ variational_interp.py
 transfer_learning.ipynb
 best_qzp.hdf5
 evaluation.ipynb
+notebook.ipynb
 evaluater
 utils/factory.py
 aux.py
