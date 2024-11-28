@@ -3,11 +3,12 @@ import argparse
 import os
 import keras
 import numpy as np
+import json
 import joblib
 from utils.config import process_config, init_obj
 from utils.data_preprocessing import load_data, get_data_split
 from utils.loss import *
-from utils.plot_utils import make_plots
+from utils.plot_utils import make_plots, PlotOutputsCallback
 import data_loader.gw_dataloader as data_loader_module
 import models.gw_models as models_module
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
@@ -34,7 +35,7 @@ def main():
     parser.add_argument('-e', '--epochs', dest='epochs', help='Number of epochs for transfer learning.', default=500, metavar='')
     args = parser.parse_args()
 
-    config, _ = process_config(os.path.join(args.model_path, "config.json"))
+    config, config_dict = process_config(os.path.join(args.model_path, "config.json"))
 
     if config.data_loader.data_output_type == 'amplitude_phase':
         overlap = overlap_amp_phs
@@ -63,9 +64,14 @@ def main():
         for layer_model in model.model.layers:
             for layer in layer_model.layers:
                 layer.trainable = True
+                if layer.name == 'latent_components':
+                    layer.kernel_regularizer = None
     except:
         for layer in model.model.layers:
             layer.trainable = True
+            if layer.name == 'latent_components':
+                    layer.kernel_regularizer = None
+
 
     model = model.model
 
@@ -81,6 +87,8 @@ def main():
     # )
     callbacks.append(EarlyStopping(monitor = 'val_loss', patience = config.callbacks.early_stopping_patience))
     callbacks.append(ReduceLROnPlateau(monitor = 'loss', factor = config.callbacks.lr_reduce_factor, patience = config.callbacks.lr_reduce_patience, verbose = 1, min_lr = config.callbacks.min_lr))       
+    callbacks.append(GradientDiagnosticsCallback(config, data_loader, folder_name = "retrain_gradient_control", batch_size = 32, threshold=1e-6, plot_interval=5, autoencoder = False))
+    callbacks.append(PlotOutputsCallback(config, data_loader, folder_name = "retrain_online_figures"))
 
     with tf.device('/CPU:0'):
         pre_tr = model.predict(data_loader.X_train, batch_size = 256)
@@ -109,10 +117,12 @@ def main():
 
         folder_path = os.path.join(root_path, "retraining_overlap")
 
+        model.summary()
+
         if not os.path.isdir(folder_path):
             os.mkdir(folder_path)
 
-        model.compile(optimizer = keras.optimizers.Adam(learning_rate = 1e-6), loss = ovlp_mae_loss, metrics = [overlap, 'mean_absolute_error'])
+        model.compile(optimizer = keras.optimizers.Adam(**config.model.optimizer_kwargs), loss = ovlp_mae_loss, metrics = [overlap, 'mean_absolute_error'])
         history_path = os.path.join(folder_path, "history.bin")
         model_path = os.path.join(folder_path, "best_model.hdf5")
         training_txt_path = os.path.join(folder_path, "training_summary.txt")
@@ -123,10 +133,13 @@ def main():
         if not os.path.isdir(folder_path):
             os.mkdir(folder_path)
 
-        model.compile(optimizer = keras.optimizers.Adam(learning_rate = 1e-6), loss = 'mae', metrics = [overlap, 'mean_absolute_error'])
+        model.compile(optimizer = keras.optimizers.Adam(**config.model.optimizer_kwargs), loss = 'mae', metrics = [overlap, 'mean_absolute_error'])
         history_path = os.path.join(folder_path, "history.bin")
         model_path = os.path.join(folder_path, "best_model.hdf5")
         training_txt_path = os.path.join(folder_path, "training_summary.txt")
+    
+    with open(os.path.join(folder_path, "config.json"), 'w') as fp:
+        json.dump(config_dict, fp)
 
     try:
         history_retrain = model.fit(
@@ -147,7 +160,7 @@ def main():
             callbacks=callbacks
         )
 
-    joblib.dump(history_retrain, history_path)
+    joblib.dump(history_retrain.history, history_path)
     model.save_weights(model_path)
 
     with tf.device('/CPU:0'):

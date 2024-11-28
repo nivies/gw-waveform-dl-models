@@ -19,6 +19,8 @@ notebook.ipynb
 evaluater
 utils/factory.py
 aux.py
+vanishing_gradient_caller.py
+quick_caller.py
 
 # Heavy content
 data/

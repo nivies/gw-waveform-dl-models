@@ -1,6 +1,6 @@
 {
     "exp": {
-      "name": "cvae_qz_bbh"
+      "name": "deep_cVAE"
     },
     "data_loader": {
       "name": "GWcVAEDataLoader",
@@ -14,21 +14,27 @@
     "model":{
       "name": "cVAEGenerator",
       "args": {},
-      "latent_dim": 15,
-      "encoder_id": "conv",
-      "decoder_id": "1",
+      "deep":{
+        "encoder_n_layers": 30,
+        "decoder_n_layers": 30,
+        "encoder_n_units": 2048,
+        "decoder_n_units": 2048
+      },
+      "latent_dim": 100,
+      "encoder_id": "deep_residual_encoder",
+      "decoder_id": "deep_residual_decoder",
       "reg_weight": 0.01,
       "optimizer_kwargs":{
-        "learning_rate": 0.0001
+        "learning_rate": 1e-6
       }
     },
     "trainer":{
       "name": "GWModelTrainer",
       "args": {},
-      "num_epochs": 4000,
-      "mapper_epochs": 4000,
-      "generator_epochs": 4000,
-      "batch_size": 64,
+      "num_epochs": 8000,
+      "mapper_epochs": 8000,
+      "generator_epochs": 8000,
+      "batch_size": 128,
       "batch_size_test": 1024,
       "verbose_training": 1
     },
@@ -39,9 +45,9 @@
       "checkpoint_save_weights_only": true,
       "checkpoint_verbose": true,
       "tensorboard_write_graph": true,
-      "early_stopping_patience": 100,
+      "early_stopping_patience": 170,
       "lr_reduce_factor": 0.5,
-      "lr_reduce_patience": 30,
-      "min_lr": 1e-9
+      "lr_reduce_patience": 80,
+      "min_lr": 1e-10
     }
   }

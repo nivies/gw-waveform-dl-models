@@ -6,6 +6,7 @@ from joblib import dump
 from utils.loss import *
 from data_loader.gw_dataloader import MultiOutputDataGenerator
 from utils.loss import DynamicLossWeightsCallback
+from utils.plot_utils import PlotOutputsCallback
 
 '''
 File for declaring the training classes. Every class inherits from the BaseTrain class defined in the base directory.
@@ -91,7 +92,7 @@ class GWModelTrainer(BaseTrain):
         self.loss.extend(history.history['loss'])
         self.val_loss.extend(history.history['val_loss'])
         self.history = history.history
-        dump(history, os.path.join(self.config.callbacks.checkpoint_dir, "history.bin"))
+        dump(history.history, os.path.join(self.config.callbacks.checkpoint_dir, "history.bin"))
         
 class GWRegularizedAutoEncoderModelTrainer(BaseTrain):
 
@@ -453,7 +454,7 @@ class GWMappedAutoEncoderModelTrainerComparisonVersion(BaseTrain):
 
     def init_callbacks(self):
     
-        checkpoint_ae = ModelCheckpoint(
+        checkpoint_ae = [ModelCheckpoint(
                 # filepath=os.path.join(self.config.callbacks.checkpoint_dir, '%s-{epoch:02d}-{val_loss:.2f}.hdf5' % self.config.exp.name),
                 filepath=os.path.join(self.config.callbacks.checkpoint_dir, 'best_autoencoder.hdf5'),
                 monitor=self.config.callbacks.checkpoint_monitor,
@@ -461,9 +462,11 @@ class GWMappedAutoEncoderModelTrainerComparisonVersion(BaseTrain):
                 save_best_only=self.config.callbacks.checkpoint_save_best_only,
                 save_weights_only=self.config.callbacks.checkpoint_save_weights_only,
                 verbose=self.config.callbacks.checkpoint_verbose,
-            )
-        
-        checkpoint_mapper = ModelCheckpoint(
+            ),
+                GradientDiagnosticsCallback(config = self.config, data_loader = self.data, folder_name = "gradient_control_autoencoder", batch_size = 8192, threshold = 1e-6, plot_interval=10, autoencoder = True),
+                PlotOutputsCallback(config = self.config, data_loader = self.data, folder_name = "online_figures_autoencoder", eval_epochs = 50, autoencoder = True)
+            ]        
+        checkpoint_mapper = [ModelCheckpoint(
                 # filepath=os.path.join(self.config.callbacks.checkpoint_dir, '%s-{epoch:02d}-{val_loss:.2f}.hdf5' % self.config.exp.name),
                 filepath=os.path.join(self.config.callbacks.checkpoint_dir, 'best_model.hdf5'),
                 monitor=self.config.callbacks.checkpoint_monitor,
@@ -471,7 +474,10 @@ class GWMappedAutoEncoderModelTrainerComparisonVersion(BaseTrain):
                 save_best_only=self.config.callbacks.checkpoint_save_best_only,
                 save_weights_only=self.config.callbacks.checkpoint_save_weights_only,
                 verbose=self.config.callbacks.checkpoint_verbose,
-            )
+            ),
+                GradientDiagnosticsCallback(config = self.config, data_loader = self.data, folder_name = "gradient_control_mapper", batch_size = 8192, threshold = 1e-6, plot_interval=10, autoencoder = False),
+                PlotOutputsCallback(config = self.config, data_loader = self.data, folder_name = "online_figures_mapper", eval_epochs = 50, autoencoder = False)
+            ]
 
 
         self.callbacks_common.append(
@@ -484,8 +490,8 @@ class GWMappedAutoEncoderModelTrainerComparisonVersion(BaseTrain):
         self.callbacks_common.append(ReduceLROnPlateau(monitor = 'loss', factor = self.config.callbacks.lr_reduce_factor, patience = self.config.callbacks.lr_reduce_patience, verbose = 1, min_lr = self.config.callbacks.min_lr))
 
         self.callbacks_embedder = self.callbacks_common
-        self.callbacks_ae = [checkpoint_ae] + self.callbacks_common
-        self.callbacks_mapper = [checkpoint_mapper] + self.callbacks_common
+        self.callbacks_ae = checkpoint_ae + self.callbacks_common
+        self.callbacks_mapper = checkpoint_mapper + self.callbacks_common
         # self.callbacks_mapper.append(DynamicLossWeightsCallback(initial_weights = [1.0, 0.0], final_weights = [1.0, 100.0], begin_transition_epoch = 500, end_transition_epoch = 1500))
 
     def train(self):
@@ -512,6 +518,7 @@ class GWMappedAutoEncoderModelTrainerComparisonVersion(BaseTrain):
             print("\n\nMapper training\n\n")
 
             self.autoencoder.autoencoder.trainable = False
+
 
             history = self.generator.fit(
                 get_data_tr,

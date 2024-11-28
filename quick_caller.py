@@ -3,46 +3,62 @@ from subprocess import run
 from utils.config import process_config
 import tempfile
 import json
-    
-for reg_coef in [1e-2, 1e-4, 1e-6]:
 
-    _, config_dict = process_config("/home/nino/GW/Keras-Project-Template/configs/gw_mapped_ae_config.json")
-    
-    config_dict['exp']['name'] = f"Mapped_ae_l1_reg_{reg_coef}"
-    config_dict['model']['model_id'] = "3"
-    config_dict['model']['ae_id'] = "l1_regularized"
-    config_dict['model']['reg_weight'] = reg_coef
+_, config_dict = process_config("/home/nino/GW/Keras-Project-Template/configs/gw_mapped_ae_config.json")
 
-    with tempfile.TemporaryDirectory() as tmpdirname:
+# # Deep mapped autoencoder call
+# config_dict['exp']['name'] = "deep_residual_mapped_autoencoder"
 
-        path_config = os.path.join(tmpdirname, "config.json")
+# with tempfile.TemporaryDirectory() as tmpdirname:
 
-        with open(path_config, 'w') as fp:
-            json.dump(config_dict, fp)
+#     path_config = os.path.join(tmpdirname, "config.json")
 
-        run(f"python3 main.py -c {path_config}", shell = True)
-        run(f"python3 main.py -c {path_config}", shell = True)
+#     with open(path_config, 'w') as fp:
+#         json.dump(config_dict, fp)
 
-        
-for reg_coef in [1e-2, 1e-4, 1e-6, 1e-8]:
+#     run(f"python3 main.py -c {path_config}", shell = True)
 
-    _, config_dict = process_config("/home/nino/GW/Keras-Project-Template/configs/gw_mapped_ae_config.json")
-    
-    config_dict['exp']['name'] = f"Mapped_ae_custom_reg_{reg_coef}"
-    config_dict['model']['model_id'] = "3"
-    config_dict['model']['ae_id'] = "custom_regularized"
-    config_dict['model']['reg_weight'] = reg_coef
+# Deep regularized mapped autoencoder call
+config_dict['exp']['name'] = "deep_residual_regularized_mapped_autoencoder"
+config_dict['model']['deep']['regularization'] = "custom"
 
-    with tempfile.TemporaryDirectory() as tmpdirname:
+with tempfile.TemporaryDirectory() as tmpdirname:
 
-        path_config = os.path.join(tmpdirname, "config.json")
+    path_config = os.path.join(tmpdirname, "config.json")
 
-        with open(path_config, 'w') as fp:
-            json.dump(config_dict, fp)
+    with open(path_config, 'w') as fp:
+        json.dump(config_dict, fp)
 
-        run(f"python3 main.py -c {path_config}", shell = True)
-        run(f"python3 main.py -c {path_config}", shell = True)
+    run(f"python3 main.py -c {path_config}", shell = True)
 
+# # Deep uninitialised mapped autoencoder call
+# config_dict['exp']['name'] = "deep_residual_uninitialised_mapped_autoencoder"
+# config_dict['model']['deep']['regularization'] = ""
+# config_dict['trainer']['uninitialised'] = True
+
+# with tempfile.TemporaryDirectory() as tmpdirname:
+
+#     path_config = os.path.join(tmpdirname, "config.json")
+
+#     with open(path_config, 'w') as fp:
+#         json.dump(config_dict, fp)
+
+#     run(f"python3 main.py -c {path_config}", shell = True)
+
+# # Deep cVAE training call
+# _, config_dict = process_config("/home/nino/GW/Keras-Project-Template/configs/gw_cvae_config.json")
+# config_dict['exp']['name'] = "symmetric_deep_cVAE"
+
+# with tempfile.TemporaryDirectory() as tmpdirname:
+
+#     path_config = os.path.join(tmpdirname, "config.json")
+
+#     with open(path_config, 'w') as fp:
+#         json.dump(config_dict, fp)
+
+#     run(f"python3 main.py -c {path_config}", shell = True)
+
+# Retraining, transfer learning and autoencoder evaluation
 main_path = "/home/nino/GW/Keras-Project-Template/experiments"
 
 for folder in os.listdir(main_path):
@@ -54,11 +70,18 @@ for folder in os.listdir(main_path):
     path = os.path.join(path, os.listdir(path)[0])
     in_path = os.path.join(path, "checkpoints")
 
-    # Transfer learning call
-    run(f"python3 transfer_learning.py -ld {in_path} -ls overlap -e 2000", shell = True)
+    # Autoencoder evaluation call
+    if not os.path.isfile(os.path.join(path, "ae_figures/mismatches_test.bin")):
+        
+        run(f"python3 evaluate_autoencoder.py -l {in_path}", shell = True)
 
     # Retrain call
-    run(f"python3 retrain.py -ld {in_path} -ls overlap -e 2000", shell = True)
+    if not os.path.isfile(os.path.join(path, "retraining_overlap/history.bin")):
 
-    # Autoencoder evaluation call
-    run(f"python3 evaluate_autoencoders.py -l {in_path}", shell = True)
+        run(f"python3 retrain.py -ld {in_path} -ls overlap -e 8000", shell = True)
+
+    # Transfer learning call
+    if not os.path.isfile(os.path.join(path, "transfer_learning_overlap/history.bin")):
+        
+        tl_path = os.path.join(path, "retraining_overlap")
+        run(f"python3 transfer_learning.py -ld {tl_path} -ls overlap -e 8000", shell = True)

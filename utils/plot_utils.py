@@ -9,6 +9,37 @@ from pycbc.types import TimeSeries
 from tqdm import tqdm
 import tensorflow as tf
 import keras.backend as K
+from copy import deepcopy
+
+class PlotOutputsCallback(tf.keras.callbacks.Callback):
+    def __init__(self, config, data_loader, folder_name, eval_epochs = 50, autoencoder = False):
+        """
+        Initialize the callback.
+        :param test_data: A tuple (inputs, targets) to be passed to the model for predictions.
+        :param num_examples: Number of examples to plot from the test_data.
+        """
+        super().__init__()
+        self.config = config
+        root_dir = os.path.dirname(config.callbacks.checkpoint_dir)
+        self.fig_directory = os.path.join(os.path.dirname(root_dir), folder_name)
+        self.data_loader = deepcopy(data_loader)
+        self.eval_epochs = eval_epochs
+        
+        if autoencoder:
+            self.data_loader.X_train = self.data_loader.y_train
+            self.data_loader.X_test = self.data_loader.y_test
+
+        if not os.path.isdir(self.fig_directory):
+            os.mkdir(self.fig_directory)
+
+    def on_epoch_end(self, epoch, logs = None):
+
+        # if (epoch + 1) % self.eval_epochs == 0 or (epoch + 1) == 2:
+        if (epoch + 1) % self.eval_epochs == 0:
+            
+            fig_dir = os.path.join(self.fig_directory, f"epoch_{epoch+1}")
+            make_plots(model = self.model, dir = fig_dir, data_loader = self.data_loader, config = self.config, metric = 'overlap')
+
 
 def wavewise_overlap(h1, h2, config, dt=2*4.925794970773135e-06, df=None):
     
@@ -167,7 +198,6 @@ def plot_waveform_comparison(y_pred, y_true, delta_t, dir, title, save_name):
 
     fig.savefig(os.path.join(dir, save_name))
     plt.close()
-    return
 
 def plot_mismatch_comparison(dir, data_dict, train_test):
 
@@ -197,12 +227,7 @@ def make_plots(model, dir, data_loader, config, metric):
 
     dir_tr, dir_ts = make_plotting_dirs(dir)
 
-    if config.trainer.uninitialised == False:
-        
-        y_pred_tr = model.predict(data_loader.X_train, batch_size = 1024)[1]
-        y_pred_ts = model.predict(data_loader.X_test, batch_size = 1024)[1]
-
-    elif config.model.name == "cVAEGenerator":
+    if config.model.name == "cVAEGenerator":
 
         model = model.decoder
         z_tr = np.random.normal(0, 1, size = [data_loader.X_train.shape[0], config.model.latent_dim])
@@ -216,6 +241,11 @@ def make_plots(model, dir, data_loader, config, metric):
         y_pred_tr = model.predict(data_loader.X_train, batch_size = 1024)
         y_pred_ts = model.predict(data_loader.X_test, batch_size = 1024)
 
+    if len(y_pred_tr) == 2:
+
+        y_pred_tr = y_pred_tr[1]
+        y_pred_ts = y_pred_ts[1]
+
     if metric == "overlap":
 
         split_idx = int(y_pred_tr.shape[-1]/2)
@@ -225,8 +255,8 @@ def make_plots(model, dir, data_loader, config, metric):
         y_pred_tr = np.real(y_pred_tr[:, :split_idx]*np.exp(1.0j*y_pred_tr[:, split_idx:]))
         y_pred_ts = np.real(y_pred_ts[:, :split_idx]*np.exp(1.0j*y_pred_ts[:, split_idx:]))
 
-        data_loader.y_train = np.real(data_loader.y_train[:, :split_idx]*np.exp(1.0j*data_loader.y_train[:, split_idx:]))
-        data_loader.y_test = np.real(data_loader.y_test[:, :split_idx]*np.exp(1.0j*data_loader.y_test[:, split_idx:]))
+        target_y_train = np.real(data_loader.y_train[:, :split_idx]*np.exp(1.0j*data_loader.y_train[:, split_idx:]))
+        target_y_test = np.real(data_loader.y_test[:, :split_idx]*np.exp(1.0j*data_loader.y_test[:, split_idx:]))
 
     elif config.data_loader.data_output_type == "amplitude_phase":
 
@@ -234,11 +264,11 @@ def make_plots(model, dir, data_loader, config, metric):
         y_pred_tr = y_pred_tr[:, :split_idx]*np.exp(1.0j*y_pred_tr[:, split_idx:])
         y_pred_ts = y_pred_ts[:, :split_idx]*np.exp(1.0j*y_pred_ts[:, split_idx:])
         
-        data_loader.y_train = np.real(data_loader.y_train[:, :split_idx]*np.exp(1.0j*data_loader.y_train[:, split_idx:]))
-        data_loader.y_test = np.real(data_loader.y_test[:, :split_idx]*np.exp(1.0j*data_loader.y_test[:, split_idx:]))
+        target_y_train = np.real(data_loader.y_train[:, :split_idx]*np.exp(1.0j*data_loader.y_train[:, split_idx:]))
+        target_y_test = np.real(data_loader.y_test[:, :split_idx]*np.exp(1.0j*data_loader.y_test[:, split_idx:]))
 
-        mm_tr, bst_tr, wrst_tr = pycbc_mismatch(y_pred_tr, data_loader.y_train, data_loader.delta_t, metric)
-        mm_ts, bst_ts, wrst_ts = pycbc_mismatch(y_pred_ts, data_loader.y_test, data_loader.delta_t, metric)
+        mm_tr, bst_tr, wrst_tr = pycbc_mismatch(y_pred_tr, target_y_train, data_loader.delta_t, metric)
+        mm_ts, bst_ts, wrst_ts = pycbc_mismatch(y_pred_ts, target_y_test, data_loader.delta_t, metric)
 
         y_pred_tr = np.real(y_pred_tr)
         y_pred_ts = np.real(y_pred_ts)
@@ -246,8 +276,8 @@ def make_plots(model, dir, data_loader, config, metric):
     
     else:
 
-        mm_tr, bst_tr, wrst_tr = pycbc_mismatch(y_pred_tr, data_loader.y_train, data_loader.delta_t, metric)
-        mm_ts, bst_ts, wrst_ts = pycbc_mismatch(y_pred_ts, data_loader.y_test, data_loader.delta_t, metric)
+        mm_tr, bst_tr, wrst_tr = pycbc_mismatch(y_pred_tr, target_y_train, data_loader.delta_t, metric)
+        mm_ts, bst_ts, wrst_ts = pycbc_mismatch(y_pred_ts, target_y_test, data_loader.delta_t, metric)
 
     perc_10_tr = get_percentile_index(mm_tr, 0.9)
     perc_50_tr = get_percentile_index(mm_tr, 0.5)
@@ -263,17 +293,17 @@ def make_plots(model, dir, data_loader, config, metric):
     plot_mismatch_histogram(mm_ts, dir_ts, "Test")
 
     print("Plotting waveforms", end='\r')
-    plot_waveform_comparison(y_pred_tr[bst_tr], data_loader.y_train[bst_tr], data_loader.delta_t, dir_tr, title = f"Best train case. Mismatch: {mm_tr[bst_tr]:.3e}", save_name = "best_waveform.jpg")
-    plot_waveform_comparison(y_pred_ts[bst_ts], data_loader.y_test[bst_ts], data_loader.delta_t, dir_ts, title = f"Best test case. Mismatch: {mm_ts[bst_ts]:.3e}", save_name = "best_waveform.jpg")
+    plot_waveform_comparison(y_pred_tr[bst_tr], target_y_train[bst_tr], data_loader.delta_t, dir_tr, title = f"Best train case. Mismatch: {mm_tr[bst_tr]:.3e}", save_name = "best_waveform.jpg")
+    plot_waveform_comparison(y_pred_ts[bst_ts], target_y_test[bst_ts], data_loader.delta_t, dir_ts, title = f"Best test case. Mismatch: {mm_ts[bst_ts]:.3e}", save_name = "best_waveform.jpg")
     
-    plot_waveform_comparison(y_pred_tr[wrst_tr], data_loader.y_train[wrst_tr], data_loader.delta_t, dir_tr, title = f"Worst train case. Mismatch: {mm_tr[wrst_tr]:.3e}", save_name = "worst_waveform.jpg")
-    plot_waveform_comparison(y_pred_ts[wrst_ts], data_loader.y_test[wrst_ts], data_loader.delta_t, dir_ts, title = f"Worst test case. Mismatch: {mm_ts[wrst_ts]:.3e}", save_name = "worst_waveform.jpg")
+    plot_waveform_comparison(y_pred_tr[wrst_tr], target_y_train[wrst_tr], data_loader.delta_t, dir_tr, title = f"Worst train case. Mismatch: {mm_tr[wrst_tr]:.3e}", save_name = "worst_waveform.jpg")
+    plot_waveform_comparison(y_pred_ts[wrst_ts], target_y_test[wrst_ts], data_loader.delta_t, dir_ts, title = f"Worst test case. Mismatch: {mm_ts[wrst_ts]:.3e}", save_name = "worst_waveform.jpg")
 
-    plot_waveform_comparison(y_pred_tr[perc_10_tr], data_loader.y_train[perc_10_tr], data_loader.delta_t, dir_tr, title = f"10th percentile train waveform. Mismatch: {mm_tr[perc_10_tr]:.3e}", save_name = "perc_10_waveform.jpg")
-    plot_waveform_comparison(y_pred_ts[perc_10_ts], data_loader.y_test[perc_10_ts], data_loader.delta_t, dir_ts, title = f"10th percentile test waveform. Mismatch: {mm_ts[perc_10_ts]:.3e}", save_name = "perc_10_waveform.jpg")
+    plot_waveform_comparison(y_pred_tr[perc_10_tr], target_y_train[perc_10_tr], data_loader.delta_t, dir_tr, title = f"10th percentile train waveform. Mismatch: {mm_tr[perc_10_tr]:.3e}", save_name = "perc_10_waveform.jpg")
+    plot_waveform_comparison(y_pred_ts[perc_10_ts], target_y_test[perc_10_ts], data_loader.delta_t, dir_ts, title = f"10th percentile test waveform. Mismatch: {mm_ts[perc_10_ts]:.3e}", save_name = "perc_10_waveform.jpg")
 
-    plot_waveform_comparison(y_pred_tr[perc_50_tr], data_loader.y_train[perc_50_tr], data_loader.delta_t, dir_tr, title = f"50th percentile train waveform. Mismatch: {mm_tr[perc_50_tr]:.3e}", save_name = "perc_50_waveform.jpg")
-    plot_waveform_comparison(y_pred_ts[perc_50_ts], data_loader.y_test[perc_50_ts], data_loader.delta_t, dir_ts, title = f"50th percentile test waveform. Mismatch: {mm_ts[perc_50_ts]:.3e}", save_name = "perc_50_waveform.jpg")
+    plot_waveform_comparison(y_pred_tr[perc_50_tr], target_y_train[perc_50_tr], data_loader.delta_t, dir_tr, title = f"50th percentile train waveform. Mismatch: {mm_tr[perc_50_tr]:.3e}", save_name = "perc_50_waveform.jpg")
+    plot_waveform_comparison(y_pred_ts[perc_50_ts], target_y_test[perc_50_ts], data_loader.delta_t, dir_ts, title = f"50th percentile test waveform. Mismatch: {mm_ts[perc_50_ts]:.3e}", save_name = "perc_50_waveform.jpg")
 
 def make_plots_sxs(model, dir, config, metric):
 

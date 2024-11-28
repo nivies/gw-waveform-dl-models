@@ -3,6 +3,117 @@ import keras.backend as K
 from keras.losses import mean_absolute_error
 from tensorflow.keras.callbacks import Callback
 from keras.regularizers import Regularizer
+import numpy as np
+import matplotlib.pyplot as plt
+from copy import deepcopy
+import os
+
+class GradientDiagnosticsCallback(tf.keras.callbacks.Callback):
+    def __init__(self, config, data_loader, folder_name, batch_size = 32, threshold=1e-6, plot_interval=5, autoencoder = True):
+        """
+        Initialize the callback.
+        :param model: The model to analyze.
+        :param x_train: Training inputs as a NumPy array.
+        :param y_train: Training targets as a NumPy array.
+        :param batch_size: Batch size for gradient computation.
+        :param threshold: Threshold for flagging vanishing gradients.
+        :param log_file: Path to a file for logging gradient diagnostics. If None, logs to console only.
+        :param plot_interval: Interval (in epochs) to generate gradient distribution plots.
+        """
+        super().__init__()
+        self.data_loader = deepcopy(data_loader)
+        self.threshold = threshold
+        self.batch_size = batch_size
+        self.plot_interval = plot_interval
+        self.epoch_gradient_norms = []  # To store gradient norms for plotting
+
+        if autoencoder:
+            self.data_loader.X_train = self.data_loader.y_train
+            self.data_loader.X_test = self.data_loader.y_test
+
+        root_dir = os.path.dirname(config.callbacks.checkpoint_dir)
+        self.log_dir = os.path.join(os.path.dirname(root_dir), folder_name)
+        self.log_file = os.path.join(self.log_dir, "gradient_control.txt")
+
+
+        if self.log_file:
+            # Ensure the directory exists
+            os.makedirs(os.path.dirname(self.log_file), exist_ok=True)
+            # with open(log_file, "w") as f:
+            #     f.write("Epoch,Mean,Max,Min,StdDev,FlaggedLayers\n")
+
+    def on_epoch_end(self, epoch, logs=None):
+
+        x_train = self.data_loader.X_train
+        y_train = self.data_loader.y_train
+        indices = np.random.choice(len(x_train), self.batch_size, replace=False)
+        x_batch = x_train[indices]
+        y_batch = y_train[indices]
+
+        with tf.GradientTape() as tape:
+            # Forward pass
+            predictions = self.model(x_batch, training=True)
+            if len(predictions) == 2:
+                predictions = predictions[1]
+            loss = self.model.compiled_loss(tf.convert_to_tensor(y_batch, dtype=tf.float32), predictions)
+
+        # Compute gradients
+        gradients = tape.gradient(loss, self.model.trainable_variables)
+
+        # Get layer names corresponding to the gradients
+        layer_names = [var.name for var in self.model.trainable_variables]
+
+        # Calculate gradient norms
+        gradient_norms = [tf.norm(grad).numpy() for grad in gradients if grad is not None]
+        self.epoch_gradient_norms.append(gradient_norms)
+
+        # Summary statistics
+        mean_norm = np.mean(gradient_norms)
+        max_norm = np.max(gradient_norms)
+        min_norm = np.min(gradient_norms)
+        std_norm = np.std(gradient_norms)
+
+        # Identify flagged layers by name
+        flagged_layers = [(name, norm) for name, norm in zip(layer_names, gradient_norms) if norm < self.threshold]
+
+        # Log diagnostics
+        log_message = (f"Epoch {epoch + 1}: "
+                    f"Mean: {mean_norm:.4e}, Max: {max_norm:.4e}, Min: {min_norm:.4e}, StdDev: {std_norm:.4e}, "
+                    f"Nº of flagged layers: {len(flagged_layers)} | "
+                    f"Flagged Layers: {[name for name, _ in flagged_layers]}\n")
+
+        if self.log_file:
+            with open(self.log_file, "a") as f:
+                f.write(log_message)
+        else:
+            print(log_message)
+
+
+        # Plot gradient distribution every `plot_interval` epochs
+        if (epoch + 1) % self.plot_interval == 0:
+            self._plot_gradient_distribution(epoch + 1)
+
+    def _plot_gradient_distribution(self, epoch):
+        # Flatten all gradient norms for the epoch
+        all_norms = np.concatenate(self.epoch_gradient_norms)
+
+        # Filter out zero gradients to avoid issues with log scale
+        all_norms = all_norms[all_norms > 0]
+
+        plt.figure(figsize=(10, 6))
+        plt.hist(all_norms, bins=30, alpha=0.7)  # Logarithmic scale for frequency
+        plt.title(f"Log-Scale Gradient Norm Distribution at Epoch {epoch}")
+        plt.xscale('log')
+        plt.xlabel("Gradient Norm (Log Scale)")
+        plt.ylabel("Number of layers")
+        plt.grid(True)
+
+        # Save or display the plot
+        plot_path = os.path.join(self.log_dir, f"gradient_distribution_epoch_{epoch}.png")
+        plt.savefig(plot_path)
+        plt.close()
+        print(f"Gradient distribution plot saved to {plot_path}")
+
 
 def mean_absolute_error_batched(y_true, y_pred, batch_size):
     """
@@ -164,7 +275,7 @@ def overlap_amp_phs(h1, h2, dt=2*4.925794970773135e-06, df=None):
     inner = tf.cast(tf.math.reduce_sum((tf.math.conj(h1_f)*h2_f),axis=-1),tf.float32)
     overl = tf.cast((4*df*inner*norm),tf.float32)
     
-    return  K.abs(1. - overl)
+    return  tf.math.log(1. - overl) / tf.math.log(10.0)
 
 def overlap_hphc(h1, h2, dt=2*4.925794970773135e-06, df=None):
     
@@ -189,7 +300,8 @@ def overlap_hphc(h1, h2, dt=2*4.925794970773135e-06, df=None):
     inner = tf.cast(tf.math.reduce_sum((tf.math.conj(h1_f)*h2_f),axis=-1),tf.float32)
     overl = tf.cast((4*df*inner*norm),tf.float32)
     
-    return  K.abs(1. - overl)
+    # return  K.abs(1. - overl)
+    return  tf.math.log(1. - overl) / tf.math.log(10.0)
 
 
 

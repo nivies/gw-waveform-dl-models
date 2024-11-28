@@ -1,6 +1,6 @@
 {
     "exp": {
-      "name": "mapped_qz_bbh"
+      "name": "Small_blocks_training_attempt_unregularized"
     },
     "data_loader": {
       "name": "MappedDataLoader",
@@ -11,25 +11,42 @@
       "split_size": 0.2
     },
     "model":{
-      "name": "MappedAutoEncoderGeneratorComparisonVersion",
+      "name": "SeparatedMappedAutoEncoderGenerator",
       "args": {"test": true},
-      "latent_dim": 15,
-      "ae_id": "0",
-      "model_id": "3",
-      "loss": "overlap",
-      "reg_weight": 0.05,
+      "deep":{
+        "autoencoder_n_blocks": 10,
+        "autoencoder_layers_per_block": 2,
+        "autoencoder_n_units": 512,
+        "autoencoder_dense_shortcut": false,
+        "mapper_n_blocks": 8,
+        "mapper_layers_per_block": 2,
+        "mapper_n_units": 512,
+        "mapper_dense_shortcut": false,
+
+        "mapper_n_layers": 30,
+        "ae_n_layers": 60,
+        "ae_n_units": 2048,
+        "regularization": "",
+        "residue_period": 10
+      },
+      "latent_dim": 40,
+      "ae_id": "deep_residual_block_autoencoder_split",
+      "model_id": "deep_residual_block_mapper_split",
+      "loss": "mae",
+      "reg_weight": 5e-9,
       "mapper_dropout": 0.001,
       "optimizer_kwargs":{
-        "learning_rate": 0.0001
+        "learning_rate": 1e-4,
+        "clipnorm": 1e-2
       }
     },
     "trainer":{
       "name": "GWMappedAutoEncoderModelTrainerComparisonVersion",
       "args": {},
       "uninitialised": false,
-      "num_epochs": 4000,
-      "mapper_epochs": 4000,
-      "generator_epochs": 4000,
+      "num_epochs": 8000,
+      "mapper_epochs": 8000,
+      "generator_epochs": 8000,
       "batch_size": 128,
       "batch_size_test": 1024,
       "verbose_training": 1
@@ -41,9 +58,9 @@
       "checkpoint_save_weights_only": true,
       "checkpoint_verbose": true,
       "tensorboard_write_graph": true,
-      "early_stopping_patience": 60,
-      "lr_reduce_factor": 0.5,
-      "lr_reduce_patience": 15,
+      "early_stopping_patience": 350,
+      "lr_reduce_factor": 0.6,
+      "lr_reduce_patience": 100,
       "min_lr": 1e-10
     }
   }

@@ -15,28 +15,27 @@ File for declaring the main architectures for the DL-based GW modelling neural n
 class defined in the base folder.
 '''
 
-def get_pca_model_from_id(input, model_id):
+# def get_pca_model_from_id(input, model_id):
         
-    if model_id == '0' or '2':
-        units = 128
+#     if model_id == '0' or '2':
+#         units = 128
 
-    elif model_id == '1' or '3':
-        units = 512
+#     elif model_id == '1' or '3':
+#         units = 512
 
     
-    if model_id == '0' or '1':
-        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
-        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+#     if model_id == '0' or '1':
+#         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+#         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+#         return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
     
-    elif model_id == '2' or '3':
+#     elif model_id == '2' or '3':
 
-        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
-        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-
+#         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+#         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+#         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+#         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+#         return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
 
 class MLP(BaseModel):
 
@@ -471,7 +470,102 @@ class MappedAutoEncoderGeneratorComparisonVersion(BaseModel):
             self.overlap = 'mean_squared_error'
 
         if test:
-            self.mapper = MLP_test(config = config, input_shape = self.in_out_shapes['input_shape'], output_shape = config.model.latent_dim, model_id = config.mode.model_id).model
+            self.mapper = MLP_test(config = config, input_shape = self.in_out_shapes['input_shape'], output_shape = config.model.latent_dim, model_id = config.model.model_id).model
+            self.autoencoder = AutoEncoder_test(config, self.in_out_shapes['output_shape'])
+        else:
+            self.mapper = MLP(config, data_loader, test, self.config.model.latent_dim).model
+            self.autoencoder = AutoEncoder(config, self.in_out_shapes['output_shape'])
+
+        self.build_model()
+
+    def build_model(self):
+
+        inp = keras.Input(self.in_out_shapes['input_shape'])
+
+        self.mapper._name = "latent_components"
+        self.autoencoder.decoder._name = "output"
+
+        lat = self.mapper(inp)
+        opt = self.autoencoder.decoder(lat)
+
+        if self.config.trainer.uninitialised:
+            
+            self.model = keras.Model(inp, opt)
+            # Careful, compiling twice if executed in mode without initialization!!
+
+            optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+
+            if self.config.model.loss == "overlap":
+
+                self.model.compile(optimizer = optimizer,
+                            loss = self.ovlp_mae_loss, 
+                            metrics = ['mean_absolute_error', self.overlap]
+                            )
+            else:
+
+                self.model.compile(optimizer = optimizer,
+                            loss = 'mean_absolute_error',
+                            metrics = ['mean_absolute_error', self.overlap]
+                            )
+                
+        else:
+
+            self.model = keras.Model(inp, [lat, opt])
+            # Careful, compiling twice if executed in mode without initialization!!
+
+            optimizer = keras.optimizers.Adam(**self.config.model.optimizer_kwargs)
+
+            if self.config.model.loss == "overlap":
+
+                self.model.compile(optimizer = optimizer,
+                            loss = {'latent_components': 'mean_absolute_error', 'output' : self.overlap}
+                            )
+            else:
+
+                self.model.compile(optimizer = optimizer,
+                            loss = {'latent_components': 'mean_absolute_error', 'output' : 'mean_absolute_error'},
+                            metrics = {'latent_components': 'mean_absolute_error', 'output': self.overlap}
+                            )
+
+class SeparatedMappedAutoEncoderGenerator(BaseModel):
+
+    '''
+    Class for calling all the necessary models (mapper and autoencoder) and ensembling the final mapped autoencoder
+    GW generation model.
+
+    Input parameters:
+    -----------------
+
+    config: dict
+        Configuration dictionary built from the configuration .json file.
+
+    data_loader: data_loader class instance
+        data_loader instance called for the particular problem. All information for this class' calling is contained in the configuration file.
+    -----------------
+
+    Generator model built can be called from the .model method. Every network that composes the full model can also be called:
+
+    mapper      : Mapper network from the input parameters to the latent space of the autoencoder.
+    autoencoder : Mapped autoencoder class.
+    '''
+
+    def __init__(self, config, data_loader, test = False):
+        super(SeparatedMappedAutoEncoderGenerator, self).__init__(config)
+        
+        self.in_out_shapes = data_loader.in_out_shapes
+
+        if self.config.data_loader.data_output_type == 'amplitude_phase':
+            self.overlap = overlap_amp_phs
+            self.ovlp_mae_loss = ovlp_mae_loss_amp_phs
+
+        elif self.config.data_loader.data_output_type == 'hphc':
+            self.overlap = overlap_hphc
+            self.ovlp_mae_loss = ovlp_mae_loss_hphc
+        else:
+            self.overlap = 'mean_squared_error'
+
+        if test:
+            self.mapper = MLP_test(config = config, input_shape = self.in_out_shapes['input_shape'], output_shape = config.model.latent_dim, model_id = config.model.model_id).model
             self.autoencoder = AutoEncoder_test(config, self.in_out_shapes['output_shape'])
         else:
             self.mapper = MLP(config, data_loader, test, self.config.model.latent_dim).model
@@ -529,7 +623,6 @@ class MappedAutoEncoderGeneratorComparisonVersion(BaseModel):
                             )
 
 
-
 class cVAEGenerator(BaseModel):
 
     '''
@@ -561,7 +654,8 @@ class cVAEGenerator(BaseModel):
 
     def build_model(self):
 
-        self.encoder, self.decoder = cVAE_NN_declaration(self.in_out_shapes, self.config.model.latent_dim, self.config.model.encoder_id, self.config.model.decoder_id)
+        # I know I have to fix this line...
+        self.encoder, self.decoder = cVAE_NN_declaration(self.in_out_shapes, self.config.model.latent_dim, self.config.model.encoder_id, self.config.model.decoder_id, self.config)
 
         self.model = cVAE(self.encoder, self.decoder)
 
@@ -745,7 +839,7 @@ class PCA_MLP(BaseModel):
 
         if self.config.trainer.uninitialised:
 
-            x = get_pca_model_from_id(params, self.config.model.model_id)
+            x = get_pca_model_from_id(params, self.config)
 
             x = layers.Dense(self.config.model.pca_n_components)(x)
             opt = layers.Dense(self.in_out_shapes['output_shape'])(x)
@@ -769,7 +863,7 @@ class PCA_MLP(BaseModel):
 
         else:
 
-            x = get_pca_model_from_id(params, self.config.model.model_id)
+            x = get_pca_model_from_id(params, self.config)
 
             x = layers.Dense(self.config.model.pca_n_components, name = 'pca_components')(x)
             opt = layers.Dense(self.in_out_shapes['output_shape'], trainable = False, name = 'output')(x)

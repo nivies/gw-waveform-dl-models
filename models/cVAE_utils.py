@@ -1,12 +1,13 @@
 import tensorflow as tf
 import keras
 from keras import layers
+from models.gw_test_models import stack_residual_blocks
 
 '''
 File for architecture definition and internal logic coding of conditional variational autoencoder.
 '''
 
-def declare_encoder(inputs: tf.Tensor, model_id: str) -> tf.Tensor:
+def declare_encoder(inputs: tf.Tensor, model_id: str, config) -> tf.Tensor:
 
     if model_id == "conv":
         x = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(inputs)
@@ -59,10 +60,57 @@ def declare_encoder(inputs: tf.Tensor, model_id: str) -> tf.Tensor:
         x = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
         return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(x)
     
+    elif model_id == "deep_encoder":
+
+        n_layers = config.model.deep.encoder_n_layers
+        units = config.model.deep.encoder_n_units
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(inputs) 
+
+        for _ in range(int(n_layers)):
+            x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+    
+    elif model_id == "deep_residual_encoder":
+
+        n_layers = config.model.deep.encoder_n_layers
+        units = config.model.deep.encoder_n_units
+        res_layers = []
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(inputs) 
+
+        for ct in range(int(n_layers/2)):
+            
+            x = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            if ct % 10 == 0:
+                res_layers.append(tf.identity(x))
+
+        for ct in range(int(n_layers/2)):
+
+            if ct % 10 == 0:
+                x = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x + res_layers.pop(-1))
+
+            else:
+                x = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+    
+    elif model_id == "deep_block_residual_encoder":
+
+        
+        n_blocks = config.model.deep.mapper_n_blocks
+        layers_per_block = config.model.deep.mapper_layers_per_block
+        units = config.model.deep.mapper_n_units
+        dense_shortcut = config.model.deep.mapper_dense_shortcut 
+
+        return stack_residual_blocks(x = inputs, n_blocks = n_blocks, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut) 
+
+    
     else:
         raise ValueError(f"Model id supplied ({model_id}) is not implemented.")
 
-def declare_decoder(z_cond: tf.Tensor, model_id: str) -> tf.Tensor:
+def declare_decoder(z_cond: tf.Tensor, model_id: str, config) -> tf.Tensor:
 
     if model_id == "conv":
         y = layers.Dense(1024, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(z_cond)
@@ -121,6 +169,53 @@ def declare_decoder(z_cond: tf.Tensor, model_id: str) -> tf.Tensor:
         y = layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
         return layers.Dense(512, activation = "relu", kernel_initializer = "glorot_uniform")(y)
     
+    elif model_id == "deep_decoder":
+
+        n_layers = config.model.deep.decoder_n_layers
+        units = config.model.deep.decoder_n_units
+
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(z_cond) 
+
+        for _ in range(int(n_layers)):
+            y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+
+        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+    
+    elif model_id == "deep_residual_decoder":
+
+        n_layers = config.model.deep.decoder_n_layers
+        units = config.model.deep.decoder_n_units
+        res_layers = []
+
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(z_cond) 
+
+        for ct in range(int(n_layers/2)):
+            
+            y = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+            if ct % 10 == 0:
+                res_layers.append(tf.identity(y))
+
+        for ct in range(int(n_layers/2)):
+
+            if ct % 10 == 0:
+                y = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y + res_layers.pop(-1))
+
+            else:
+                y = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+
+        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+    
+    elif model_id == "deep_block_residual_decoder":
+
+        n_blocks = config.model.deep.mapper_n_blocks
+        layers_per_block = config.model.deep.mapper_layers_per_block
+        units = config.model.deep.mapper_n_units
+        dense_shortcut = config.model.deep.mapper_dense_shortcut 
+
+        return stack_residual_blocks(x = z_cond, n_blocks = n_blocks, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut) 
+
+    
+    
     else:
         raise ValueError(f"Model id supplied ({model_id}) is not implemented.")
 
@@ -146,7 +241,7 @@ class Sampling(layers.Layer):
         epsilon = tf.random.normal(shape=(batch, dim))
         return z_mean + tf.exp(0.5 * z_log_var) * epsilon
 
-def cVAE_NN_declaration(in_out_shapes: dict, latent_dim: int, encoder_id: str, decoder_id: str) -> keras.Model:
+def cVAE_NN_declaration(in_out_shapes: dict, latent_dim: int, encoder_id: str, decoder_id: str, config) -> keras.Model:
 
     '''
     Defines the encoder and decoder architectures for the cVAE.
@@ -172,14 +267,14 @@ def cVAE_NN_declaration(in_out_shapes: dict, latent_dim: int, encoder_id: str, d
     par_inputs = keras.Input(shape=input_shape)
     inputs = layers.Concatenate(axis=1)([wave_inputs, par_inputs])
 
-    x = declare_encoder(inputs, encoder_id)
+    x = declare_encoder(inputs, encoder_id, config)
 
     z_mean = layers.Dense(latent_dim, kernel_initializer = 'glorot_normal', name="z_mean")(x)
     z_log_var = layers.Dense(latent_dim, kernel_initializer = 'glorot_normal', name="z_log_var")(x)
     z = Sampling()([z_mean, z_log_var])
     z_cond = layers.Concatenate(axis=1)([z, par_inputs])
 
-    y = declare_decoder(z_cond, decoder_id)
+    y = declare_decoder(z_cond, decoder_id, config)
 
     output = layers.Dense(output_shape, kernel_initializer = 'glorot_uniform')(y)
 
@@ -268,4 +363,20 @@ class cVAE(keras.Model):
         waves, conditions = data
         z_mean, z_log_var, z = self.encoder([waves, conditions])
         return self.decoder([z, conditions])
+    
+    def get_config(self):
+        # Return the configuration for serialization
+        config = super(cVAE, self).get_config()
+        config.update({
+            "encoder": self.encoder,
+            "decoder": self.decoder
+        })
+        return config
+
+    @classmethod
+    def from_config(cls, config):
+        # Rebuild the object from configuration
+        encoder = config.pop("encoder")
+        decoder = config.pop("decoder")
+        return cls(encoder=encoder, decoder=decoder, **config)
     

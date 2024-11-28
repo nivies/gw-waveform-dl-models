@@ -3,28 +3,146 @@ import keras
 from keras import layers
 from utils.loss import *
 
-def get_pca_model_from_id(input, model_id):
+def create_regularized_latent_layer_split(x, config, latent_dimension):
+
+    regularization = config.model.deep.regularization
+
+    if regularization == 'l1':
+        enc = layers.Dense(units = latent_dimension, kernel_regularizer = keras.regularizers.L1(l1 = config.model.reg_weight))(x)
+    
+    elif regularization == 'custom':
+        enc = layers.Dense(units = latent_dimension, kernel_regularizer = ComponentWiseRegularizer(coef = config.model.reg_weight))(x)
+    
+    else:
+        enc = layers.Dense(units = latent_dimension)(x)
+
+    return enc
+
+def dense_residual_block(x, n_neurons, n_layers, dense_shortcut, name):
+
+    y = layers.Dense(units = n_neurons, activation = 'leaky_relu', name = name + "_layer_0")(x)
+
+    for ct, _ in enumerate(range(n_layers-1)):
+        y = layers.Dense(units = n_neurons, activation = 'leaky_relu', name = name + f"_layer_{ct + 1}")(y)
+
+
+    if dense_shortcut:
+        z = layers.Dense(units = n_neurons, activation = 'leaky_relu', name = name + "_layer_shortcut_0")(x)
+
+        for ct, _ in enumerate(range(n_layers // 4)):
+            z = layers.Dense(units = n_neurons, activation = 'leaky_relu', name = name + f"_layer_shortcut_{ct + 1}")(z)
+            
+    else:
+        z = x
+
+    z = layers.Add(name = name + "_add_layer")([z, y])
+
+    return z
+
+
+def stack_residual_blocks(x, n_blocks, n_neurons, layers_per_block, dense_shortcut, name):
+
+    x = layers.Dense(units = n_neurons, activation = 'leaky_relu', name = name + "_first_layer")(x)
+
+    for ct, _ in enumerate(range(n_blocks)):
+        x = dense_residual_block(x, n_neurons, layers_per_block, dense_shortcut, name = name + f"_block_{ct}")
+    
+    return x
+
+def get_pca_model_from_id(input_shape, output_shape, config):
+
+    input = keras.Input(input_shape)
+
+    model_id = config.model.model_id
         
-    if model_id == '0' or '2':
+    if model_id == '0' or model_id == '2':
         units = 128
 
-    elif model_id == '1' or '3':
+    elif model_id == '1' or model_id == '3':
         units = 512
 
-    
-    if model_id == '0' or '1':
+    if model_id == '0' or model_id == '2':
         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-    
-    elif model_id == '2' or '3':
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        output = layers.Dense(units = output_shape)(x)
+
+    elif model_id == '1' or model_id == '3':
 
         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
         x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
-        return layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        output = layers.Dense(units = output_shape)(x)
+    
+    elif model_id == "deep_mapper":
 
+        n_layers = config.model.deep.mapper_n_layers
+        units = config.model.deep.mapper_n_units        
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input)
+
+        for _ in range(n_layers):
+            x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        output = layers.Dense(units = output_shape)(x)
+    
+    elif model_id == "deep_residual_mapper":
+
+        n_layers = config.model.deep.mapper_n_layers
+        units = config.model.deep.mapper_n_units  
+        res_layers = []      
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input)
+
+        for ct in range(int(n_layers/2)):
+            
+            x = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            if ct % 10 == 0:
+                res_layers.append(tf.identity(x))
+
+        for ct in range(int(n_layers/2)):
+
+            if ct % 10 == 0:
+                x = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x + res_layers.pop(-1))
+
+            else:
+                x = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+        output = layers.Dense(units = output_shape)(x)
+    
+    elif model_id == "deep_residual_block_mapper":   
+
+        n_blocks = config.model.deep.mapper_n_blocks
+        layers_per_block = config.model.deep.mapper_layers_per_block
+        units = config.model.deep.mapper_n_units
+        dense_shortcut = config.model.deep.mapper_dense_shortcut 
+
+        x = stack_residual_blocks(x = input, n_blocks = n_blocks, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut)
+        output = layers.Dense(units = output_shape)(x)
+    
+    elif model_id == "deep_residual_block_mapper_split":   
+
+        n_blocks = config.model.deep.mapper_n_blocks
+        layers_per_block = config.model.deep.mapper_layers_per_block
+        units = config.model.deep.mapper_n_units
+        dense_shortcut = config.model.deep.mapper_dense_shortcut 
+
+        x_1 = stack_residual_blocks(x = input, n_blocks = n_blocks, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut, name = "amp_mapper") 
+        x_2 = stack_residual_blocks(x = input, n_blocks = n_blocks, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut, name = "phs_mapper") 
+
+        opt_1 = layers.Dense(units = output_shape)(x_1)
+        opt_2 = layers.Dense(units = output_shape)(x_2)
+
+        output = layers.Concatenate()([opt_1, opt_2])
+    
+    else:
+        raise Exception("Mapper ID not defined!")
+
+    return keras.Model(input, output)
 
 
 def get_ae_model_from_id(input, model_id, latent_dimension, output_dimension, config):
@@ -66,6 +184,142 @@ def get_ae_model_from_id(input, model_id, latent_dimension, output_dimension, co
         y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(enc)
         y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
         dec = layers.Dense(units = output_dimension, kernel_initializer = 'glorot_uniform', name = 'output')(y)
+
+    elif model_id == "deep_autoencoder":
+
+        n_layers = config.model.deep.ae_n_layers
+        units = config.model.deep.ae_n_units
+        latent_dimension = config.model.latent_dim
+        regularization = config.model.deep.regularization
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+
+        for _ in range(int(n_layers/2)):
+            x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+        if regularization == 'l1':
+            enc = layers.Dense(units = latent_dimension, kernel_initializer = 'glorot_uniform', kernel_regularizer = keras.regularizers.L1(l1 = config.model.reg_weight), name = 'latent_components')(x)
+        elif regularization == 'custom':
+            enc = layers.Dense(units = latent_dimension, kernel_initializer = 'glorot_uniform', kernel_regularizer = ComponentWiseRegularizer(coef = config.model.reg_weight), name = 'latent_components')(x)
+        else:
+            enc = layers.Dense(units = latent_dimension, kernel_initializer = 'glorot_uniform', name = 'latent_components')(x)
+
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(enc)
+
+        for _ in range(int(n_layers/2)):
+            y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+        
+        dec = layers.Dense(units = output_dimension, kernel_initializer = 'glorot_uniform', name = 'output')(y)
+
+    elif model_id == "deep_residual_autoencoder":
+
+        n_layers = config.model.deep.ae_n_layers
+        units = config.model.deep.ae_n_units
+        latent_dimension = config.model.latent_dim
+        residual_period = config.model.deep.residue_period
+        res_layers = []
+
+        x = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(input) 
+
+        for ct in range(int(n_layers/4)):
+            
+            x = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+            if ct % residual_period == 0:
+                res_layers.append(tf.identity(x))
+
+        for ct in range(int(n_layers/4)):
+
+            if ct % residual_period == 0:
+                x = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x + res_layers.pop(-1))
+
+            else:
+                x = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
+
+        res_layers = []
+
+        if regularization == 'l1':
+            enc = layers.Dense(units = latent_dimension, kernel_initializer = 'glorot_uniform', kernel_regularizer = keras.regularizers.L1(l1 = config.model.reg_weight), name = 'latent_components')(x)
+        elif regularization == 'custom':
+            enc = layers.Dense(units = latent_dimension, kernel_initializer = 'glorot_uniform', kernel_regularizer = ComponentWiseRegularizer(coef = config.model.reg_weight), name = 'latent_components')(x)
+        else:
+            enc = layers.Dense(units = latent_dimension, kernel_initializer = 'glorot_uniform', name = 'latent_components')(x)
+
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(enc)
+
+        for ct in range(int(n_layers/4)):
+            
+            y = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+            if ct % residual_period == 0:
+                res_layers.append(tf.identity(y))
+
+        for ct in range(int(n_layers/4)):
+
+            if ct % residual_period == 0:
+                y = layers.Dense(units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y + res_layers.pop(-1))
+
+        dec = layers.Dense(units = output_dimension, kernel_initializer = 'glorot_uniform', name = 'output')(y)
+
+    elif model_id == "deep_residual_block_autoencoder":   
+
+        n_blocks = config.model.deep.autoencoder_n_blocks
+        layers_per_block = config.model.deep.autoencoder_layers_per_block
+        units = config.model.deep.autoencoder_n_units
+        dense_shortcut = config.model.deep.autoencoder_dense_shortcut 
+        regularization = config.model.deep.regularization
+
+        x = stack_residual_blocks(x = input, n_blocks = n_blocks // 2, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut)
+
+        if regularization == 'l1':
+            enc = layers.Dense(units = latent_dimension, kernel_initializer = 'glorot_uniform', kernel_regularizer = keras.regularizers.L1(l1 = config.model.reg_weight), name = 'latent_components')(x)
+        elif regularization == 'custom':
+            enc = layers.Dense(units = latent_dimension, kernel_initializer = 'glorot_uniform', kernel_regularizer = ComponentWiseRegularizer(coef = config.model.reg_weight), name = 'latent_components')(x)
+        else:
+            enc = layers.Dense(units = latent_dimension, kernel_initializer = 'glorot_uniform', name = 'latent_components')(x)
+
+        y = stack_residual_blocks(x = enc, n_blocks = n_blocks // 2, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut)
+
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+        y = layers.Dense(units = units, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(y)
+
+        dec = layers.Dense(units = output_dimension, kernel_initializer = 'glorot_uniform', name = 'output')(y)
+
+    elif model_id == "deep_residual_block_autoencoder_split":   
+
+        n_blocks = config.model.deep.autoencoder_n_blocks
+        layers_per_block = config.model.deep.autoencoder_layers_per_block
+        units = config.model.deep.autoencoder_n_units
+        dense_shortcut = config.model.deep.autoencoder_dense_shortcut 
+        regularization = config.model.deep.regularization
+
+        input_len = input.shape[-1]
+
+        amp = layers.Lambda(lambda x: x[:, :input_len//2])(input)  
+        phs = layers.Lambda(lambda x: x[:, input_len//2:])(input)
+
+        x_amp = stack_residual_blocks(x = amp, n_blocks = n_blocks, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut, name = "enc_amp")
+        x_phs = stack_residual_blocks(x = phs, n_blocks = n_blocks, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut, name = "enc_phs")
+
+        x_amp = layers.Concatenate()([amp, x_phs])
+        x_phs = layers.Concatenate()([phs, x_phs])
+
+        enc_amp = create_regularized_latent_layer_split(x_amp, config, latent_dimension)
+        enc_phs = create_regularized_latent_layer_split(x_phs, config, latent_dimension)
+
+        enc = layers.Concatenate(name = 'latent_components')([enc_amp, enc_phs])
+
+        dec_amp = layers.Lambda(lambda x: x[:, :latent_dimension])(enc)  
+        dec_phs = layers.Lambda(lambda x: x[:, latent_dimension:])(enc)
+
+        y_amp = stack_residual_blocks(x = dec_amp, n_blocks = n_blocks, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut, name = "dec_amp")
+        y_phs = stack_residual_blocks(x = dec_phs, n_blocks = n_blocks, n_neurons = units, layers_per_block = layers_per_block, dense_shortcut = dense_shortcut, name = "dec_phs")
+
+        y_amp = layers.Concatenate()([y_amp, dec_amp])
+        y_phs = layers.Concatenate()([y_phs, dec_phs])
+
+        y_amp = layers.Dense(units = output_dimension // 2, kernel_initializer = 'glorot_uniform')(y_amp)
+        y_phs = layers.Dense(units = output_dimension // 2, kernel_initializer = 'glorot_uniform')(y_phs)
+
+        dec = layers.Concatenate(name = "output")([y_amp, y_phs])
 
     else:
         raise Exception("Autoencoder ID not defined!")
@@ -338,15 +592,14 @@ class MLP_test(BaseModel):
 
         self.input_shape = input_shape
         self.output_shape = output_shape
-        self.model_id = str(model_id)
 
         self.build_model()
 
     def build_model(self):
         
-        inp = keras.Input(self.input_shape)
+        '''inp = keras.Input(self.input_shape)'''
 
-        x = get_pca_model_from_id(input=inp, model_id = self.model_id)
+        self.model = get_pca_model_from_id(input_shape = self.input_shape, output_shape = self.output_shape, config = self.config)
 
         # if self.model_id == '0':
 
@@ -420,10 +673,10 @@ class MLP_test(BaseModel):
         #     x = layers.Dense(128, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
         #     x = layers.Dense(128, activation = 'leaky_relu', kernel_initializer = 'glorot_uniform')(x)
 
+        '''
         opt = layers.Dense(self.output_shape)(x)
-
         self.model = keras.Model(inp, opt)
-
+        '''
 class AutoEncoder_test(BaseModel):
 
     '''

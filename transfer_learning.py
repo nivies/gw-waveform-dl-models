@@ -60,8 +60,6 @@ def main():
     elif config.model.name == "cVAEGenerator":
         model = init_obj(config, "model", models_module, data_loader = data_loader)
 
-        import tensorflow as tf
-
         sample_waves = tf.random.normal([100, data_loader.in_out_shapes['output_shape']])  # Replace with actual dimensions
         sample_conditions = tf.random.normal([100, data_loader.in_out_shapes['input_shape']])  # Replace with actual dimensions
 
@@ -73,26 +71,31 @@ def main():
 
     model.model.load_weights(os.path.join(args.model_path, "best_model.hdf5"))
 
-    try:
-        for layer_model in model.model.layers:
-            for layer in layer_model.layers:
-                layer.trainable = True
-    except:
-        for layer in model.model.layers:
-            layer.trainable = True
+    # try:
+    #     for layer_model in model.model.layers:
+    #         for layer in layer_model.layers:
+    #             layer.trainable = True
+    #             if layer.name == 'latent_components':
+    #                 layer.kernel_regularizer = None
+    # except:
+    #     for layer in model.model.layers:
+    #         layer.trainable = True
+    #         if layer.name == 'latent_components':
+    #             layer.kernel_regularizer = None
+    # model = model.model
 
-    model = model.model
+    for layer in model.model.layers:
+        layer.trainable = True
+        if layer.name == 'latent_components':
+            layer.kernel_regularizer = None
 
-    # for layer in model.model.layers:
-    #     layer.trainable = True
+    inp = model.model.input
+    x = model.model.layers[0](inp)
+    for layer in model.model.layers[1:-1]:
+        x = layer(x)
+    opt = model.model.layers[-1](x)
 
-    # inp = model.model.input
-    # x = model.model.layers[0](inp)
-    # for layer in model.model.layers[1:-1]:
-    #     x = layer(x)
-    # opt = model.model.layers[-1](x)
-
-    # model = keras.Model(inp, opt)
+    model = keras.Model(inp, opt)
 
     print("Model loaded!", end = "\r")
  
@@ -140,7 +143,7 @@ def main():
         if not os.path.isdir(folder_path):
             os.mkdir(folder_path)
 
-        model.compile(optimizer = keras.optimizers.Adam(learning_rate = 1e-6), loss = ovlp_mae_loss, metrics = [overlap, 'mean_absolute_error'])
+        model.compile(optimizer = keras.optimizers.Adam(learning_rate = config.model.optimizer_kwargs.learning_rate/100), loss = ovlp_mae_loss, metrics = [overlap, 'mean_absolute_error'])
         history_path = os.path.join(folder_path, "history.bin")
         model_path = os.path.join(folder_path, "best_model.hdf5")
         training_txt_path = os.path.join(folder_path, "training_summary.txt")
@@ -151,7 +154,7 @@ def main():
         if not os.path.isdir(folder_path):
             os.mkdir(folder_path)
 
-        model.compile(optimizer = keras.optimizers.Adam(learning_rate = 1e-6), loss = 'mae', metrics = [overlap, 'mean_absolute_error'])
+        model.compile(optimizer = keras.optimizers.Adam(learning_rate = config.model.optimizer_kwargs.learning_rate/100), loss = 'mae', metrics = [overlap, 'mean_absolute_error'])
         history_path = os.path.join(folder_path, "history.bin")
         model_path = os.path.join(folder_path, "best_model.hdf5")
         training_txt_path = os.path.join(folder_path, "training_summary.txt")
